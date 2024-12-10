@@ -20,7 +20,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-a5efh423n@(v2hy!5%gq%i$oih9kg-lo=%g__=7&2rsweckvmh'
+SECRET_KEY = 'django-insecure-^vet%9@mf^_f0-vq^v!l!w!f57$=oy=z$4i9@%8*4!a0*(y9u%'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -77,7 +77,7 @@ WSGI_APPLICATION = 'car.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'NAME': BASE_DIR / 'cars.sqlite3',
     }
 }
 

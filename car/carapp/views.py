@@ -5,6 +5,8 @@ from django.http import HttpResponse
 # Create your views here.
 def index(request):
     return render(request, 'index.html')
+def catalog(request):
+    return render(request, 'catalog.html')
 def auto(request):
     return render(request, 'auto.html')
 def promotion(request):
