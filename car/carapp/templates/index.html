@@ -1,47 +1,51 @@
+{% load static %}
 <!DOCTYPE html>
 <html>
 <head>
 	<meta charset="utf-8">
 	<title>Главная</title>
+	<link rel="stylesheet" type="text/css" href="{% static 'css/for_all.css' %}">
 </head>
 <body>
 	<div id="header">
 		<div id="main_container">
 			<div id="logo_section">
-				<img src="image.png" alt="logo">
+				<img src="{% static 'img/logo.svg' %}" alt="logo">
 				<div id="navigation_links">
-					<a class="nav_item" href="">Авто из Кореи</a>
-					<a class="nav_item" href="">Авто из Китая</a>
-					<a class="nav_item" href="">Авто из Кореи</a>
-					<a class="nav_item" href="">Контакты</a>
+					<a class="nav_item little_text" href="">Авто из Кореи</a>
+					<a class="nav_item little_text" href="">Авто из Китая</a>
+					<a class="nav_item little_text" href="">Авто из Кореи</a>
+					<a class="nav_item little_text" href="">Контакты</a>
 				</div>
 			</div>
 			<div id="contact_section">
 				<p class="big_text">8 (800) 500-49-49</p>
-				<a href=""><img src="image.png" alt="Telegram"></a>
-				<a href=""><img src="image.png" alt="WhatsApp"></a>
+				<a href=""><img src="{% static 'img/telegram_logo.svg' %}" alt="Telegram"></a>
+				<a href=""><img src="{% static 'img/whatsapp_logo.svg' %}" alt="WhatsApp"></a>
 			</div>
 		</div>
 	</div>
 
 	<div id="banner">
-		<div id="banner_center">
+		<img src="{% static 'img/banner.png' %}">
+		<div id="banner_center" style=" background: url(); background-size: contain;">
 			<h1 class="large_text">АВТОМОБИЛЬ ВАШЕЙ МЕЧТЫ ЗДЕСЬ</h1>
-			<p class="middle_text">Прозрачное ценообразование с подробным разъяснением затрат на каждом этапе</p>
+			<p class="middle_text">Прозрачное ценообразование с подробным разъяснением затрат на каждом этапе</p><br>
 			<a href=""><div class="gradient_btn"><p>Рассчитать стоимость</p></div></a>
 		</div>
 		<div id="banner_down">
 			<div id="banner_down_left">
 				<div class="banner_item">
 					<p class="large_text">5+</p>
-					<p class="litle_text">лет на рынке</p>
+					<p class="litle_text grey_text">лет на рынке</p>
 				</div>
 				<div class="banner_item">
 					<p class="large_text">4000+</p>
-					<p class="litle_text">довольных клиентов</p>
+					<p class="litle_text grey_text">довольных клиентов</p>
 				</div>
-				<div class="banner_item">
-					<img src="image.png" alt="star">
+				<div class="banner_item" style="
+				">
+					<img src="{% static 'img/star.png' %}" alt="star">
 					<p class="large_text">4.9</p>
 				</div>
 			</div>
@@ -49,9 +53,9 @@
 				<div>
 					<p class="middle_text">Экономия до</p>
 					<p class="large_text red_text">30%</p>
-					<p class="middle_text">от рынка в наличии</p>
-					<a href=""><div class="gradient_btn"><p>Смотреть пример</p></div></a>
 				</div>
+				<p class="middle_text">от рынка авто в наличии</p>
+				<a href=""><div class="gradient_btn"><p>Смотреть пример</p></div></a>
 			</div>
 		</div>
 	</div>
@@ -60,16 +64,112 @@
 		<div class="popular_auto_title">
 			<p class="large_text grey_text">ПОПУЛЯРНЫЕ АВТО</p>
 			<p class="large_text red_text">ИЗ КОРЕИ</p>
+			<img src="{% static 'img/flag_korea.png' %}" alt="KoreaFlag">
 		</div>
 		<div class="popular_auto_item_big">
+			<div class="auto_item_title">
+				<p class="middle_text">SUBARU LEVONG VN5</p>
+				<p class="litle_text grey_text">2021 • Гибрит • 10 000 км</p>
+			</div>
+			<img src="{% static 'img/car1.jpg' %}">
+			<div class="auto_item_price">
+				<p class="large_text">2 115 600 ₽</p>
+				<div class="transperent_btn"><p>Оставить заявку</p></div>
+			</div>
+			<div class="circle_bar">
+				<div class="lil_circle act_lil_circle"></div>
+				<div class="lil_circle"></div>
+				<div class="lil_circle"></div>
+				<div class="lil_circle"></div>
+				<div class="lil_circle"></div>
+				<div class="lil_circle"></div>
+				<div class="lil_circle"></div>
+				<div class="lil_circle"></div>
+				<div class="lil_circle"></div>
+				<div class="lil_circle"></div>
+				<div class="lil_circle"></div>
+				<div class="lil_circle"></div>
+			</div>
+		</div>
+		<!-- <div class="popular_auto_item">
 			<div class="auto_item_title">
 				<p class="big_text">SUBARU LEVONG VN5</p>
 				<p class="litle_text grey_text">2021 • Гибрит • 10 000 км</p>
 			</div>
-			<img src="image.png">
+			<img src="{% static 'img/image.png' %}">
 			<div class="auto_item_price">
 				<p class="large_text">2 115 600 ₽</p>
+				<div class="transperent_btn"><p>Оставить заявку</p></div>
 			</div>
+			<div class="circle_bar">
+				<div class="lil_circle act_lil_circle"></div>
+				<div class="lil_circle"></div>
+				<div class="lil_circle"></div>
+				<div class="lil_circle"></div>
+				<div class="lil_circle"></div>
+				<div class="lil_circle"></div>
+				<div class="lil_circle"></div>
+				<div class="lil_circle"></div>
+				<div class="lil_circle"></div>
+				<div class="lil_circle"></div>
+				<div class="lil_circle"></div>
+				<div class="lil_circle"></div>
+			</div>
+		</div> -->
+	</div>
+	<div id="brend_bar">
+		<img src="{% static 'img/bmw_logo.png' %}" alt="bmw_logo">
+		<img src="{% static 'img/toyota_logo.png' %}" alt="toyota_logo">
+		<img src="{% static 'img/audi_logo.png' %}" alt="audi_logo">
+		<img src="{% static 'img/kia_logo.png' %}" alt="kia_logo">
+		<img src="{% static 'img/mers_logo.png' %}" alt="mersedes_logo">
+		<img src="{% static 'img/hyundai_logo.png' %}" alt="hyunday_logo">
+		<img src="{% static 'img/chery_logo.png' %}" alt="chery_logo">
+		<img src="{% static 'img/chevrolet_logo.png' %}" alt="chevrolet_logo">
+		<img src="{% static 'img/renault_samsung_logo .png' %}" alt="renault_samsung_logo">
+		<img src="{% static 'img/haval_logo.png' %}" alt="haval_logo">
+		<img src="{% static 'img/jac_logo.png' %}" alt="jac_logo">
+		<img src="{% static 'img/daewoo_logo.png' %}" alt="daewoo_logo">
+		<img src="{% static 'img/faw_logo.png' %}" alt="faw_logo">
+	</div>
+	<div id="stages_of_work">
+		<h2 class="large_text">ЭТАПЫ РАБОТЫ</h2>
+		<p class="litle_text grey_text"></p>
+		<div class="stages_item">
+			<div class="stage_bar">
+				<div class="empty"></div>
+				<div class="fill"></div>
+			</div>
+			<p class="large_text">ЗАЯВКА</p>
+			<p class="litle_text">Оставьте заявку, чтобы получить индивидуальную консультацию</p>
+		</div>
+		<div class="stages_item">
+			<div class="stage_bar">
+				<div class="empty"></div>
+				<div class="fill"></div>
+			</div>
+			<p class="large_text">ПОДБОР АВТО</p>
+			<p class="litle_text">Подберём автомобиль под ваши критерии</p>
+		</div>
+		<div class="stages_item">
+			<div class="stage_bar">
+				<div class="empty"></div>
+				<div class="fill"></div>
+			</div>
+			<p class="large_text">ОФОРМЛЕНИЕ</p>
+			<p class="litle_text">Согласуем бюджет и заключим договор на договор</p>
+		</div>
+		<div class="stages_item">
+			<div class="stage_bar">
+				<div class="empty"></div>
+				<div class="fill"></div>
+			</div>
+			<p class="large_text">ДОСТАВКА ПО РФ</p>
+			<p class="litle_text">После доставки в г. Владивосток, мы отправим автомобиль в ваш город</p>
+		</div>
+		<div>
+			<div class="gradient_btn"><p>Получить консультацию</p></div>
+			<a href=""><img src="{% static 'img/image.png' %}" alt="WhatsApp"></a>
 		</div>
 	</div>
 </body>
