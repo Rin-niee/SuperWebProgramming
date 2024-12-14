@@ -12,9 +12,9 @@ class Brands(models.Model):
 
 class Cars(models.Model):
     model = models.CharField(max_length=200)
-    year = models.IntegerField(max_length=200)
-    mileage = models.IntegerField(max_length=200)
-    price = models.IntegerField(max_length=200)
+    year = models.IntegerField()
+    mileage = models.IntegerField(0)
+    price = models.IntegerField()
     transmission = models.CharField(max_length=200)
     engine_volume = models.CharField(max_length=200)
     drive = models.CharField(max_length=200)
