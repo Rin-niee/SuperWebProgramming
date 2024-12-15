@@ -8,18 +8,20 @@ class Brands(models.Model):
     class Meta:
         managed = False
         db_table = 'brands'
+    def __str__(self):
+        return self.brand 
 
 
 class Cars(models.Model):
-    model = models.CharField(max_length=200)
-    year = models.IntegerField()
-    mileage = models.IntegerField(0)
-    price = models.IntegerField()
-    transmission = models.CharField(max_length=200)
-    engine_volume = models.CharField(max_length=200)
-    drive = models.CharField(max_length=200)
-    color = models.CharField(max_length=200)
-    power_volume = models.CharField(max_length=200)
+    model = models.CharField(max_length=200) #модель
+    year = models.IntegerField() #год
+    mileage = models.IntegerField() #пробег
+    price = models.IntegerField() #цена
+    transmission = models.CharField(max_length=200)  #коробка передач
+    engine_volume = models.CharField(max_length=2000) #объем двигателя
+    drive = models.CharField(max_length=200) #привод
+    color = models.CharField(max_length=200) # цвет
+    power_volume = models.CharField(max_length=2000) #мощность
     brand_country = models.ForeignKey(Brands, models.DO_NOTHING, blank=True, null=True)
 
     class Meta:

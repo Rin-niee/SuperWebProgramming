@@ -1,8 +1,24 @@
-<h1>Автомобили из {{ country }}</h1>
-<ul>
-    {% for car in cars %}
-        <li> {{car.brand_country.brand}}-{{ car.model }} - {{ car.price }} - {{ car.color }}</li>
-    {% empty %}
-        <li>Нет доступных автомобилей для этой страны.</li>
-    {% endfor %}
-</ul>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catalog for {{ country }}</title>
+    
+</head>
+<body>
+    <h1>Catalog for {{ country }}</h1>
+
+    <form method="get">
+        {{ form.as_p }}
+        <button type="submit">Filter</button>
+    </form>
+
+    <h2>Cars</h2>
+    <ul>
+        {% for car in cars %}
+            <li>{{ car.model }} - {{ car.year }} - {{ car.price }} - {{ car.transmission }} -{{ car.color }} - {{ car.drive }} </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
