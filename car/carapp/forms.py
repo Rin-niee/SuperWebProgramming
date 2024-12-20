@@ -32,4 +32,13 @@ class CarFilterForm(forms.Form):
             self.fields['engine_volume_to'].choices = [('','Выберите фигню для авто')] + [(engine_volume, engine_volume) for engine_volume in sorted(set(car.engine_volume for car in Cars.objects.filter()))]
             self.fields['transmission'].choices = [('','Выберите фигню для авто')] + [(transmission, transmission) for transmission in set(car.transmission for car in Cars.objects.filter())]
             self.fields['drive'].choices = [('','Выберите райана для авто')] + [(drive, drive) for drive in set(car.drive for car in Cars.objects.filter())]
-            self.fields['color'].choices = [('','Выберите фигню для авто')] + [(color, color) for color in set(car.color for car in Cars.objects.filter())]
+            self.fields['color'].choices = [(color, color) for color in set(car.color for car in Cars.objects.filter())]
+
+
+class Connection(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+    class Meta:
+        model = Contact
+        fields = 'name' , 'number', 'message'
+    check = forms.BooleanField(required=True)

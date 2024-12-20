@@ -1,12 +1,22 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from .models import *
-from .forms import CarFilterForm
+from .forms import *
 
 
 # Create your views here.
 def index(request):
-    return render(request, 'index.html')
+    if request.method == 'POST':
+        form = Connection(request.POST)
+        if form.is_valid():
+            form.save()
+            form = Connection()
+    else: 
+        form = Connection()
+    context = {
+        'forms': form
+    }
+    return render(request, 'index.html', context)
 
 def catalog(request, country):
     cars = Cars.objects.filter(brand_country__country=country)
@@ -64,8 +74,13 @@ def catalog(request, country):
     }
     return render(request, 'catalog.html', context)
     
-def auto(request):
-    return render(request, 'auto.html')
+def auto(request, car_id):
+    car = Cars.objects.filter(id=car_id)
+    context = {
+        'car': car,
+        'id':car_id
+    }
+    return render(request, 'auto.html', context)
 
 def promotion(request):
     return render(request, 'promotion.html')
