@@ -1,24 +1,98 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Catalog for {{ country }}</title>
-    
+    <title>Catalog</title>
+
+    <!-- Подключаем jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- Подключаем свой JS файл (если есть) -->
+    <script src="{% static 'js/catalog.js' %}" defer></script>
 </head>
 <body>
-    <h1>Catalog for {{ country }}</h1>
 
-    <form method="get">
-        {{ form.as_p }}
-        <button type="submit">Filter</button>
+    <!-- Форма для фильтров -->
+    <form method="GET">
+        <fieldset>
+            <legend>Фильтры</legend>
+            
+            <!-- Фильтр по бренду -->
+            <label for="brand">Brand</label>
+            <select name="brand" id="brand">
+                <option value="">Select a brand</option>
+                {% for brand in form.brand.field.queryset %}
+                    <option value="{{ brand.id }}" {% if brand.id == request.GET.brand %}selected{% endif %}>
+                        {{ brand.brand }}
+                    </option>
+                {% endfor %}
+            </select>
+
+            <!-- Фильтр по модели -->
+            <label for="model">Model</label>
+            <select name="model" id="model">
+                <option value="">Select a model</option>
+                {% for model in models %}
+                    <option value="{{ model.model }}" {% if model.model == request.GET.model %}selected{% endif %}>
+                        {{ model.model }}
+                    </option>
+                {% endfor %}
+            </select>
+        
+        {{form.year_from}}
+        {{form.year_to}}
+        {{form.mileage_from}}
+        {{form.mileage_to}}
+        {{form.engine_volume_from}}
+        {{form.engine_volume_to}}
+        {{form.transmission}}
+        {{form.drive}}
+        {{form.color}}
+            <button type="submit">Apply Filters</button>
+        </fieldset>
+
+        <!-- Выпадающий список для сортировки -->
+        <fieldset>
+            <legend>Sort by</legend>
+
+            <label for="sort">Sort by</label>
+            <select name="sort" id="sort" onchange="this.form.submit()">
+                <option value="">Select sorting</option>
+                <option value="mileage_asc" {% if current_sort == 'mileage_asc' %}selected{% endif %}>Пробег (по возрастанию)</option>
+                <option value="mileage_desc" {% if current_sort == 'mileage_desc' %}selected{% endif %}>Пробег (по убыванию)</option>
+                <option value="price_asc" {% if current_sort == 'price_asc' %}selected{% endif %}>Цена (по возрастанию)</option>
+                <option value="price_desc" {% if current_sort == 'price_desc' %}selected{% endif %}>Цена (по убыванию)</option>
+                <option value="engine_volume_asc" {% if current_sort == 'engine_volume_asc' %}selected{% endif %}>Объем двигателя (по возрастанию)</option>
+                <option value="engine_volume_desc" {% if current_sort == 'engine_volume_desc' %}selected{% endif %}>Объем двигателя (по убыванию)</option>
+                <option value="year_asc" {% if current_sort == 'year_asc' %}selected{% endif %}>Год (по возрастанию)</option>
+                <option value="year_desc" {% if current_sort == 'year_desc' %}selected{% endif %}>Год (по убыванию)</option>
+            </select>
+        </fieldset>
     </form>
 
-    <h2>Cars</h2>
-    <ul>
-        {% for car in cars %}
-            <li>{{ car.model }} - {{ car.year }} - {{ car.price }} - {{ car.transmission }} -{{ car.color }} - {{ car.drive }} </li>
-        {% endfor %}
-    </ul>
+    <!-- Таблица с результатами -->
+    <table>
+        <thead>
+            <tr>
+                <th>Model</th>
+                <th>Year</th>
+                <th>Mileage</th>
+                <th>Price</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for car in cars %}
+            <tr>
+                <td>{{ car.id }}</td>
+                <td>{{ car.year }}</td>
+                <td>{{ car.mileage }}</td>
+                <td>{{ car.price }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
 </body>
 </html>

@@ -9,5 +9,5 @@ urlpatterns = [
     path('promotion/', views.promotion, name = "promotion"), #акции
     path('contacts/', views.contacts, name = "contacts"), #контакты
     path('workconditions/', views.workconditions, name = "workconditions"), #условия работы
-
+    path('ajax/load-models/', views.load_models, name='load_models'),  # новый путь для AJAX-запроса
 ]

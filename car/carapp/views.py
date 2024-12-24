@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.http import JsonResponse
 from .models import *
 from .forms import *
 
@@ -18,8 +18,23 @@ def index(request):
     }
     return render(request, 'index.html', context)
 
+SORT_CHOICES = {
+    'mileage_asc': ('mileage', 'Пробег (по возрастанию)'),
+    'mileage_desc': ('-mileage', 'Пробег (по убыванию)'),
+    'price_asc': ('price', 'Цена (по возрастанию)'),
+    'price_desc': ('-price', 'Цена (по убыванию)'),
+    'engine_volume_asc': ('engine_volume', 'Объем двигателя (по возрастанию)'),
+    'engine_volume_desc': ('-engine_volume', 'Объем двигателя (по убыванию)'),
+    'year_asc': ('year', 'Год (по возрастанию)'),
+    'year_desc': ('-year', 'Год (по убыванию)'),
+}
+
 def catalog(request, country):
     cars = Cars.objects.filter(brand_country__country=country)
+    sort_option = request.GET.get('sort')
+    # Применяем сортировку, если параметр сортировки передан
+    if sort_option in SORT_CHOICES:
+        cars = cars.order_by(SORT_CHOICES[sort_option][0])  # Сортировка по полю из SORT_CHOICES
     if request.method == 'GET':
         form = CarFilterForm(request.GET, country=country)
         if form.is_valid():
@@ -70,9 +85,16 @@ def catalog(request, country):
     context = {
         'country': country,
         'form': form,
-        'cars': cars
+        'cars': cars,
+        'sort_choices': SORT_CHOICES,  # Передаем варианты сортировки в шаблон
+        'current_sort': sort_option,  # Текущая выбранная сортировка
     }
     return render(request, 'catalog.html', context)
+
+def load_models(request):
+    brand_id = request.GET.get('brand_id')
+    models = Cars.objects.filter(brand_country_id=brand_id).values('model').distinct()
+    return JsonResponse(list(models), safe=False)
     
 def auto(request, car_id):
     car = Cars.objects.filter(id=car_id)
@@ -90,3 +112,10 @@ def contacts(request):
 
 def workconditions(request):
     return render(request, 'workconditions.html')
+
+def get_models(request):
+    brand_id = request.GET.get('brands_id')
+    if brand_id:
+        models = Cars.objects.filter(brand_id=brand_id).values('model').distinct()
+        model_choices = [(model['model'], model['model']) for model in models]
+    return JsonResponse({'models': []})
