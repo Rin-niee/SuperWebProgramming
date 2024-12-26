@@ -1,0 +1,22 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Каталог</title>
+	<link rel="stylesheet" type="text/css" href="/static/css/for_all.css">
+</head>
+<body>
+	{% include "header.html" %}
+	<div id="breadcrump">
+		<a href="" class="tiny_text grey_text">Главная</a>
+		<p class="tiny_text grey_text"> • </p>
+		<a href="" class="tiny_text grey_text">Каталог</a>
+	</div>
+	<div id="search_form" class="simple_form"></div>
+	<div id="no_results_block"></div>
+	{% include "contact_block.html" %}
+	<div class="temporary_blok"><p>Здесь будет блок подписки</p></div>
+	{% include "footer.html" %}
+</body>
+</html>
