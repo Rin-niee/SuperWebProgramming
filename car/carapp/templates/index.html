@@ -5,6 +5,11 @@
 	<meta charset="utf-8">
 	<title>Главная</title>
 	<link rel="stylesheet" type="text/css" href="/static/css/for_all.css">
+	<link rel="stylesheet" type="text/css" href="/static/css/index.css">
+	<link rel="stylesheet" type="text/css" href="/static/css/popular_auto.css">
+	<link rel="stylesheet" type="text/css" href="/static/css/about.css">
+	<link rel="stylesheet" type="text/css" href="/static/css/subscribe_block.css">
+	<link rel="stylesheet" type="text/css" href="/static/css/contact_block.css">
 
 </head>
 <body>
@@ -352,6 +357,8 @@
 			<img src="/static/img/preview.jpg">
 		</div>
 	</div>
+	{% include "subscribe_block.html" %}
+	{% include "contact_block.html" %}
 	{% include "footer.html" %}
 </body>
 </html>

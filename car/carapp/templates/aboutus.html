@@ -1,3 +1,4 @@
+{% load static %}
 <div class="about_block">
 	<div class="about_right">
 		<h2 class="giant_text decorated_text">О нас</h2>
@@ -8,8 +9,8 @@
 		</p>
 		<div class="button_set">
 			<a href=""><div class="gradient_btn"><p>Подобрать авто</p></div></a>
-			<a href=""><img src="/static/img/whatsapp_logo.svg" class="link_btn"></a>
+			<a href=""><img src="{% static 'img/whatsapp_logo.svg' %}" class="link_btn"></a>
 		</div>
 	</div>
-	<img src="/static/img/abot.png">
+	<img src= "{% static 'img/abot.png' %}">
 </div>

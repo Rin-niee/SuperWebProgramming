@@ -1,34 +1,36 @@
-<div class="contact_block">
-	<div class="contact_block_left">
-		<h2 class="giant_text decorated_text">Контактная информация <img src="/static/img/hi.png"></h2>
-		<p class="medium_text grey_text">Оставьте свою заявку и наш менеджер свяжется с Вами для уточнения деталей.</p>
-		<p class="small_text grey_text">Звонок по России бесплатный</p>
-		<p class="medium_text">8 (800) 775-67-29</p>
-		<p class="small_text grey_text">WhatsApp</p>
-		<p class="medium_text">+7 924 420-24-32</p>
-		<p class="small_text grey_text">Офис</p>
-		<p class="medium_text">г. Владивосток, ул. Жигура 9в, 1 этаж, офис 1</p>
-	</div>
-	<div class="contact_block_right">
-		<form class="simple_form">
-			<div class="form_item short_item">
-				<label class="tiny_text" for="name">Имя</label>
-				<input type="text" name="name" id="name"></input>
+{% load static %}
+	<div class="" id="contact_block">
+		<div class="contact_block_left">
+			<div class="title">
+				<h2 class="giant_text decorated_text">Контактная информация</h2>
+				<img src="{% static 'img/hi.png' %}">
 			</div>
-			<div class="form_item short_item">
-				<label class="tiny_text" for="phone">Телефон</label>
-				<input type="text" name="phone" id="phone"></input>
-			</div>
-			<div class="form_item">
-				<label class="tiny_text" for="question">Уточните свой вопрос</label>
-				<textarea type="text" name="question" id="question"></textarea>
-			</div>
-			<div class="form_item">
-				<input type="checkbox" name="consent" id="consent" class="custom-checkbox"></input><label for="consent" class="medium_text">С правилами <span class="red_text">политики конфиденциальности</span>  ознакомлен</label>
-			</div>
-			<div class="form_item">
+			<p class="medium_text grey_text">Оставьте свою заявку и наш менеджер свяжется с Вами для уточнения деталей.</p>
+			<p class="small_text grey_text">Звонок по России бесплатный</p>
+			<p class="medium_text">8 800 550 48 32</p>
+			<p class="small_text grey_text">WhatsApp</p>
+			<p class="medium_text">+7 (924) 420-24-32</p>
+			<p class="small_text grey_text">Офис</p>
+			<p class="medium_text">г. Владивосток, ул. Тополевая 6</p>
+		</div>
+		<div class="contact_block_right">
+			<form id="contact_form" class="simple_form">
+				<div class="form_item short_item">
+					<label for="user_name" class="tiny_text">Имя</label>
+					<input type="text" name="name" placeholder="Введите имя" pattern="^[A-Za-zА-Яа-яЁё\s]+$" title="Имя должно содержать только буквы и пробелы." maxlength="20"  id="user_name" class="tiny_text grey_text">
+				</div>
+				<div class="form_item short_item">
+					<label for="user_phone" class="tiny_text">Телефон</label>
+					<input type="text" name="user_phone" id="user_phone" placeholder="+7" pattern="^\+7 [0-6,9]\d{2} \d{3} \d{2} \d{2}$" title="Формат: '+7 999 999 99 99' и номер не должен начинаться с 8 или 7 после кода +7" maxlength="16" class="tiny_text grey_text">
+				</div>
+				<div class="form_item">
+					<label for="user_quest" class="tiny_text">Ваш запрос</label>
+					<textarea id="user_quest" name="user_quest" cols="40" rows="10" placeholder="Введите текст сообщения, укажите страну, марку и год машины." maxlength="200" class="tiny_text grey_text"></textarea>
+				</div>
+				<div class="form_item">
+					<label for="user_agreement" class="tiny_text"><input type="checkbox" name="user_agreement" id="user_agreement" class="custom-checkbox"> С правилами <a href="" class="red_text">политики конфиденциальности</a> ознакомлен</label>
+				</div>
 				<button class="transperent_btn"><p>Отправить</p></button>
-			</div>
-		</form>
+			</form>
+		</div>
 	</div>
-</div>

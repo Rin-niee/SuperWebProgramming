@@ -4,7 +4,11 @@
 <head>
 	<meta charset="utf-8">
 	<title>Каталог</title>
-	<link rel="stylesheet" type="text/css" href="/static/css/for_all.css">
+	<link rel="stylesheet" type="text/css" href="{% static 'css/for_all.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'css/contact_block.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'css/popular_auto.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'css/subscribe_block.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'css/catalog.css' %}">
 </head>
 <body>
 	{% include "header.html" %}
@@ -13,10 +17,593 @@
 		<p class="tiny_text grey_text"> • </p>
 		<a href="" class="tiny_text grey_text">Каталог</a>
 	</div>
-	<div id="search_form" class="simple_form"></div>
-	<div id="no_results_block"></div>
+	<div id="search_form">
+		<form id="filter_form" class="simple_form">
+			<div class="form_item short_item4">
+				<select name="brand" id="brand">
+					<option value="">Марка авто</option>
+					<div class="option_bar">
+		                <option value="">item 1</option>
+		                <option value="">item 2</option>
+		                <option value="">item 3</option>
+		                <option value="">item 4</option>
+		                <option value="">item 5</option>
+		                <option value="">item 5</option>
+		                <option value="">item 5</option>
+		                <option value="">item 5</option>
+		                <option value="">item 5</option>
+		                <option value="">item 5</option>
+		                <option value="">item 5</option>
+		                <option value="">item 5</option>
+		                <option value="">item 5</option>
+		                <option value="">item 5</option>
+		                <option value="">item 5</option>
+		                <option value="">item 5</option>
+		                <option value="">item 5</option>
+		                <option value="">item 5</option>
+		                <option value="">item 5</option>
+		                <option value="">item 5</option>
+		                <option value="">item 5</option>
+		                <option value="">item 5</option>
+		                <option value="">item 5</option>
+		                <option value="">item 5</option>
+		                <option value="">item 5</option>
+		                <option value="">item 5</option>
+		                <option value="">item 5</option>
+		                <option value="">item 5</option>
+		                <option value="">item 5</option>
+		                <option value="">item 5</option>
+		                <option value="">item 5</option>
+		                <option value="">item 5</option>
+		                <option value="">item 5</option>
+		                <option value="">item 5</option>
+		                <option value="">item 5</option>
+		                <option value="">item 5</option>
+		                <option value="">item 5</option>
+		                <option value="">item 5</option>
+		                <option value="">item 5</option>
+		                <option value="">item 5</option>
+		                <option value="">item 5</option>
+		                <option value="">item 5</option>
+		                <option value="">item 5</option>
+		                <option value="">item 5</option>
+		                <option value="">item 5</option>
+		                <option value="">item 5</option>
+		                <option value="">item 5</option>
+		                <option value="">item 5</option>
+		                <option value="">item 5</option>
+		                <option value="">item 5</option>
+		                <option value="">item 5</option>
+		                <option value="">item 5</option>
+		                <option value="">item 5</option>
+		                <option value="">item 5</option>
+		                <option value="">item 5</option>
+		                <option value="">item 5</option>
+		                <option value="">item 5</option>
+		                <option value="">item 5</option>
+		                <option value="">item 5</option>
+		                <option value="">item 5</option>
+		                <option value="">item 5</option>
+		                <option value="">item 5</option>
+		                <option value="">item 5</option>
+		                <option value="">item 5</option>
+		                <option value="">item 5</option>
+		                <option value="">item 5</option>
+		                <option value="">item 5</option>
+		                <option value="">item 5</option>
+		                <option value="">item 5</option>
+		                <option value="">item 5</option>
+					</div>
+	                
+	                {% for brand in form.brand.field.queryset %}
+	                    <option class="dropdown-menu" value="{{ brand.id }}" {% if brand.id == request.GET.brand %}selected{% endif %}>
+	                        {{ brand.brand }}
+	                {% endfor %}
+	            </select>
+	            <select name="model" id="model">
+	                <option value="">Модель авто</option>
+	                {% for model in models %}
+	                    <option value="{{ model.model }}" {% if model.model == request.GET.model %}selected{% endif %}>
+	                        {{ model.model }}
+	                    </option>
+	                {% endfor %}
+	            </select>
+	            <button class="transperent_btn"><p>Показать</p></button>
+			</div>
+			{{form.year_from}}
+	        {{form.year_to}}
+	        {{form.mileage_from}}
+	        {{form.mileage_to}}
+	        {{form.engine_volume_from}}
+	        {{form.engine_volume_to}}
+	        {{form.transmission}}
+	        {{form.drive}}
+	        {{form.color}}
+			<div class="form_item short_item4">
+				<!-- Фильтр по году -->
+				<div class="couple">
+					<select class="couple_left" name="model" id="model">
+		                <option value="">Год от</option>
+		                {% for model in models %}
+		                    <option value="{{ model.model }}" {% if model.model == request.GET.model %}selected{% endif %}>
+		                        {{ model.model }}
+		                    </option>
+		                {% endfor %}
+		            </select>	
+		            <select class="couple_right" name="model" id="model">
+		                <option value="">до</option>
+		                {% for model in models %}
+		                    <option value="{{ model.model }}" {% if model.model == request.GET.model %}selected{% endif %}>
+		                        {{ model.model }}
+		                    </option>
+		                {% endfor %}
+		            </select>
+				</div>
+				<div class="couple">
+					<select class="couple_left" name="model" id="model">
+		                <option value="">Пробег от</option>
+		                {% for model in models %}
+		                    <option value="{{ model.model }}" {% if model.model == request.GET.model %}selected{% endif %}>
+		                        {{ model.model }}
+		                    </option>
+		                {% endfor %}
+		            </select>	
+		            <select class="couple_right" name="model" id="model">
+		                <option value="">до</option>
+		                {% for model in models %}
+		                    <option value="{{ model.model }}" {% if model.model == request.GET.model %}selected{% endif %}>
+		                        {{ model.model }}
+		                    </option>
+		                {% endfor %}
+		            </select>
+				</div>	   
+				<button class="empty_btn"><p>Сбросить</p></button>       
+			</div>
+			<div class="form_item short_item4">
+				<div class="couple">
+					<select class="couple_left" name="model" id="model">
+		                <option value="">Объём от</option>
+		                {% for model in models %}
+		                    <option value="{{ model.model }}" {% if model.model == request.GET.model %}selected{% endif %}>
+		                        {{ model.model }}
+		                    </option>
+		                {% endfor %}
+		            </select>	
+		            <select class="couple_right" name="model" id="model">
+		                <option value="">до</option>
+		                {% for model in models %}
+		                    <option value="{{ model.model }}" {% if model.model == request.GET.model %}selected{% endif %}>
+		                        {{ model.model }}
+		                    </option>
+		                {% endfor %}
+		            </select>
+				</div>	
+				<select name="brand" id="brand">
+					<option value="">Тип КПП</option>
+					<div class="option_bar">
+		                <option value="">item 1</option>
+		                <option value="">item 2</option>
+		                <option value="">item 3</option>
+		                <option value="">item 4</option>
+		                <option value="">item 5</option>
+		                <option value="">item 5</option>
+		                <option value="">item 5</option>
+		                <option value="">item 5</option>
+		                <option value="">item 5</option>
+		                <option value="">item 5</option>
+		                <option value="">item 5</option>
+		                <option value="">item 5</option>
+		                <option value="">item 5</option>
+		                <option value="">item 5</option>
+		                <option value="">item 5</option>
+		                <option value="">item 5</option>
+		                <option value="">item 5</option>
+		                <option value="">item 5</option>
+		                <option value="">item 5</option>
+		                <option value="">item 5</option>
+		                <option value="">item 5</option>
+		                <option value="">item 5</option>
+		                <option value="">item 5</option>
+		                <option value="">item 5</option>
+		                <option value="">item 5</option>
+		                <option value="">item 5</option>
+		                <option value="">item 5</option>
+		                <option value="">item 5</option>
+		                <option value="">item 5</option>
+		                <option value="">item 5</option>
+		                <option value="">item 5</option>
+		                <option value="">item 5</option>
+		                <option value="">item 5</option>
+		                <option value="">item 5</option>
+		                <option value="">item 5</option>
+		                <option value="">item 5</option>
+		                <option value="">item 5</option>
+		                <option value="">item 5</option>
+		                <option value="">item 5</option>
+		                <option value="">item 5</option>
+		                <option value="">item 5</option>
+		                <option value="">item 5</option>
+		                <option value="">item 5</option>
+		                <option value="">item 5</option>
+		                <option value="">item 5</option>
+		                <option value="">item 5</option>
+		                <option value="">item 5</option>
+		                <option value="">item 5</option>
+		                <option value="">item 5</option>
+		                <option value="">item 5</option>
+		                <option value="">item 5</option>
+		                <option value="">item 5</option>
+		                <option value="">item 5</option>
+		                <option value="">item 5</option>
+		                <option value="">item 5</option>
+		                <option value="">item 5</option>
+		                <option value="">item 5</option>
+		                <option value="">item 5</option>
+		                <option value="">item 5</option>
+		                <option value="">item 5</option>
+		                <option value="">item 5</option>
+		                <option value="">item 5</option>
+		                <option value="">item 5</option>
+		                <option value="">item 5</option>
+		                <option value="">item 5</option>
+		                <option value="">item 5</option>
+		                <option value="">item 5</option>
+		                <option value="">item 5</option>
+		                <option value="">item 5</option>
+		                <option value="">item 5</option>
+					</div>
+	                
+	                {% for brand in form.brand.field.queryset %}
+	                    <option class="dropdown-menu" value="{{ brand.id }}" {% if brand.id == request.GET.brand %}selected{% endif %}>
+	                        {{ brand.brand }}
+	                {% endfor %}
+	            </select>
+			</div>
+			<div class="form_item short_item4">
+				<select name="brand" id="brand">
+					<option value="">Привод</option>
+	                {% for brand in form.brand.field.queryset %}
+	                    <option class="dropdown-menu" value="{{ brand.id }}" {% if brand.id == request.GET.brand %}selected{% endif %}>
+	                        {{ brand.brand }}
+	                {% endfor %}
+	            </select>
+	            <select name="model" id="model">
+	                <option value="">Цвет</option>
+	                {% for model in models %}
+	                    <option value="{{ model.model }}" {% if model.model == request.GET.model %}selected{% endif %}>
+	                        {{ model.model }}
+	                    </option>
+	                {% endfor %}
+	            </select>
+			</div>
+	    </form>
+	</div>
+	{% include "popular_auto.html" %}
+	<div id="no_results_block">
+		<img src="{% static 'img/search.png' %}"> <p class="small_text"> К сожалению, по заданным параметрам ничего не найдено. Попробуйте изменить условия поиска.</p>
+	</div>
+	<div id="have_results_block">
+		<div id="sorting_block">
+			<select class="sorting" name="brand" id="sort">
+					<option value="">Сначала недорогие</option>
+		            <option value="">item 1</option>
+		            <option value="">item 1</option>
+		            <option value="">item 1</option>
+		            <option value="">item 1</option>
+		            <option value="">item 1</option>
+		            <option value="">item 1</option>
+	                
+	                {% for brand in form.brand.field.queryset %}
+	                    <option class="dropdown-menu" value="{{ brand.id }}" {% if brand.id == request.GET.brand %}selected{% endif %}>
+	                        {{ brand.brand }}
+	                {% endfor %}
+	            </select>
+		</div>
+		<div id="results">
+			<div class="popular_auto_item">
+				<div class="auto_item_title">
+					<p class="big_text decorated_text">SUBARU LEVONG VN5</p>
+					<p class="tiny_text grey_text">2021 • Гибрит • 10 000 км</p>
+				</div>
+				<img src="/static/img/auto2.png">
+				<div class="auto_item_price">
+					<p class="big_text decorated_text">2 115 600 ₽</p>
+					<div class="transperent_btn"><p>Оставить заявку</p></div>
+				</div>
+				<div class="circle_bar">
+					<div class="lil_circle act_lil_circle"></div>
+					<div class="lil_circle"></div>
+					<div class="lil_circle"></div>
+					<div class="lil_circle"></div>
+					<div class="lil_circle"></div>
+					<div class="lil_circle"></div>
+					<div class="lil_circle"></div>
+					<div class="lil_circle"></div>
+					<div class="lil_circle"></div>
+					<div class="lil_circle"></div>
+					<div class="lil_circle"></div>
+					<div class="lil_circle"></div>
+				</div>
+			</div>
+			<div class="popular_auto_item">
+				<div class="auto_item_title">
+					<p class="big_text decorated_text">SUBARU LEVONG VN5</p>
+					<p class="tiny_text grey_text">2021 • Гибрит • 10 000 км</p>
+				</div>
+				<img src="/static/img/auto2.png">
+				<div class="auto_item_price">
+					<p class="big_text decorated_text">2 115 600 ₽</p>
+					<div class="transperent_btn"><p>Оставить заявку</p></div>
+				</div>
+				<div class="circle_bar">
+					<div class="lil_circle act_lil_circle"></div>
+					<div class="lil_circle"></div>
+					<div class="lil_circle"></div>
+					<div class="lil_circle"></div>
+					<div class="lil_circle"></div>
+					<div class="lil_circle"></div>
+					<div class="lil_circle"></div>
+					<div class="lil_circle"></div>
+					<div class="lil_circle"></div>
+					<div class="lil_circle"></div>
+					<div class="lil_circle"></div>
+					<div class="lil_circle"></div>
+				</div>
+			</div>
+			<div class="popular_auto_item">
+				<div class="auto_item_title">
+					<p class="big_text decorated_text">SUBARU LEVONG VN5</p>
+					<p class="tiny_text grey_text">2021 • Гибрит • 10 000 км</p>
+				</div>
+				<img src="/static/img/auto2.png">
+				<div class="auto_item_price">
+					<p class="big_text decorated_text">2 115 600 ₽</p>
+					<div class="transperent_btn"><p>Оставить заявку</p></div>
+				</div>
+				<div class="circle_bar">
+					<div class="lil_circle act_lil_circle"></div>
+					<div class="lil_circle"></div>
+					<div class="lil_circle"></div>
+					<div class="lil_circle"></div>
+					<div class="lil_circle"></div>
+					<div class="lil_circle"></div>
+					<div class="lil_circle"></div>
+					<div class="lil_circle"></div>
+					<div class="lil_circle"></div>
+					<div class="lil_circle"></div>
+					<div class="lil_circle"></div>
+					<div class="lil_circle"></div>
+				</div>
+			</div>
+			<div class="popular_auto_item">
+				<div class="auto_item_title">
+					<p class="big_text decorated_text">SUBARU LEVONG VN5</p>
+					<p class="tiny_text grey_text">2021 • Гибрит • 10 000 км</p>
+				</div>
+				<img src="/static/img/auto2.png">
+				<div class="auto_item_price">
+					<p class="big_text decorated_text">2 115 600 ₽</p>
+					<div class="transperent_btn"><p>Оставить заявку</p></div>
+				</div>
+				<div class="circle_bar">
+					<div class="lil_circle act_lil_circle"></div>
+					<div class="lil_circle"></div>
+					<div class="lil_circle"></div>
+					<div class="lil_circle"></div>
+					<div class="lil_circle"></div>
+					<div class="lil_circle"></div>
+					<div class="lil_circle"></div>
+					<div class="lil_circle"></div>
+					<div class="lil_circle"></div>
+					<div class="lil_circle"></div>
+					<div class="lil_circle"></div>
+					<div class="lil_circle"></div>
+				</div>
+			</div>
+			<div class="popular_auto_item">
+				<div class="auto_item_title">
+					<p class="big_text decorated_text">SUBARU LEVONG VN5</p>
+					<p class="tiny_text grey_text">2021 • Гибрит • 10 000 км</p>
+				</div>
+				<img src="/static/img/auto2.png">
+				<div class="auto_item_price">
+					<p class="big_text decorated_text">2 115 600 ₽</p>
+					<div class="transperent_btn"><p>Оставить заявку</p></div>
+				</div>
+				<div class="circle_bar">
+					<div class="lil_circle act_lil_circle"></div>
+					<div class="lil_circle"></div>
+					<div class="lil_circle"></div>
+					<div class="lil_circle"></div>
+					<div class="lil_circle"></div>
+					<div class="lil_circle"></div>
+					<div class="lil_circle"></div>
+					<div class="lil_circle"></div>
+					<div class="lil_circle"></div>
+					<div class="lil_circle"></div>
+					<div class="lil_circle"></div>
+					<div class="lil_circle"></div>
+				</div>
+			</div>
+			<div class="popular_auto_item">
+				<div class="auto_item_title">
+					<p class="big_text decorated_text">SUBARU LEVONG VN5</p>
+					<p class="tiny_text grey_text">2021 • Гибрит • 10 000 км</p>
+				</div>
+				<img src="/static/img/auto2.png">
+				<div class="auto_item_price">
+					<p class="big_text decorated_text">2 115 600 ₽</p>
+					<div class="transperent_btn"><p>Оставить заявку</p></div>
+				</div>
+				<div class="circle_bar">
+					<div class="lil_circle act_lil_circle"></div>
+					<div class="lil_circle"></div>
+					<div class="lil_circle"></div>
+					<div class="lil_circle"></div>
+					<div class="lil_circle"></div>
+					<div class="lil_circle"></div>
+					<div class="lil_circle"></div>
+					<div class="lil_circle"></div>
+					<div class="lil_circle"></div>
+					<div class="lil_circle"></div>
+					<div class="lil_circle"></div>
+					<div class="lil_circle"></div>
+				</div>
+			</div>
+			<div class="popular_auto_item">
+				<div class="auto_item_title">
+					<p class="big_text decorated_text">SUBARU LEVONG VN5</p>
+					<p class="tiny_text grey_text">2021 • Гибрит • 10 000 км</p>
+				</div>
+				<img src="/static/img/auto2.png">
+				<div class="auto_item_price">
+					<p class="big_text decorated_text">2 115 600 ₽</p>
+					<div class="transperent_btn"><p>Оставить заявку</p></div>
+				</div>
+				<div class="circle_bar">
+					<div class="lil_circle act_lil_circle"></div>
+					<div class="lil_circle"></div>
+					<div class="lil_circle"></div>
+					<div class="lil_circle"></div>
+					<div class="lil_circle"></div>
+					<div class="lil_circle"></div>
+					<div class="lil_circle"></div>
+					<div class="lil_circle"></div>
+					<div class="lil_circle"></div>
+					<div class="lil_circle"></div>
+					<div class="lil_circle"></div>
+					<div class="lil_circle"></div>
+				</div>
+			</div>
+			<div class="popular_auto_item">
+				<div class="auto_item_title">
+					<p class="big_text decorated_text">SUBARU LEVONG VN5</p>
+					<p class="tiny_text grey_text">2021 • Гибрит • 10 000 км</p>
+				</div>
+				<img src="/static/img/auto2.png">
+				<div class="auto_item_price">
+					<p class="big_text decorated_text">2 115 600 ₽</p>
+					<div class="transperent_btn"><p>Оставить заявку</p></div>
+				</div>
+				<div class="circle_bar">
+					<div class="lil_circle act_lil_circle"></div>
+					<div class="lil_circle"></div>
+					<div class="lil_circle"></div>
+					<div class="lil_circle"></div>
+					<div class="lil_circle"></div>
+					<div class="lil_circle"></div>
+					<div class="lil_circle"></div>
+					<div class="lil_circle"></div>
+					<div class="lil_circle"></div>
+					<div class="lil_circle"></div>
+					<div class="lil_circle"></div>
+					<div class="lil_circle"></div>
+				</div>
+			</div>
+			<div class="popular_auto_item">
+				<div class="auto_item_title">
+					<p class="big_text decorated_text">SUBARU LEVONG VN5</p>
+					<p class="tiny_text grey_text">2021 • Гибрит • 10 000 км</p>
+				</div>
+				<img src="/static/img/auto2.png">
+				<div class="auto_item_price">
+					<p class="big_text decorated_text">2 115 600 ₽</p>
+					<div class="transperent_btn"><p>Оставить заявку</p></div>
+				</div>
+				<div class="circle_bar">
+					<div class="lil_circle act_lil_circle"></div>
+					<div class="lil_circle"></div>
+					<div class="lil_circle"></div>
+					<div class="lil_circle"></div>
+					<div class="lil_circle"></div>
+					<div class="lil_circle"></div>
+					<div class="lil_circle"></div>
+					<div class="lil_circle"></div>
+					<div class="lil_circle"></div>
+					<div class="lil_circle"></div>
+					<div class="lil_circle"></div>
+					<div class="lil_circle"></div>
+				</div>
+			</div>
+			<div class="popular_auto_item">
+				<div class="auto_item_title">
+					<p class="big_text decorated_text">SUBARU LEVONG VN5</p>
+					<p class="tiny_text grey_text">2021 • Гибрит • 10 000 км</p>
+				</div>
+				<img src="/static/img/auto2.png">
+				<div class="auto_item_price">
+					<p class="big_text decorated_text">2 115 600 ₽</p>
+					<div class="transperent_btn"><p>Оставить заявку</p></div>
+				</div>
+				<div class="circle_bar">
+					<div class="lil_circle act_lil_circle"></div>
+					<div class="lil_circle"></div>
+					<div class="lil_circle"></div>
+					<div class="lil_circle"></div>
+					<div class="lil_circle"></div>
+					<div class="lil_circle"></div>
+					<div class="lil_circle"></div>
+					<div class="lil_circle"></div>
+					<div class="lil_circle"></div>
+					<div class="lil_circle"></div>
+					<div class="lil_circle"></div>
+					<div class="lil_circle"></div>
+				</div>
+			</div>
+			<div class="popular_auto_item">
+				<div class="auto_item_title">
+					<p class="big_text decorated_text">SUBARU LEVONG VN5</p>
+					<p class="tiny_text grey_text">2021 • Гибрит • 10 000 км</p>
+				</div>
+				<img src="/static/img/auto2.png">
+				<div class="auto_item_price">
+					<p class="big_text decorated_text">2 115 600 ₽</p>
+					<div class="transperent_btn"><p>Оставить заявку</p></div>
+				</div>
+				<div class="circle_bar">
+					<div class="lil_circle act_lil_circle"></div>
+					<div class="lil_circle"></div>
+					<div class="lil_circle"></div>
+					<div class="lil_circle"></div>
+					<div class="lil_circle"></div>
+					<div class="lil_circle"></div>
+					<div class="lil_circle"></div>
+					<div class="lil_circle"></div>
+					<div class="lil_circle"></div>
+					<div class="lil_circle"></div>
+					<div class="lil_circle"></div>
+					<div class="lil_circle"></div>
+				</div>
+			</div>
+			<div class="popular_auto_item">
+				<div class="auto_item_title">
+					<p class="big_text decorated_text">SUBARU LEVONG VN5</p>
+					<p class="tiny_text grey_text">2021 • Гибрит • 10 000 км</p>
+				</div>
+				<img src="/static/img/auto2.png">
+				<div class="auto_item_price">
+					<p class="big_text decorated_text">2 115 600 ₽</p>
+					<div class="transperent_btn"><p>Оставить заявку</p></div>
+				</div>
+				<div class="circle_bar">
+					<div class="lil_circle act_lil_circle"></div>
+					<div class="lil_circle"></div>
+					<div class="lil_circle"></div>
+					<div class="lil_circle"></div>
+					<div class="lil_circle"></div>
+					<div class="lil_circle"></div>
+					<div class="lil_circle"></div>
+					<div class="lil_circle"></div>
+					<div class="lil_circle"></div>
+					<div class="lil_circle"></div>
+					<div class="lil_circle"></div>
+					<div class="lil_circle"></div>
+				</div>
+			</div>
+		</div>
+	</div>
 	{% include "contact_block.html" %}
-	<div class="temporary_blok"><p>Здесь будет блок подписки</p></div>
+	{% include "subscribe_block.html" %}
 	{% include "footer.html" %}
 </body>
 </html>
