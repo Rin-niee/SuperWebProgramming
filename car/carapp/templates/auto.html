@@ -1,2 +1,3 @@
-<h1>dfdsf</h1>
-
+{% for car in car %}
+            <li>{{ car.model }} - {{ car.year }} - {{ car.price }} - {{ car.transmission }} -{{ car.color }} - {{ car.drive }} </li>
+        {% endfor %}
