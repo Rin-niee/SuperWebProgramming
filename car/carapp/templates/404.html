@@ -1,0 +1,25 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Страница не найдена</title>
+	<link rel="stylesheet" type="text/css" href="{% static 'css/for_all.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'css/404.css' %}">
+</head>
+<body>
+	{% include "header.html" %}
+	<div class="main">
+		<img src="{% static 'img/404.png' %}">
+		<div class="center_content">
+			<p class="medium_text">Ничего нет, возможно страница была удалена</p>
+			<p class="small_text grey_text">Оставьте свою заявку и наш менеджер свяжется с Вами для уточнения деталей</p>
+		</div>
+		<div class="button_set">
+			<a href=""><div class="gradient_btn"><p>Получить консультацию</p></div></a>
+			<a href=""><img src="{% static 'img/whatsapp_logo.svg' %}" class="link_btn"></a>
+		</div>
+	</div>
+	{% include "footer.html" %}
+</body>
+</html>

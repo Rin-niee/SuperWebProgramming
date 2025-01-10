@@ -278,5 +278,10 @@ p, h2, h3{margin: 0px;}
     gap: 10px;
 }
 
-
+.button_set {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+    flex-wrap: nowrap;
+}
 
