@@ -1,1 +1,59 @@
-<h1>Условия работы</h1>
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Условия работы</title>
+	<link rel="stylesheet" type="text/css" href="{% static 'css/for_all.css '%}">
+	<link rel="stylesheet" type="text/css" href="{% static 'css/about.css '%}">
+	<link rel="stylesheet" type="text/css" href="{% static 'css/stages_of_work.css '%}">
+	<link rel="stylesheet" type="text/css" href="{% static 'css/workcondition.css' %}">
+</head>
+<body>
+	{% include "header.html"%}
+	{% include "aboutus.html"%}
+	{% include "stages_of_work.html"%}
+	<div id="commission">
+		<h2 class="giant_text decorated_text">Комиссии</h2>
+		<div id="countries">
+			<div class="country">
+				<div class="country_top">
+					<img src="{% static 'img/flag_japan.png' %}">
+					<p class="small_text grey_text">Япония</p>
+					<p class="big_text decorated_text">60 000 ₽</p>
+				</div>
+				<div class="country_bottom">
+					<p class="small_text">Договор <img src="{% static 'img/arrow.svg' %}"></p>
+				</div>
+			</div>
+
+			<div class="country">
+				<div class="country_top">
+					<img src="{% static 'img/flag_korea.png' %}">
+					<p class="small_text grey_text">Корея</p>
+					<p class="big_text decorated_text">100 000 ₽</p>
+				</div>
+				<div class="country_bottom">
+					<p class="small_text">Договор <img src="{% static 'img/arrow.svg' %}"></p>
+				</div>
+			</div>
+
+			<div class="country">
+				<div class="country_top">
+					<img src="{% static 'img/flag_china.png' %}">
+					<p class="small_text grey_text">Китай</p>
+					<p class="big_text decorated_text">150 000 ₽</p>
+				</div>
+				<div class="country_bottom">
+					<p class="small_text">Договор <img src="{% static 'img/arrow.svg' %}"></p>
+				</div>
+			</div>
+		</div>
+		<div class="button_set">
+			<p class="medium_text">У нас доступна оплата депозита частями</p>
+			<div class="gradient_btn"><p>Подробнее тут</p><img src="{% static 'img/arrow.svg' %}"></div>
+		</div>
+	</div>
+	{% include "footer.html"%}
+</body>
+</html>

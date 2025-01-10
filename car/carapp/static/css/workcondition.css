@@ -1,0 +1,41 @@
+#commission{
+	width: Fill (1,600px)px;
+	height: Hug (613px)px;
+	padding: 80px 100px 80px 100px;
+	gap: 40px;
+	border-radius: 40px 40px 40px 40px;
+	opacity: 0px;
+	background: #081E36;
+	display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+#countries {
+    display: flex;
+    gap: 15px;
+}
+.country{
+	width: Hug (141px)px;
+	height: Hug (180px)px;
+	padding: 16px 24px 16px 24px;
+	gap: 10px;
+	border-radius: 24px;
+	opacity: 0px;
+	background: #20344A;
+}
+.country_top {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #FFFFFF1A;
+}
+.country_bottom {
+    padding: 5px 0px 0px 0px;
+}
+#commission > div.button_set > .gradient_btn {
+    margin-top: 24px;
+}

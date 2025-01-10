@@ -10,6 +10,7 @@
 	<link rel="stylesheet" type="text/css" href="/static/css/about.css">
 	<link rel="stylesheet" type="text/css" href="/static/css/subscribe_block.css">
 	<link rel="stylesheet" type="text/css" href="/static/css/contact_block.css">
+	<link rel="stylesheet" type="text/css" href="/static/css/stages_of_work.css">
 
 </head>
 <body>
@@ -65,58 +66,7 @@
 		<img src="/static/img/daewoo_logo.png" alt="daewoo_logo">
 		<img src="/static/img/faw_logo.png" alt="faw_logo">
 	</div>
-	<div id="stages_of_work">
-		<div class="stages_block_top">
-			<h2 class="giant_text decorated_text"><span class="red_text">ЭТАПЫ</span> РАБОТЫ</h2>
-			<p class="tiny_text grey_text">Прозрачное ценообразование с подробным разъяснением затрат на каждом этапе</p>
-		</div>
-		<div class="stages_items">
-			<div class="stages_item">
-				<img src="/static/img/stage1.png">
-				<img src="/static/img/line1.svg">
-				<div>
-					<h3 class="large_text decorated_text">Заявка</h3>
-					<p class="tiny_text">Оставьте заявку,чтобы получить  индивидуальную консультацию</p>
-				</div>
-			</div>
-			<div class="stages_item">
-				<img src="/static/img/stage2.png">
-				<img src="/static/img/line2.svg">
-				<div>
-					<h3 class="large_text decorated_text">Подбор авто</h3>
-					<p class="tiny_text">Подберем автомобиль под ваши критерии</p>
-				</div>
-			</div>
-			<div class="stages_item">
-				<img src="/static/img/stage3.png">
-				<img src="/static/img/line2.svg">
-				<div>
-					<h3 class="large_text decorated_text">Оформление</h3>
-					<p class="tiny_text">Согласуем бюджет и заключим договор на авто</p>
-				</div>
-			</div>
-			<div class="stages_item">
-				<img src="/static/img/stage4.png">
-				<img src="/static/img/line2.svg">
-				<div>
-					<h3 class="large_text decorated_text">Доставка по РФ</h3>
-					<p class="tiny_text">После доставки в г. Владивосток, мы отправим автомобиль в ваш город</p>
-				</div>
-			</div>
-		</div>
-		<div class="stages_block_bottom">
-			<a href=""><div class="gradient_btn"><p>получить консультацию</p></div></a>
-			<a href=""><img src="/static/img/whatsapp_logo.svg" class="link_btn"></a>
-		</div>
-		<img src="/static/img/banner2.png">
-	</div> <!--end stages_of_work-->
-	<div class="save_discount">
-        <div>
-            <p class="big_text">Экономия до <span class="large_text">30%</span></p>
-            <span class="tiny_text">от рынка авто в наличии</span>
-        </div>
-        <a href="#" aria-label="Открыть карточку"><div class="transperent_btn"><img src="/static/img/arrow.svg"></div></a>
-    </div>
+	{% include "stages_of_work.html" %}
     {% include "aboutus.html" %}
 	<div id="mini_banner">
 		<div class="banner_item">

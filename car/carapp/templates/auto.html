@@ -1,2 +1,26 @@
-<h1>dfdsf</h1>
+{% load static %}
+<<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Автомобиль</title>
+	<link rel="stylesheet" type="text/css" href="{% static 'css/for_all.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'css/contact_block.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'css/popular_auto.css' %}">
+</head>
+<body>
+	{% include "header.html" %}
+	<div id="breadcrump">
+		<a href="" class="tiny_text grey_text">Главная</a>
+		<p class="tiny_text grey_text"> • </p>
+		<a href="" class="tiny_text grey_text">Каталог</a>
+		<p class="tiny_text grey_text"> • </p>
+		<a href="" class="tiny_text grey_text">Автомобиль</a>
+	</div>
 
+	<div class="temporary"><p class="giant_text">Карточка товара</p></div>
+	{% include "popular_auto.html" %}
+	{% include "contact_block.html" %}
+	{% include "footer.html" %}
+</body>
+</html>

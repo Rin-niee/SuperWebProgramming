@@ -2,6 +2,9 @@
 body{
     background: #011224;
     padding: 0px calc((100vw - 1600px)/2);
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
 }
 a{
     text-decoration: none;
@@ -263,7 +266,7 @@ p, h2, h3{margin: 0px;}
 }
 
 #breadcrump{
-    padding-top: 30px;
+    padding: 0px 0px 0px 50px;
     margin-bottom: 50px;
     font-family: Inter;
     font-size: 14px;
