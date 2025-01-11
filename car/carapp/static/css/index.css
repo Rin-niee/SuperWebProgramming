@@ -315,10 +315,6 @@ span.blue-line {
     background: #081e36;
     border: none;
 }
-.modal::backdrop {
-  background-color: #081e36;
-  opacity: .5;
-}
 .economy_content {
     display: flex;
     justify-content: space-around;
@@ -343,5 +339,5 @@ span.blue-line {
     margin-bottom: 15px;
 }
 #economyWindow>.button_set{
-    margin-bottom: 40px;
+    margin-bottom: 30px;
 }

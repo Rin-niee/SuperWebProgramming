@@ -62,13 +62,21 @@
     display: flex;
     gap: 15px;
     padding: 15px;
-    margin-left: 40px;
-    margin-top: 80px;
+    padding-left: 20px;
+    padding-top: 20px;
+    padding-bottom: 30px;
+    background: url(../img/red_flag.png);
+    /* object-fit: fill; */
+    /*background-size: cover;*/
+    box-sizing: border-box;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    z-index: -1;
 }
 .save_discount > a > div {
     width: 20px;
 }
-#stages_of_work::after {
+/*#stages_of_work::after {
     position: absolute;
     content: "";
     width: 96%;
@@ -80,4 +88,4 @@
     z-index: -2;
     -webkit-transform: rotate(-2deg);
     transform: rotate(-4deg);
-}
+}*/
