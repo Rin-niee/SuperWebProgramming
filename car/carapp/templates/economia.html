@@ -1,0 +1,20 @@
+{% load static %}
+<dialog id="economyWindow" class="modal">
+	<div class="economy_top"><button type="button" onclick="window.economyWindow.close()" class="close_btn large_text">x</button></div>
+	<p class="big_text">Экономия до <span class="huge_text red_text decorated_text">30%</span> от рынка авто в наличии</p>
+	<div class="economy_content">
+		<div class="economy_left">
+			<img src="{% static 'img/economy_left.png' %}">
+			<p class="small_text grey_text">Привезли мы</p>
+		</div>
+		<div class="economy_right">
+			<img src="{% static 'img/economy_right.png' %}">
+			<p class="small_text grey_text">В наличии на Дром Авто</p>
+		</div>
+	</div>
+	<div class="button_set">
+		<a href=""><div class="gradient_btn"><p>Получить консультацию</p></div></a>
+		<a href=""><img src="{% static 'img/whatsapp_logo.svg' %}" class="link_btn"></a>
+		<a href=""><img src="{% static 'img/telegram_logo.svg' %}" class="link_btn"></a>
+	</div>
+</dialog>
