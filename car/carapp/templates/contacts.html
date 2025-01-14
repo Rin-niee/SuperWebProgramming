@@ -1,1 +1,21 @@
-<h1>kfkfkf</h1>
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Контакты</title>
+	<link rel="stylesheet" type="text/css" href="{% static 'css/for_all.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'css/about.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'css/stages_of_work.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'css/contact_block.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'css/index.css' %}">
+</head>
+<body>
+	{% include "header.html" %}
+	{% include "aboutus.html" %}
+	{% include "stages_of_work.html" %}
+	{% include "comments.html" %}
+	{% include "contact_block.html" %}
+	{% include "footer.html" %}
+</body>
+</html>

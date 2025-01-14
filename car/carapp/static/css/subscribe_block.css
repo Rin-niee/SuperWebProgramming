@@ -1,0 +1,81 @@
+
+.describe_block{
+    display: flex;  /* Устанавливаем контейнер как flex-контейнер */
+    justify-content: center; /* Выравниваем по горизонтали */
+    height: 100vh;
+    width: 100%;
+    align-items: center;
+    flex-wrap: wrap;
+    position: relative;
+}
+
+.back {
+    position: absolute;
+    width: 84%;
+    aspect-ratio: 14 / 1;
+    background: #D51117;
+    border-radius: 28px;
+    margin-top: 35.3%;
+    transform: rotate(-0.7deg);
+    z-index: 1;
+}
+
+.mainn {
+    position: absolute;
+    width: 90%;
+    aspect-ratio: 8 / 3;
+    background: #081E36;
+    border-radius: 28px;
+    margin-top: 6%;
+    z-index: 2;
+}
+
+
+.describe_block h2 {
+    position: absolute;
+    font-size: 3.2vw;
+    margin-top: 4%;
+    margin-left: 52%;
+    font-family: 'Oswald', sans-serif;
+}
+
+.red {
+    color: #D51117; /* Красный цвет для первого слова */
+}
+
+.white {
+    color: white; /* Белый цвет для остальных слов */
+}
+
+
+.coshial {
+    /*position: absolute;*/
+    font-family: 'Inter', sans-serif;
+    color: white;
+    font-size: 2vw;
+    margin-top: 16%;
+    margin-left: 52%;
+}
+
+.photo {
+    position: absolute;
+    margin-top: -10.4%;
+    margin-left: 2%;
+}
+
+.describe_block .logo_image {
+    width: 50px;
+    height: auto;
+    margin-right: 5%;
+}
+
+.describe_block .arrow_image{
+    width: 19px;
+    height: auto;
+    margin-left: 3px;
+}
+.coshial>div{
+    display: flex;
+    align-items: center;
+    margin-bottom: 4%;
+}

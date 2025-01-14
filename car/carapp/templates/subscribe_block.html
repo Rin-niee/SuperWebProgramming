@@ -1,0 +1,41 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="{% static 'css/describe_block.css' %}">
+        <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+    </head>
+    <body>
+    <div class = "describe_block">
+        <div class= "mainn"> 
+            <h2 class="giant_text"><span class="red_text">ПОДПИШИСЬ</span> И НЕ УПУСТИ СВОЙ АВТОМОБИЛЬ МЕЧТЫ</h2>
+            
+            <div class = "photo">
+                <img src="{% static 'img/subscribe_image.png' %}" style="width: 36vw;">
+            </div>
+
+            <div class= "coshial">
+                <div>
+                    <img src="{% static 'img/telegram_logo2.svg' %}" class="logo_image">
+                    <p class="big_texts">Телеграм-канал</p>
+                    <img src="{% static 'img/arrow.svg' %}" class="arrow_image">
+                </div>
+                <div>
+                    <img src="{% static 'img/vk_logo2.svg' %}" class="logo_image">
+                    <p style="margin: 0; font-size: 2vw;">VK</p>
+                    <img src="{% static 'img/arrow.svg' %}" class="arrow_image">
+                </div>
+                <div>
+                    <img src="{% static 'img/insta_logo2.svg' %}" class="logo_image">
+                    <p style="margin: 0; font-size: 2vw;">Instagram</p>
+                    <img src= "{% static 'img/arrow.svg' %}" class="arrow_image">
+                </div>
+            
+            </div> 
+            
+        </div>
+        <div class= "back"></div>
+    </div>
+    </body>
+</html>

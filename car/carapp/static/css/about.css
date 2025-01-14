@@ -1,0 +1,35 @@
+.about_block {
+    display: flex;
+    justify-content: space-around;
+    gap: 30px;
+    margin: 80px 15px 0px 0px;
+}
+.about_right {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+.about_right .button_set {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+}
+.about_right>p{white-space: pre-wrap;}
+#mini_banner {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    /* width: 50%; */
+    /* min-width: 500px; */
+    margin-top: 40px;
+    border-style: solid;
+    border-color: #FFFFFF29;
+    border-width: 1px 0px 0px 0px;
+    padding-top: 20px;
+}
+.inline {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+}
+.banner_item+.inline>img{ margin-right: 20px;}
