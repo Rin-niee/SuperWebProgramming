@@ -1,0 +1,73 @@
+#subscribe_block{
+    margin-top: 200px;
+    margin-bottom: 100px;
+    padding: 0px 50px 0px 50px;
+}
+
+.main {
+    background: #081E36;
+    border-radius: 28px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    /* max-height: 520px; */
+    z-index: 2;
+    position: relative;
+    flex-wrap: wrap;
+    align-content: center;
+    align-items: flex-start;
+    padding: 60px;
+}
+
+.back {
+    position: relative;
+    display: flex;
+    width: 95%;
+    height: 62px;
+    background: #D51117;
+    border-radius: 28px;
+    margin-top: -3.2%;
+    margin-left: 3%;
+    z-index: 1;
+    transform: skew(0deg, -1deg);
+}
+
+.title{
+    /* margin-top: 5%; */
+    /* margin-right: 10%; */
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+}
+
+h2 {
+    font-size: 70px;
+    font-family: "Bebas Neue", serif;
+    
+}
+
+.red {
+    color: #FD554B; /* Красный цвет для первого слова */
+}
+
+.white {
+    color: white; /* Белый цвет для остальных слов */
+}
+
+
+.coshial {
+    font-family: 'Inter', sans-serif;
+    color: white;
+    margin-top: 5%;
+    margin-left: 2%;
+}
+
+.photo {
+    width: 30%;
+    height: auto;
+    min-width: 600px;
+    /* min-height: auto; */
+    max-width: 900px;
+    margin: -209px 10px -200px -70px;
+}
+
