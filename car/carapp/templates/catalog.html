@@ -9,8 +9,11 @@
 	<link rel="stylesheet" type="text/css" href="{% static 'css/popular_auto.css' %}">
 	<link rel="stylesheet" type="text/css" href="{% static 'css/subscribe_block.css' %}">
 	<link rel="stylesheet" type="text/css" href="{% static 'css/catalog.css' %}">
-</head>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="{% static 'js/catalog.js' %}" defer></script>
+  </head>
 <body>
+  <form method="GET">
 	{% include "header.html" %}
 	<div id="breadcrump">
 		<a href="" class="tiny_text grey_text">Главная</a>
@@ -22,83 +25,11 @@
 			<div class="form_item short_item4">
 				<select name="brand" id="brand">
 					<option value="">Марка авто</option>
-					<div class="option_bar">
-		                <option value="">item 1</option>
-		                <option value="">item 2</option>
-		                <option value="">item 3</option>
-		                <option value="">item 4</option>
-		                <option value="">item 5</option>
-		                <option value="">item 5</option>
-		                <option value="">item 5</option>
-		                <option value="">item 5</option>
-		                <option value="">item 5</option>
-		                <option value="">item 5</option>
-		                <option value="">item 5</option>
-		                <option value="">item 5</option>
-		                <option value="">item 5</option>
-		                <option value="">item 5</option>
-		                <option value="">item 5</option>
-		                <option value="">item 5</option>
-		                <option value="">item 5</option>
-		                <option value="">item 5</option>
-		                <option value="">item 5</option>
-		                <option value="">item 5</option>
-		                <option value="">item 5</option>
-		                <option value="">item 5</option>
-		                <option value="">item 5</option>
-		                <option value="">item 5</option>
-		                <option value="">item 5</option>
-		                <option value="">item 5</option>
-		                <option value="">item 5</option>
-		                <option value="">item 5</option>
-		                <option value="">item 5</option>
-		                <option value="">item 5</option>
-		                <option value="">item 5</option>
-		                <option value="">item 5</option>
-		                <option value="">item 5</option>
-		                <option value="">item 5</option>
-		                <option value="">item 5</option>
-		                <option value="">item 5</option>
-		                <option value="">item 5</option>
-		                <option value="">item 5</option>
-		                <option value="">item 5</option>
-		                <option value="">item 5</option>
-		                <option value="">item 5</option>
-		                <option value="">item 5</option>
-		                <option value="">item 5</option>
-		                <option value="">item 5</option>
-		                <option value="">item 5</option>
-		                <option value="">item 5</option>
-		                <option value="">item 5</option>
-		                <option value="">item 5</option>
-		                <option value="">item 5</option>
-		                <option value="">item 5</option>
-		                <option value="">item 5</option>
-		                <option value="">item 5</option>
-		                <option value="">item 5</option>
-		                <option value="">item 5</option>
-		                <option value="">item 5</option>
-		                <option value="">item 5</option>
-		                <option value="">item 5</option>
-		                <option value="">item 5</option>
-		                <option value="">item 5</option>
-		                <option value="">item 5</option>
-		                <option value="">item 5</option>
-		                <option value="">item 5</option>
-		                <option value="">item 5</option>
-		                <option value="">item 5</option>
-		                <option value="">item 5</option>
-		                <option value="">item 5</option>
-		                <option value="">item 5</option>
-		                <option value="">item 5</option>
-		                <option value="">item 5</option>
-		                <option value="">item 5</option>
-					</div>
-	                
-	                {% for brand in form.brand.field.queryset %}
-	                    <option class="dropdown-menu" value="{{ brand.id }}" {% if brand.id == request.GET.brand %}selected{% endif %}>
-	                        {{ brand.brand }}
-	                {% endfor %}
+					{% for brand in form.brand.field.queryset %}
+                    <option value="{{ brand.id }}" {% if brand.id == request.GET.brand %}selected{% endif %}>
+                        {{ brand.brand }}
+                    </option>
+                {% endfor %}
 	            </select>
 	            <select name="model" id="model">
 	                <option value="">Модель авто</option>
@@ -110,51 +41,42 @@
 	            </select>
 	            <button class="transperent_btn"><p>Показать</p></button>
 			</div>
-			{{form.year_from}}
-	        {{form.year_to}}
-	        {{form.mileage_from}}
-	        {{form.mileage_to}}
-	        {{form.engine_volume_from}}
-	        {{form.engine_volume_to}}
-	        {{form.transmission}}
-	        {{form.drive}}
-	        {{form.color}}
 			<div class="form_item short_item4">
 				<!-- Фильтр по году -->
 				<div class="couple">
 					<select class="couple_left" name="model" id="model">
 		                <option value="">Год от</option>
-		                {% for model in models %}
-		                    <option value="{{ model.model }}" {% if model.model == request.GET.model %}selected{% endif %}>
-		                        {{ model.model }}
-		                    </option>
-		                {% endfor %}
+		                {% for year in years %}
+                      <option value="{{ year }}" {% if year == request.GET.year_from %}selected{% endif %}>
+                      {{ year }}
+        </option>
+    {% endfor %}
 		            </select>	
 		            <select class="couple_right" name="model" id="model">
 		                <option value="">до</option>
-		                {% for model in models %}
-		                    <option value="{{ model.model }}" {% if model.model == request.GET.model %}selected{% endif %}>
-		                        {{ model.model }}
-		                    </option>
-		                {% endfor %}
+		                {% for year in years %}
+                      <option value="{{ year }}" {% if year == request.GET.year_to %}selected{% endif %}>
+                      {{ year }}
+                    </option>
+                     {% endfor %}
 		            </select>
 				</div>
 				<div class="couple">
 					<select class="couple_left" name="model" id="model">
 		                <option value="">Пробег от</option>
-		                {% for model in models %}
-		                    <option value="{{ model.model }}" {% if model.model == request.GET.model %}selected{% endif %}>
-		                        {{ model.model }}
-		                    </option>
-		                {% endfor %}
+		                {% for mileage in mileages %}
+        <option value="{{ mileage }}" {% if mileage == request.GET.mileage_from %}selected{% endif %}>
+            {{ mileage }}
+        </option>
+    {% endfor %}
 		            </select>	
 		            <select class="couple_right" name="model" id="model">
 		                <option value="">до</option>
-		                {% for model in models %}
-		                    <option value="{{ model.model }}" {% if model.model == request.GET.model %}selected{% endif %}>
-		                        {{ model.model }}
-		                    </option>
-		                {% endfor %}
+		                {% for mileage in mileages %}
+        <option value="{{ mileage }}" {% if mileage == request.GET.mileage_to %}selected{% endif %}>
+            {{ mileage }}
+        </option>
+    {% endfor %}
 		            </select>
 				</div>	   
 				<button class="empty_btn"><p>Сбросить</p></button>       
@@ -163,117 +85,46 @@
 				<div class="couple">
 					<select class="couple_left" name="model" id="model">
 		                <option value="">Объём от</option>
-		                {% for model in models %}
-		                    <option value="{{ model.model }}" {% if model.model == request.GET.model %}selected{% endif %}>
-		                        {{ model.model }}
-		                    </option>
-		                {% endfor %}
+		                {% for volume in engine_volumes %}
+        <option value="{{ volume }}" {% if volume == request.GET.engine_volume_from %}selected{% endif %}>
+            {{ volume }}
+        </option>
+    {% endfor %}
 		            </select>	
 		            <select class="couple_right" name="model" id="model">
 		                <option value="">до</option>
-		                {% for model in models %}
-		                    <option value="{{ model.model }}" {% if model.model == request.GET.model %}selected{% endif %}>
-		                        {{ model.model }}
-		                    </option>
-		                {% endfor %}
+		                {% for volume in engine_volumes %}
+        <option value="{{ volume }}" {% if volume == request.GET.engine_volume_to %}selected{% endif %}>
+            {{ volume }}
+        </option>
+    {% endfor %}
 		            </select>
 				</div>	
 				<select name="brand" id="brand">
 					<option value="">Тип КПП</option>
-					<div class="option_bar">
-		                <option value="">item 1</option>
-		                <option value="">item 2</option>
-		                <option value="">item 3</option>
-		                <option value="">item 4</option>
-		                <option value="">item 5</option>
-		                <option value="">item 5</option>
-		                <option value="">item 5</option>
-		                <option value="">item 5</option>
-		                <option value="">item 5</option>
-		                <option value="">item 5</option>
-		                <option value="">item 5</option>
-		                <option value="">item 5</option>
-		                <option value="">item 5</option>
-		                <option value="">item 5</option>
-		                <option value="">item 5</option>
-		                <option value="">item 5</option>
-		                <option value="">item 5</option>
-		                <option value="">item 5</option>
-		                <option value="">item 5</option>
-		                <option value="">item 5</option>
-		                <option value="">item 5</option>
-		                <option value="">item 5</option>
-		                <option value="">item 5</option>
-		                <option value="">item 5</option>
-		                <option value="">item 5</option>
-		                <option value="">item 5</option>
-		                <option value="">item 5</option>
-		                <option value="">item 5</option>
-		                <option value="">item 5</option>
-		                <option value="">item 5</option>
-		                <option value="">item 5</option>
-		                <option value="">item 5</option>
-		                <option value="">item 5</option>
-		                <option value="">item 5</option>
-		                <option value="">item 5</option>
-		                <option value="">item 5</option>
-		                <option value="">item 5</option>
-		                <option value="">item 5</option>
-		                <option value="">item 5</option>
-		                <option value="">item 5</option>
-		                <option value="">item 5</option>
-		                <option value="">item 5</option>
-		                <option value="">item 5</option>
-		                <option value="">item 5</option>
-		                <option value="">item 5</option>
-		                <option value="">item 5</option>
-		                <option value="">item 5</option>
-		                <option value="">item 5</option>
-		                <option value="">item 5</option>
-		                <option value="">item 5</option>
-		                <option value="">item 5</option>
-		                <option value="">item 5</option>
-		                <option value="">item 5</option>
-		                <option value="">item 5</option>
-		                <option value="">item 5</option>
-		                <option value="">item 5</option>
-		                <option value="">item 5</option>
-		                <option value="">item 5</option>
-		                <option value="">item 5</option>
-		                <option value="">item 5</option>
-		                <option value="">item 5</option>
-		                <option value="">item 5</option>
-		                <option value="">item 5</option>
-		                <option value="">item 5</option>
-		                <option value="">item 5</option>
-		                <option value="">item 5</option>
-		                <option value="">item 5</option>
-		                <option value="">item 5</option>
-		                <option value="">item 5</option>
-		                <option value="">item 5</option>
-					</div>
-	                
-	                {% for brand in form.brand.field.queryset %}
-	                    <option class="dropdown-menu" value="{{ brand.id }}" {% if brand.id == request.GET.brand %}selected{% endif %}>
-	                        {{ brand.brand }}
-	                {% endfor %}
+					{% for trans in transmissions %}
+        <option value="{{ trans }}" {% if trans == request.GET.transmission %}selected{% endif %}>
+            {{ trans }}
+        </option>
+    {% endfor %}
 	            </select>
 			</div>
 			<div class="form_item short_item4">
 				<select name="brand" id="brand">
 					<option value="">Привод</option>
-	                {% for brand in form.brand.field.queryset %}
-	                    <option class="dropdown-menu" value="{{ brand.id }}" {% if brand.id == request.GET.brand %}selected{% endif %}>
-	                        {{ brand.brand }}
-	                {% endfor %}
+	                {% for drv in drives %}
+        <option value="{{ drv }}" {% if drv == request.GET.drive %}selected{% endif %}>
+            {{ drv }}
+        </option>
+    {% endfor %}
 	            </select>
 	            <select name="model" id="model">
 	                <option value="">Цвет</option>
-	                {% for model in models %}
-	                    <option value="{{ model.model }}" {% if model.model == request.GET.model %}selected{% endif %}>
-	                        {{ model.model }}
-	                    </option>
-	                {% endfor %}
+	                {% for clr in colors %}
+        <option value="{{ clr }}" {% if clr == request.GET.color %}selected{% endif %}>
+            {{ clr }}
+        </option>
+    {% endfor %}
 	            </select>
 			</div>
 	    </form>
@@ -286,18 +137,14 @@
 		<div id="sorting_block">
 			<select class="sorting" name="brand" id="sort">
 					<option value="">Сначала недорогие</option>
-		            <option value="">item 1</option>
-		            <option value="">item 1</option>
-		            <option value="">item 1</option>
-		            <option value="">item 1</option>
-		            <option value="">item 1</option>
-		            <option value="">item 1</option>
-	                
-	                {% for brand in form.brand.field.queryset %}
-	                    <option class="dropdown-menu" value="{{ brand.id }}" {% if brand.id == request.GET.brand %}selected{% endif %}>
-	                        {{ brand.brand }}
-	                {% endfor %}
-	            </select>
+		            <option value="mileage_asc" {% if current_sort == 'mileage_asc' %}selected{% endif %}>Пробег (по возрастанию)</option>
+                <option value="mileage_desc" {% if current_sort == 'mileage_desc' %}selected{% endif %}>Пробег (по убыванию)</option>
+                <option value="price_asc" {% if current_sort == 'price_asc' %}selected{% endif %}>Цена (по возрастанию)</option>
+                <option value="price_desc" {% if current_sort == 'price_desc' %}selected{% endif %}>Цена (по убыванию)</option>
+                <option value="engine_volume_asc" {% if current_sort == 'engine_volume_asc' %}selected{% endif %}>Объем двигателя (по возрастанию)</option>
+                <option value="engine_volume_desc" {% if current_sort == 'engine_volume_desc' %}selected{% endif %}>Объем двигателя (по убыванию)</option>
+                <option value="year_asc" {% if current_sort == 'year_asc' %}selected{% endif %}>Год (по возрастанию)</option>
+                <option value="year_desc" {% if current_sort == 'year_desc' %}selected{% endif %}>Год (по убыванию)</option>
 		</div>
 		<div id="results">
 			<div class="popular_auto_item">
@@ -605,5 +452,3 @@
 	{% include "contact_block.html" %}
 	{% include "subscribe_block.html" %}
 	{% include "footer.html" %}
-</body>
-</html>
