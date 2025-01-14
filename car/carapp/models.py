@@ -1,7 +1,5 @@
 from django.db import models
 from django.core.validators import RegexValidator
-#модели
-
 
 class Brands(models.Model):
     country = models.CharField(max_length=200)
