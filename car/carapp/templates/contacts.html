@@ -12,10 +12,18 @@
 </head>
 <body>
 	{% include "header.html" %}
-	{% include "aboutus.html" %}
-	{% include "stages_of_work.html" %}
-	{% include "comments.html" %}
-	{% include "contact_block.html" %}
-	{% include "footer.html" %}
+	<div id="breadcrump">
+		<a href="" class="tiny_text grey_text">Главная</a>
+		<p class="tiny_text grey_text"> • </p>
+		<a href="" class="tiny_text grey_text">Контакты</a>
+	</div>
+	<div class="main">
+		{% include "aboutus.html" %}
+		{% include "stages_of_work.html" %}
+		{% include "comments.html" %}
+		{% include "contact_block.html" %}
+		{% include "footer.html" %}
+	</div>
+	
 </body>
 </html>
