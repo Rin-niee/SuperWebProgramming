@@ -10,7 +10,7 @@ $(document).ready(function() {
                 },
                 success: function(data) {
                     // Очищаем текущие значения в поле модели
-                    $('#model').html('<option value="">Select a model</option>');
+                    $('#model').html('<option value="">Модель авто</option>');
                     // Добавляем новые опции моделей
                     $.each(data, function(index, model) {
                         $('#model').append('<option value="' + model.model + '">' + model.model + '</option>');
@@ -25,7 +25,7 @@ $(document).ready(function() {
             });
         } else {
             // Если бренд не выбран, очищаем список моделей
-            $('#model').html('<option value="">Select a model</option>');
+            $('#model').html('<option value="">Модель авто</option>');
         }
     }
 
@@ -51,10 +51,10 @@ $(document).ready(function() {
         loadModels(savedBrand);  // Загружаем модели для сохраненного бренда
     }
 
-    // Сортировка — это можно также отслеживать, если нужно
-    $('#sort').change(function() {
-        $(this).closest('form').submit();  // Отправляем форму при изменении сортировки
-    });
+    // // Сортировка — это можно также отслеживать, если нужно
+    // $('#sort').change(function() {
+    //     $(this).closest('form').submit();  // Отправляем форму при изменении сортировки
+    // });
 });
 
 
