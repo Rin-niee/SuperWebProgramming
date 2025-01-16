@@ -7,6 +7,7 @@
 	<link rel="stylesheet" type="text/css" href="{% static 'css/for_all.css' %}">
 	<link rel="stylesheet" type="text/css" href="{% static 'css/contact_block.css' %}">
 	<link rel="stylesheet" type="text/css" href="{% static 'css/popular_auto.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'css/auto.css' %}">
 </head>
 <body>
 	{% include "header.html" %}
@@ -17,8 +18,75 @@
 		<p class="tiny_text grey_text"> • </p>
 		<a href="" class="tiny_text grey_text">Автомобиль</a>
 	</div>
+	<div id="auto_card">
+		<div id="auto_card_left">
+			<p class="huge_text decorated_text">Subaru LEVORG VN5, 2021 г.</p>
+			<div id="auto_item_price">
+				<p class="large_text decorated_text">1 315 000 ₽</p>
+				<div class="switch_container">
+					<label class="toggle-switch">
+					    <input type="checkbox" />
+					    <span class="slider"></span>
+					</label>
+					 <p class="tiny_text">Криптовалюта</p>
+				</div>
+			</div>
+			<div class="button_set">
+				<a href=""><div class="gradient_btn"><p>Отправить заявку</p></div></a>
+				<a href=""><img src="{% static 'img/whatsapp_logo.svg' %}" class="link_btn"></a>
+			</div>
+			<p class="tiny_text">Экономия до 30% от рынка авто в наличии</p>
+			<table>
+				<tr>
+					<td class="tiny_text grey_text">Год выпуска:</td>
+					<td class="tiny_text">2018 г.</td>
+				</tr>
+				<tr>
+					<td class="tiny_text grey_text">Кузов:</td>
+					<td class="tiny_text">Кроссовер</td>
+				</tr>
+				<tr>
+					<td class="tiny_text grey_text">Страна:</td>
+					<td class="tiny_text">Япония</td>
+				</tr>
+				<tr>
+					<td class="tiny_text grey_text">КПП:</td>
+					<td class="tiny_text">Автомат</td>
+				</tr>
+				<tr>
+					<td class="tiny_text grey_text">Двигатель:</td>
+					<td class="tiny_text">Бензиновый</td>
+				</tr>
+				<tr>
+					<td class="tiny_text grey_text">Объем двигателя:</td>
+					<td class="tiny_text">2 000 лс</td>
+				</tr>
+				<tr>
+					<td class="tiny_text grey_text">Привод:</td>
+					<td class="tiny_text">4WD</td>
+				</tr>
+				<tr>
+					<td class="tiny_text grey_text">Пробег:</td>
+					<td class="tiny_text">42 000/ Без пробега по РФ</td>
+				</tr>
+			</table>
+		</div>
+		<div id="auto_card_right">
+			<div id="big_foto">
+				<img src="{% static 'img/car1.jpg' %}">
+				<div class="nav"><button class="nav_button"><img src="{% static 'img/navigation_left.png' %}"></button>
+				<button class="nav_button"><img src="{% static 'img/navigation_right.png' %}"></button></div>
+			</div>
+			<div id="foto_row">
+				<img class="mini_foto active_img" src="{% static 'img/car1.jpg' %}">
+				<img class="mini_foto" src="{% static 'img/auto2.png' %}">
+				<img class="mini_foto" src="{% static 'img/auto2.png' %}">
+				<img class="mini_foto" src="{% static 'img/auto2.png' %}">
+				<img class="mini_foto" src="{% static 'img/auto2.png' %}">
+			</div>
 
-	<div class="temporary"><p class="giant_text">Карточка товара</p></div>
+		</div>
+	</div>
 	{% include "popular_auto.html" %}
 	{% include "contact_block.html" %}
 	{% include "footer.html" %}
