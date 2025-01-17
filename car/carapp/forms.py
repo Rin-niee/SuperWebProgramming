@@ -32,7 +32,7 @@ class CarFilterForm(forms.Form):
             self.fields['engine_volume_to'].choices = [('','Выберите максимальный объем двигателя')] + [(engine_volume, engine_volume) for engine_volume in sorted(set(car.engine_volume for car in Cars.objects.filter()))]
             self.fields['transmission'].choices = [('','Выберите трансмиссию')] + [(transmission, transmission) for transmission in set(car.transmission for car in Cars.objects.filter())]
             self.fields['drive'].choices = [('','Выберите тип привода')] + [(drive, drive) for drive in set(car.drive for car in Cars.objects.filter())]
-            self.fields['color'].choices = [(color, color) for color in set(car.color for car in Cars.objects.filter())]
+            self.fields['color'].choices = [(color, color) for color in set(car.color for car in Cars.objects.filter()) if color]
 
 
 

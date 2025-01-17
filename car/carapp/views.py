@@ -5,18 +5,24 @@ from .forms import *
 
 
 # Create your views here.
-def index(request):
+
+def contact(request):
     if request.method == 'POST':
         form = Connection(request.POST)
         if form.is_valid():
-            form.save()
-            form = Connection()
-    else: 
-        form = Connection()
+            form.save()  # Сохраняем данные в базе данных
+            return JsonResponse({'success': True, 'message': 'Форма успешно отправлена!'})
+        else:
+            return JsonResponse({'success': False, 'errors': form.errors})
+    return forms
+
+def index(request):
+    forms = contact(request)
     context = {
-        'forms': form
+        'forms': forms,
     }
     return render(request, 'index.html', context)
+
 
 SORT_CHOICES = {
     'mileage_asc': ('mileage', 'Пробег (по возрастанию)'),
@@ -82,10 +88,12 @@ def catalog(request, country):
                 cars = cars.filter(drive=drive)
             if color:
                 cars = cars.filter(color=color)
+    forms = contact(request)
     context = {
         'country': country,
         'form': form,
         'cars': cars,
+        'forms': forms,
         'sort_choices': SORT_CHOICES,  # Передаем варианты сортировки в шаблон
         'current_sort': sort_option,  # Текущая выбранная сортировка
     }
@@ -98,24 +106,38 @@ def load_models(request):
     
 def auto(request, car_id):
     car = Cars.objects.filter(id=car_id)
+    forms = contact(request)
     context = {
         'car': car,
-        'id':car_id
+        'id':car_id,
+        'forms': forms,
     }
     return render(request, 'auto.html', context)
 
 def promotion(request):
-    return render(request, 'promotion.html')
+    forms = contact(request)
+    context = {
+        'forms': forms,
+    }
+    return render(request, 'promotion.html', context)
 
 def contacts(request):
-    return render(request, 'contacts.html')
+    forms = contact(request)
+    context = {
+        'forms': forms,
+    }
+    return render(request, 'contacts.html', context)
 
 def workconditions(request):
-    return render(request, 'workconditions.html')
+    forms = contact(request)
+    context = {
+        'forms': forms,
+    }
+    return render(request, 'workconditions.html', context)
 
-def get_models(request):
-    brand_id = request.GET.get('brands_id')
-    if brand_id:
-        models = Cars.objects.filter(brand_id=brand_id).values('model').distinct()
-        model_choices = [(model['model'], model['model']) for model in models]
-    return JsonResponse({'models': []})
+# def get_models(request):
+#     brand_id = request.GET.get('brands_id')
+#     if brand_id:
+#         models = Cars.objects.filter(brand_id=brand_id).values('model').distinct()
+#         model_choices = [(model['model'], model['model']) for model in models]
+#     return JsonResponse({'models': []})
