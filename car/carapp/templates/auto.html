@@ -74,8 +74,10 @@
 		<div id="auto_card_right">
 			<div id="big_foto">
 				<img src="{% static 'img/car1.jpg' %}">
-				<div class="nav"><button class="nav_button"><img src="{% static 'img/navigation_left.png' %}"></button>
-				<button class="nav_button"><img src="{% static 'img/navigation_right.png' %}"></button></div>
+				<div class="nav">
+					<button class="nav_button"><img src="{% static 'img/navigation_left.png' %}"></button>
+					<button type="button" onclick="window.photo_viewer_window.showModal()"></button>
+					<button class="nav_button"><img src="{% static 'img/navigation_right.png' %}"></button></div>
 			</div>
 			<div id="foto_row">
 				<img class="mini_foto active_img" src="{% static 'img/car1.jpg' %}">
@@ -84,9 +86,38 @@
 				<img class="mini_foto" src="{% static 'img/auto2.png' %}">
 				<img class="mini_foto" src="{% static 'img/auto2.png' %}">
 			</div>
-
 		</div>
 	</div>
+	<!-- <button class="gradient_btn" type="button" onclick="window.photo_viewer_window.showModal()"><p>Смотреть пример</p></button> -->
+	<dialog id="photo_viewer_window" class="modal">
+		<div class="modal_content">
+			<div class="modal_top"><button type="button" onclick="window.photo_viewer_window.close()" class="close_btn large_text">x</button></div>
+			<img src="{% static 'img/car1.jpg' %}">
+			<div class="info_container">
+				<div class="info_container_left">
+					<p class="big_text decorated_text">Subaru LEVORG VN5</p>
+					<p class="tiny_text grey_text">2021 • Бензин • 42 000 км</p>
+				</div>
+				<div class="info_container_right">
+					<p class="big_text decorated_text">1 315 000 ₽</p>
+					<a href=""><div class="orange_btn"><p>Оставить заявку</p></div></a>
+					<a href=""><img src="{% static 'img/whatsapp_logo.svg' %}"></a>
+				</div>
+			</div>
+			<div id="foto_row">
+				<img class="mini_foto active_img" src="{% static 'img/car1.jpg' %}">
+				<img class="mini_foto" src="{% static 'img/auto2.png' %}">
+				<img class="mini_foto" src="{% static 'img/auto2.png' %}">
+				<img class="mini_foto" src="{% static 'img/auto2.png' %}">
+				<img class="mini_foto" src="{% static 'img/auto2.png' %}">
+				<img class="mini_foto" src="{% static 'img/auto2.png' %}">
+				<img class="mini_foto" src="{% static 'img/auto2.png' %}">
+				<img class="mini_foto" src="{% static 'img/auto2.png' %}">
+				<img class="mini_foto" src="{% static 'img/auto2.png' %}">
+				<img class="mini_foto" src="{% static 'img/auto2.png' %}">
+			</div>
+		</div>
+	</dialog>
 	{% include "popular_auto.html" %}
 	{% include "contact_block.html" %}
 	{% include "footer.html" %}

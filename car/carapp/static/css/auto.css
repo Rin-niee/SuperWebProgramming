@@ -105,6 +105,7 @@ td.tiny_text.grey_text {
 #foto_row{
     display: flex;
     gap: 2px;
+    justify-content: space-between;
 }
 #big_foto{
     position: relative;
@@ -113,9 +114,13 @@ td.tiny_text.grey_text {
     height: max-content;
 }
 #big_foto>img{
-    /* position: absolute; */
     border-radius: 28px;
     width: 100%;
+}
+#open_modal_btn {
+    width: 66%;
+    background: none;
+    border: none;
 }
 
 .nav_button {
@@ -146,7 +151,7 @@ td.tiny_text.grey_text {
     background: linear-gradient(236.55deg, #0D2F68 18.06%, #D51117 96.56%);  
 }
 
-#foto_row::after {
+#auto_card #foto_row::after {
     content: "+6";
     width: 16.5%;
     height: auto;
@@ -164,4 +169,58 @@ td.tiny_text.grey_text {
     text-decoration-skip-ink: none;
     color: #FFFFFF;
     background: #00000091;
+}
+
+/*===== modal settings =====*/
+#photo_viewer_window{
+    background: none;
+    border: none;
+}
+#photo_viewer_window>div{
+    width: min-content;
+}
+.info_container{
+    display: flex;
+    padding: 16px 16px 16px 24px;
+    gap: 24px;
+    border-radius: 24px;
+    background: #081E36;
+    justify-content: space-between;
+    max-width: calc(100% - 2em - 6px);
+}
+.info_container_left{
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+.info_container_right{
+    display: flex;
+    gap: 24px;
+    align-items: center;
+}
+#photo_viewer_window .mini_foto {
+    width: 9%;
+    height: auto;
+    border-radius: 12px;
+    position: relative;
+    z-index: 1;
+    border: 4px solid transparent;
+}
+.modal_top {
+    display: flex;
+    justify-content: flex-end;
+}
+/*#photo_viewer_window > div > div.modal_top > button {
+    width: 40px;
+    height: 40px;
+    top: 50px;
+    left: 1490px;
+    padding: 10px; 
+    border-radius: 50px;
+    background: #FFFFFF33;
+    border: none;
+}*/
+
+#photo_viewer_window > div > img {
+    width: 1100px;
 }
