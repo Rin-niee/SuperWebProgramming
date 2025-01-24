@@ -85,6 +85,26 @@
 #brend_bar img{
     width: 85px;
 }
+#brend_bar{
+    overflow: hidden; /* Скрыть переполненные элементы */
+    display: inline-block;
+    white-space: nowrap;
+    box-sizing: border-box;
+}
+
+.div2{
+    display: inline-block;
+    animation: scrolling2 15s linear infinite; 
+}
+
+@keyframes scrolling2 {
+    0% {
+        transform: translateX(0); 
+    }
+    100% {
+        transform: translateX(-100%);
+    }
+}
 
 #mini_banner {
     display: flex;
