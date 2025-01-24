@@ -75,8 +75,6 @@
     justify-content: center
 }
 
-
-
 #brend_bar{
     display: flex;
     justify-content: space-evenly;
@@ -87,11 +85,6 @@
 #brend_bar img{
     width: 85px;
 }
-
-
-
-
-
 
 #mini_banner {
     display: flex;
@@ -127,7 +120,7 @@
 
 .div1 {
     display: inline-block;
-    animation: scrolling 5s linear infinite; 
+    animation: scrolling 10s linear infinite; 
 }
 
 @keyframes scrolling {
@@ -135,7 +128,7 @@
         transform: translateX(0); 
     }
     100% {
-        transform: translateX(-50%);
+        transform: translateX(-100%);
     }
 }
 .red-line {
@@ -151,7 +144,7 @@
     align-items: center;
     width: max-content;
 }
-.red_logo_row{
+.red_logo_row, .blue_logo_row{
     display: flex;
 }
 .red_logo_row>div{
@@ -159,15 +152,9 @@
     background-color: #d51117;
     width: fit-content;
 }
-span.red-line {
-    width: 40px;
-    justify-content: center;
-    color: #FFFFFF66;
-    font-weight: 400;
-}
 .blue-line {
     height: 40px;
-    background: #081e36;
+    background: #081E36;
     color: white;
     font-family: Inter;
     font-size: 16px;
@@ -178,59 +165,16 @@ span.red-line {
     align-items: center;
     width: max-content;
 }
-.yellow-line {
-    background: yellow;
-    height: 40px;
-    color: white;
-    font-family: Inter;
-    font-size: 16px;
-    font-weight: 600;
-    line-height: 24px;
-    text-align: left;
-    display: flex;
-    align-items: center;
-    width: max-content;
-}
-.blue_logo_row{margin-top: 10px;}
 .blue_logo_row>div{
     display: inline-flex;
-    background-color:#081e36;
+    background-color: #081E36;
+    width: fit-content;
 }
-span.blue-line {
+span.blue-line, span.red-line {
     width: 40px;
     justify-content: center;
     color: #FFFFFF66;
     font-weight: 400;
-}
-/*.div1 {
-    animation: marquee1 20s infinite linear;
-    animation-delay: -20s;
-}
-
-.div2 {
-    animation: marquee2 40s infinite linear;
-    animation-delay: -10s;
-}
-
-@keyframes marquee1 {
-    0% {
-        transform: translateX(0%);
-    }
-    100% {
-        transform: translateX(-200%);
-    }
-}
-
-@keyframes marquee2 {
-    0% {
-        transform: translateX(-200%);
-    }
-    100% {
-        transform: translateX(-400%);
-    }
-}*/
-#comments{
-    /* margin: 100px 0; */
 }
 .comments_title>img{
     width: 50px;
