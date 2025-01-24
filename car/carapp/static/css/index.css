@@ -309,28 +309,15 @@ span.blue-line {
 }
 
 
-.modal {
+#economyWindow {
     padding: 24px 40px 40px 40px;
     border-radius: 24px;
     background: #081e36;
     border: none;
 }
-.economy_content {
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    gap: 20px;
-}
-.close_btn{
-    background: none;
-    border: none;
-}
+
 .economy_content>div{
     width: 100%;
-}
-.economy_top {
-    display: flex;
-    justify-content: flex-end;
 }
 .economy_content {
     text-align: center;

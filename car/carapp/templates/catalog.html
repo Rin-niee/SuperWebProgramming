@@ -135,8 +135,8 @@
 {% include "popular_auto.html" %}
 	<div id="have_results_block">
 	<div id="sorting_block">
-		<form method="GET">
-			<select class="sorting" name="brand" id="sort" onchange="this.form.submit()">
+		<form method="GET" class="simple_form">
+			<select class="sorting" name="sort" id="sort" onchange="this.form.submit()">
 				<option value="">Сначала недорогие</option>
 				<option value="mileage_asc" {% if current_sort == 'mileage_asc' %}selected{% endif %}>Пробег (по возрастанию)</option>
 				<option value="mileage_desc" {% if current_sort == 'mileage_desc' %}selected{% endif %}>Пробег (по убыванию)</option>
@@ -151,13 +151,14 @@
 	</div>
 
 <div id="results">
-	{%for car in cars %}
+	{%for car in cars_page %}
+    <a href = "{% url 'auto' car.id %}">
 		<div class="popular_auto_item">
 			<div class="auto_item_title">
 				<p class="big_text decorated_text">{{car.model}}</p>
 				<p class="tiny_text grey_text">{{car.year}} • {{car.transmission}} • {{car.mileage}} км</p>
 			</div>
-			<img src="/static/img/auto2.png">
+            <img class = "imagepic" src="/static/img/auto2.png" alt ='autopic'>
 			<div class="auto_item_price">
 				<p class="big_text decorated_text">{{car.price}} ₽</p>
 				<a href="#contact-section" class="transperent_btn"><p>Оставить заявку</p></a>
@@ -175,8 +176,9 @@
 				<div class="lil_circle"></div>
 				<div class="lil_circle"></div>
 				<div class="lil_circle"></div>
-			</div>
+			</div> 
 		</div>
+    </a>
 	{% empty %}
 	<div id="no_results_block">
 		<img src="{% static 'img/search.png' %}"> <p class="small_text"> К сожалению, по заданным параметрам ничего не найдено. Попробуйте изменить условия поиска.</p>
@@ -184,6 +186,36 @@
 	{% endfor %}
 </div>
 </div>
+
+<div class="pagination">
+    <span class="step-links">
+        {% if cars_page.has_previous %}
+            <a href="?page={{ cars_page.previous_page_number }}&sort={{ current_sort }}">Предыдущая</a>
+        {% endif %}
+
+        {% if cars_page.number > 3 %}
+            <span>...</span>
+        {% endif %}
+
+        {% for num in cars_page.paginator.page_range %}
+            {% if num >= cars_page.number|add:-1 and num <= cars_page.number|add:1 %}
+                <a href="?page={{ num }}&sort={{ current_sort }}">{{ num }}</a>
+            {% endif %}
+        {% endfor %}
+
+        {% if cars_page.number < cars_page.paginator.num_pages|add:-2 %}
+            <span>...</span>
+            <a href="?page={{ cars_page.paginator.num_pages }}&sort={{ current_sort }}">{{ cars_page.paginator.num_pages }}</a>
+        {% endif %}
+
+        {% if cars_page.has_next %}
+            <a href="?page={{ cars_page.next_page_number }}&sort={{ current_sort }}">Следующая</a>
+        {% endif %}
+    </span>
+</div>
+
+
+
 <div id="contact-section">
 	{% include "contact_block.html" %}
 </div>

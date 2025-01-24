@@ -54,15 +54,7 @@ $(document).ready(function() {
 
 
 $(document).ready(function() {
-    // Автоматическая отправка формы при изменении поля сортировки или порядка
-    $('#sort_field, #sort_order').change(function() {
-        $(this).closest('form').submit();  // Отправляем форму при изменении любого из полей
-    });
-});
-
-$(document).ready(function() {
-    // Автоматическая отправка формы при изменении поля сортировки или порядка
-    $('#sort_field, #sort_order').change(function() {
-        $(this).closest('form').submit();  // Отправляем форму при изменении любого из полей
+    $('#sort').change(function() {
+        $(this).closest('form').submit();  // Отправляем форму при изменении поля сортировки
     });
 });

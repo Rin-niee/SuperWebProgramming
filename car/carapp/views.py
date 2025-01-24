@@ -1,10 +1,31 @@
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.shortcuts import render
 from django.http import JsonResponse
 from .models import *
 from .forms import *
 
 
+
 # Create your views here.
+def get_country_name_in_case(country, case='nominative'):
+    # Словарь с названиями стран и их формами в разных падежах
+    country_forms = {
+        'Корея': {
+            'nominative': 'Корея',
+            'genitive': 'Кореи',
+        },
+        'Япония': {
+            'nominative': 'США',
+            'genitive': 'Японии',
+        },
+        'Китай': {
+            'nominative': 'Китай',
+            'genitive': 'Китая',
+        },
+    }
+    
+    return country_forms.get(country, {}).get(case, country)
+
 
 def contact(request):
     if request.method == 'POST':
@@ -18,8 +39,18 @@ def contact(request):
 
 def index(request):
     forms = contact(request)
+    carsmini = Cars.objects.all()
+
+    # Отфильтруйте автомобили по странам
+    cars_japan = carsmini.filter(brand_country__country='Япония')[:5]
+    cars_korea = carsmini.filter(brand_country__country='Корея')[:5]
+    cars_china = carsmini.filter(brand_country__country='Китай')[:5]
+    # Передайте отфильтрованные данные в шаблон
     context = {
         'forms': forms,
+        'cars_japan': cars_japan,
+        'cars_korea': cars_korea,
+        'cars_china': cars_china,
     }
     return render(request, 'index.html', context)
 
@@ -88,11 +119,24 @@ def catalog(request, country):
                 cars = cars.filter(drive=drive)
             if color:
                 cars = cars.filter(color=color)
+
+    paginator = Paginator(cars, 12)  # Показывать по 12 машин на странице
+    page_number = request.GET.get('page')  # Получаем номер страницы из GET-запроса
+    try:
+        cars_page = paginator.page(page_number)  # Получаем нужную страницу
+    except PageNotAnInteger:
+        cars_page = paginator.page(1)  # Если номер страницы не является целым числом, показываем первую
+    except EmptyPage:
+        cars_page = paginator.page(paginator.num_pages)  # Если номер страницы больше, чем количество страниц, показываем последнюю
     forms = contact(request)
+    carsmini= Cars.objects.filter(brand_country__country=country)[:5]
     context = {
+        'country_forms': get_country_name_in_case(country = country, case = 'genitive'),
         'country': country,
         'form': form,
         'cars': cars,
+        'cars_page': cars_page,
+        'carsmini': carsmini,
         'forms': forms,
         'sort_choices': SORT_CHOICES,  # Передаем варианты сортировки в шаблон
         'current_sort': sort_option,  # Текущая выбранная сортировка
@@ -106,11 +150,17 @@ def load_models(request):
     
 def auto(request, car_id):
     car = Cars.objects.filter(id=car_id)
+    country = Cars.objects.select_related('brand_country').get(id=car_id)
+    countryid = country.brand_country.country
     forms = contact(request)
+    carsmini= Cars.objects.filter(brand_country__country=countryid)[:5]
     context = {
+        'country_forms': get_country_name_in_case(country = countryid, case = 'genitive'),  
+        'carsmini': carsmini,
         'car': car,
         'id':car_id,
         'forms': forms,
+       
     }
     return render(request, 'auto.html', context)
 

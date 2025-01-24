@@ -1,0 +1,226 @@
+#auto_card {
+    display: flex;
+    padding: 0px 40px;
+    gap: 32px;
+    justify-content: space-between;
+}
+#auto_card_left {
+    display: flex;
+    width: 40%;
+    gap: 24px;
+    flex-direction: column;
+}
+#auto_item_price {
+    display: flex;
+    width: 100%;
+    gap: 16px;
+    align-items: flex-end;
+}
+#auto_button_set{
+    display: flex;
+    padding: 0px 0px 12px 0px;
+    gap: 8px;
+    width: 100%;
+
+}
+.auto_button_set>*{
+    min-width: fit-contents;
+}
+
+.switch_container{
+    display: flex;
+    gap: 8px;
+}
+
+/*Switch settings*/
+.toggle-switch {
+    position: relative;
+    display: inline-block;
+    width: 50px;
+    height: 24px;
+}
+
+.toggle-switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    background-color: #ccc;
+    transition: background-color 0.3s;
+    width: 40px;
+    height: 20px;
+    border-radius: 80px;
+    background: #2D3A48;
+}
+
+.slider::before {
+    content: "";
+    position: absolute;
+    left: 4px;
+    bottom: 2px;
+    background-color: white;
+    border-radius: 50%;
+    transition: transform 0.3s;
+    width: 15px;
+    height: 16px;
+    top: 3px;
+    left: 2px;
+}
+
+.toggle-switch input:checked+.slider {
+    background-color: #4caf50;
+}
+
+.toggle-switch input:checked+.slider::before {
+    transform: translateX(22px);
+}
+/**/
+
+label.toggle-switch {
+    font-family: Inter;
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 16.94px;
+    text-align: left;
+    text-underline-position: from-font;
+    text-decoration-skip-ink: none;
+    color: #FFFFFF;
+}
+
+td.tiny_text.grey_text {
+    width: 150px;
+    padding-bottom: 12px;
+}
+
+#auto_card_right{
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    width: 60%;
+}
+#foto_row{
+    display: flex;
+    gap: 2px;
+    justify-content: space-between;
+}
+#big_foto{
+    position: relative;
+    width: 83%;
+    /* overflow: hidden; */
+    height: max-content;
+}
+#big_foto>img{
+    border-radius: 28px;
+    width: 100%;
+}
+#open_modal_btn {
+    width: 66%;
+    background: none;
+    border: none;
+}
+
+.nav_button {
+    background: none;
+    border: none;
+    padding: 0px;
+}
+.nav {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    justify-content: space-between;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+}
+
+.mini_foto {
+    width: 16%;
+    height: auto;
+    border-radius: 12px;
+    position: relative;
+    z-index: 1;
+    border: 2px solid transparent;
+}
+
+.active_img{
+    background: linear-gradient(236.55deg, #0D2F68 18.06%, #D51117 96.56%);  
+}
+
+#auto_card #foto_row::after {
+    content: "+6";
+    width: 16.5%;
+    height: auto;
+    border-radius: 9px;
+    margin: 0% 0% 0% -16.8%;
+    z-index: 1;
+    align-content: center;
+    text-align: center;
+    font-family: Inter;
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 29.05px;
+    /* text-align: center; */
+    text-underline-position: from-font;
+    text-decoration-skip-ink: none;
+    color: #FFFFFF;
+    background: #00000091;
+}
+
+/*===== modal settings =====*/
+#photo_viewer_window{
+    background: none;
+    border: none;
+}
+#photo_viewer_window>div{
+    width: min-content;
+}
+.info_container{
+    display: flex;
+    padding: 16px 16px 16px 24px;
+    gap: 24px;
+    border-radius: 24px;
+    background: #081E36;
+    justify-content: space-between;
+    max-width: calc(100% - 2em - 6px);
+}
+.info_container_left{
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+.info_container_right{
+    display: flex;
+    gap: 24px;
+    align-items: center;
+}
+#photo_viewer_window .mini_foto {
+    width: 9%;
+    height: auto;
+    border-radius: 12px;
+    position: relative;
+    z-index: 1;
+    border: 4px solid transparent;
+}
+.modal_top {
+    display: flex;
+    justify-content: flex-end;
+}
+/*#photo_viewer_window > div > div.modal_top > button {
+    width: 40px;
+    height: 40px;
+    top: 50px;
+    left: 1490px;
+    padding: 10px; 
+    border-radius: 50px;
+    background: #FFFFFF33;
+    border: none;
+}*/
+
+#photo_viewer_window > div > img {
+    width: 1100px;
+}
