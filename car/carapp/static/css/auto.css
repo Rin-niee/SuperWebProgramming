@@ -105,7 +105,7 @@ td.tiny_text.grey_text {
 #foto_row{
     display: flex;
     gap: 2px;
-    justify-content: space-between;
+    justify-content: flex-start;
 }
 #big_foto{
     position: relative;
