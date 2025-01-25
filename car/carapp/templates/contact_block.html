@@ -1,9 +1,13 @@
 {% load static %}
+<head>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="{% static 'js/scripts.js' %}" defer></script>
+</head>
 	<div class="" id="contact_block">
 		<div class="contact_block_left">
 			<div class="title">
 				<h2 class="giant_text decorated_text">Контактная информация</h2>
-				<img src="{% static 'img/hi.png' %}">
+				<img src="{% static '/img/hi.png' %}">
 			</div>
 			<p class="medium_text grey_text">Оставьте свою заявку и наш менеджер свяжется с Вами для уточнения деталей.</p>
 			<p class="small_text grey_text">Звонок по России бесплатный</p>
@@ -14,23 +18,31 @@
 			<p class="medium_text">г. Владивосток, ул. Тополевая 6</p>
 		</div>
 		<div class="contact_block_right">
-			<form id="contact_form" class="simple_form">
+			<form id="contact_form" class="simple_form" method="post" onsubmit="return handleSubmit()">
+				{% csrf_token %}
 				<div class="form_item short_item">
 					<label for="user_name" class="tiny_text">Имя</label>
-					<input type="text" name="name" placeholder="Введите имя" pattern="^[A-Za-zА-Яа-яЁё\s]+$" title="Имя должно содержать только буквы и пробелы." maxlength="20"  id="user_name" class="tiny_text grey_text">
+					<input type="text" name="name" placeholder="Введите имя" maxlength="20"  id="user_name" class="tiny_text grey_text">
 				</div>
 				<div class="form_item short_item">
 					<label for="user_phone" class="tiny_text">Телефон</label>
-					<input type="text" name="user_phone" id="user_phone" placeholder="+7" pattern="^\+7 [0-6,9]\d{2} \d{3} \d{2} \d{2}$" title="Формат: '+7 999 999 99 99' и номер не должен начинаться с 8 или 7 после кода +7" maxlength="16" class="tiny_text grey_text">
+					<input type="text" name="user_phone" id="user_phone" placeholder="+7 999 999 99 99" maxlength="16" class="tiny_text grey_text" required oninput="formatPhoneNumber(this)">
 				</div>
 				<div class="form_item">
 					<label for="user_quest" class="tiny_text">Ваш запрос</label>
 					<textarea id="user_quest" name="user_quest" cols="40" rows="10" placeholder="Введите текст сообщения, укажите страну, марку и год машины." maxlength="200" class="tiny_text grey_text"></textarea>
 				</div>
 				<div class="form_item">
-					<label for="user_agreement" class="tiny_text"><input type="checkbox" name="user_agreement" id="user_agreement" class="custom-checkbox"> С правилами <a href="" class="red_text">политики конфиденциальности</a> ознакомлен</label>
+					<label for="user_agreement" class="tiny_text">
+						<input type="checkbox" name="user_agreement" id="user_agreement" class="custom-checkbox" required> 
+						С правилами <a href="" class="red_text">политики конфиденциальности</a> ознакомлен
+					</label>
 				</div>
-				<button class="transperent_btn"><p>Отправить</p></button>
+				<button class="transperent_btn" type="submit"><p>Отправить</p></button>
 			</form>
 		</div>
 	</div>
+
+	<!-- <input type="text" name="user_name" id="user_phone" placeholder="Имя"> -->
+	<!-- <input type="text" name="user_phone" id="user_phone" placeholder="+79999999999" maxlength="16" class="tiny_text grey_text"required oninput="formatPhoneNumber(this)"> -->
+	<!-- <textarea id="user_quest" name="user_quest" cols="40" rows="10" placeholder="Введите текст сообщения, укажите страну, марку и год машины." maxlength="200" class="tiny_text grey_text"></textarea> -->

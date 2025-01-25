@@ -1,41 +1,30 @@
 {% load static %}
-<!DOCTYPE html>
-<html>
-    <head>
-        <link rel="stylesheet" href="{% static 'css/describe_block.css' %}">
-        <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400&display=swap" rel="stylesheet">
-        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
-    </head>
-    <body>
-    <div class = "describe_block">
-        <div class= "mainn"> 
-            <h2 class="giant_text"><span class="red_text">ПОДПИШИСЬ</span> И НЕ УПУСТИ СВОЙ АВТОМОБИЛЬ МЕЧТЫ</h2>
-            
-            <div class = "photo">
-                <img src="{% static 'img/subscribe_image.png' %}" style="width: 36vw;">
-            </div>
+    <div class="" id = "subscribe_block">
+        <div class = "main"> 
+                    <img class = 'photo' src="\static\img\subscribe_image.png">
+                    <div class = "titlesunscribe">
+                    <h2><span class="red">ПОДПИШИСЬ</span><span class="white"> И НЕ УПУСТИ СВОЙ АВТОМОБИЛЬ МЕЧТЫ</p></span></h2> 
+                    <!-- <p style="margin-top: -2%;"> -->
+                        <div class= "coshial">
+                            <div style="display: flex;align-items: center;margin-bottom: 4%;">
+                                <img src="\static\img\telegram.png" style="width: 44px;height: auto;margin-right: 5%;">
+                                <p style="margin: 0;font-size: 24px;">Телеграм-канал</p>
+                                <img src="\static\img\link.png" style="width: 16px;height: auto;margin-left: 2%;">
+                            </div>
 
-            <div class= "coshial">
-                <div>
-                    <img src="{% static 'img/telegram_logo2.svg' %}" class="logo_image">
-                    <p class="big_texts">Телеграм-канал</p>
-                    <img src="{% static 'img/arrow.svg' %}" class="arrow_image">
-                </div>
-                <div>
-                    <img src="{% static 'img/vk_logo2.svg' %}" class="logo_image">
-                    <p style="margin: 0; font-size: 2vw;">VK</p>
-                    <img src="{% static 'img/arrow.svg' %}" class="arrow_image">
-                </div>
-                <div>
-                    <img src="{% static 'img/insta_logo2.svg' %}" class="logo_image">
-                    <p style="margin: 0; font-size: 2vw;">Instagram</p>
-                    <img src= "{% static 'img/arrow.svg' %}" class="arrow_image">
-                </div>
-            
-            </div> 
-            
+                            <div style="display: flex;align-items: center;margin-bottom: 4%;">
+                                <img src="\static\img\VK.png" style="width: 44px;height: auto;margin-right: 5%;">
+                                <p style="margin: 0;font-size: 24px;">VK</p>
+                                <img src="\static\img\link.png" style="width: 16px;height: auto;margin-left: 2%;">
+                            </div>
+
+                            <div style="display: flex;align-items: center;margin-bottom: 4%;">
+                                <img src="\static\img\insta.png" style="width: 44px;height: auto;margin-right: 5%;">
+                                <p style="margin: 0;font-size: 24px;">Instagram</p>
+                                <img src="\static\img\link.png" style="width: 16px;height: auto;margin-left: 2%;">
+                            </div>
+                        </div>  
+                    </div>
         </div>
-        <div class= "back"></div>
-    </div>
-    </body>
-</html>
+        <div class = "back"></div>
+    </div>        

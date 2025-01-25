@@ -7,20 +7,125 @@
 	<link rel="stylesheet" type="text/css" href="{% static 'css/for_all.css' %}">
 	<link rel="stylesheet" type="text/css" href="{% static 'css/contact_block.css' %}">
 	<link rel="stylesheet" type="text/css" href="{% static 'css/popular_auto.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'css/auto.css' %}">
 </head>
 <body>
 	{% include "header.html" %}
 	<div id="breadcrump">
-		<a href="" class="tiny_text grey_text">Главная</a>
+		{%for car in car%}
+		<a href="{% url 'index' %}" class="tiny_text grey_text">Главная</a>
 		<p class="tiny_text grey_text"> • </p>
-		<a href="" class="tiny_text grey_text">Каталог</a>
+		<a href="{% url 'catalog' country=car.brand_country.country%}" class="tiny_text grey_text">Каталог</a>
 		<p class="tiny_text grey_text"> • </p>
 		<a href="" class="tiny_text grey_text">Автомобиль</a>
+		{% endfor %}
 	</div>
-
-	<div class="temporary"><p class="giant_text">Карточка товара</p></div>
-	{% include "popular_auto.html" %}
-	{% include "contact_block.html" %}
+	<div id="auto_card">
+		{%for car in car%}
+		<div id="auto_card_left">
+			<p class="huge_text decorated_text">{{car.brand_country.brand}} {{car.model}}, 2021 г.</p>
+			<div id="auto_item_price">
+				<p class="large_text decorated_text">{{car.price}} ₽</p>
+				<div class="switch_container">
+					<label class="toggle-switch">
+					    <input type="checkbox" />
+					    <span class="slider"></span>
+					</label>
+					 <p class="tiny_text">Криптовалюта</p>
+				</div>
+			</div>
+			<div class="button_set">
+				<a href="#contact-section"><div class="gradient_btn"><p>Отправить заявку</p></div></a>
+				<a href=""><img src="{% static 'img/whatsapp_logo.svg' %}" class="link_btn"></a>
+			</div>
+			<p class="tiny_text">Экономия до 30% от рынка авто в наличии</p>
+			<table>
+				<tr>
+					<td class="tiny_text grey_text">Год выпуска:</td>
+					<td class="tiny_text">{{car.year}} г.</td>
+				</tr>
+				<!-- <tr>
+					<td class="tiny_text grey_text">Кузов:</td>
+					<td class="tiny_text">Кроссовер</td>
+				</tr> -->
+				<tr>
+					<td class="tiny_text grey_text">Страна:</td>
+					<td class="tiny_text">{{car.brand_country.country}}</td>
+				</tr>
+				<tr>
+					<td class="tiny_text grey_text">КПП:</td>
+					<td class="tiny_text">{{car.transmission}}</td>
+				</tr>
+				<tr>
+					<td class="tiny_text grey_text">Цвет:</td>
+					<td class="tiny_text">{{car.color}}</td>
+				</tr>
+				<tr>
+					<td class="tiny_text grey_text">Объем двигателя:</td>
+					<td class="tiny_text">{{car.engine_volume}} лс</td>
+				</tr>
+				<tr>
+					<td class="tiny_text grey_text">Привод:</td>
+					<td class="tiny_text">{{car.drive}}</td>
+				</tr>
+				<tr>
+					<td class="tiny_text grey_text">Пробег:</td>
+					<td class="tiny_text">{{car.mileage}}/ Без пробега по РФ</td>
+				</tr>
+			</table>
+		</div>
+		<div id="auto_card_right">
+			<div id="big_foto">
+				<img src="{% static 'img/car1.jpg' %}">
+				<div class="nav">
+					<button class="nav_button"><img src="{% static 'img/navigation_left.png' %}"></button>
+					<button type="button" onclick="window.photo_viewer_window.showModal()"></button>
+					<button class="nav_button"><img src="{% static 'img/navigation_right.png' %}"></button></div>
+			</div>
+			<div id="foto_row">
+				<img class="mini_foto active_img" src="{% static 'img/car1.jpg' %}">
+				<img class="mini_foto" src="{% static 'img/auto2.png' %}">
+				<img class="mini_foto" src="{% static 'img/auto2.png' %}">
+				<img class="mini_foto" src="{% static 'img/auto2.png' %}">
+				<img class="mini_foto" src="{% static 'img/auto2.png' %}">
+			</div>
+		</div>
+		{% endfor %}
+	</div>
+	<!-- <button class="gradient_btn" type="button" onclick="window.photo_viewer_window.showModal()"><p>Смотреть пример</p></button> -->
+	<dialog id="photo_viewer_window" class="modal">
+		<div class="modal_content">
+			<div class="modal_top"><button type="button" onclick="window.photo_viewer_window.close()" class="close_btn large_text">x</button></div>
+			<img src="{% static 'img/car1.jpg' %}">
+			<div class="info_container">
+				<div class="info_container_left">
+					<p class="big_text decorated_text">Subaru LEVORG VN5</p>
+					<p class="tiny_text grey_text">2021 • Бензин • 42 000 км</p>
+				</div>
+				<div class="info_container_right">
+					<p class="big_text decorated_text">1 315 000 ₽</p>
+					<a href="#contact-section"><div class="orange_btn"><p>Оставить заявку</p></div></a>
+					<a href=""><img src="{% static 'img/whatsapp_logo.svg' %}"></a>
+				</div>
+			</div>
+			<div id="foto_row">
+				<img class="mini_foto active_img" src="{% static 'img/car1.jpg' %}">
+				<img class="mini_foto" src="{% static 'img/auto2.png' %}">
+				<img class="mini_foto" src="{% static 'img/auto2.png' %}">
+				<img class="mini_foto" src="{% static 'img/auto2.png' %}">
+				<img class="mini_foto" src="{% static 'img/auto2.png' %}">
+				<img class="mini_foto" src="{% static 'img/auto2.png' %}">
+				<img class="mini_foto" src="{% static 'img/auto2.png' %}">
+				<img class="mini_foto" src="{% static 'img/auto2.png' %}">
+				<img class="mini_foto" src="{% static 'img/auto2.png' %}">
+				<img class="mini_foto" src="{% static 'img/auto2.png' %}">
+			</div>
+		</div>
+	</dialog>
+	{% include "popular_auto.html"%}
+	<div id="contact-section">
+		{% include "contact_block.html" %}
+	</div>
 	{% include "footer.html" %}
 </body>
 </html>

@@ -1,46 +1,52 @@
+#subscribe_block{
+    margin-top: 200px;
+    margin-bottom: 100px;
+    padding: 0px 50px 0px 50px;
+}
 
-.describe_block{
-    display: flex;  /* Устанавливаем контейнер как flex-контейнер */
-    justify-content: center; /* Выравниваем по горизонтали */
-    height: 100vh;
+.main {
+    background: #081E36;
+    border-radius: 28px;
     width: 100%;
-    align-items: center;
-    flex-wrap: wrap;
+    display: flex;
+    justify-content: space-between;
+    z-index: 2;
     position: relative;
+    flex-wrap: wrap;
+    align-content: center;
+    align-items: flex-start;
+    padding: 60px 50px 0px 50px;
+    margin-left: -50px
 }
 
 .back {
-    position: absolute;
-    width: 84%;
-    aspect-ratio: 14 / 1;
+    position: relative;
+    display: flex;
+    width: 95%;
+    height: 62px;
     background: #D51117;
     border-radius: 28px;
-    margin-top: 35.3%;
-    transform: rotate(-0.7deg);
+    margin-top: -3.2%;
+    margin-left: 3%;
     z-index: 1;
+    transform: skew(0deg, -1deg);
 }
 
-.mainn {
-    position: absolute;
-    width: 90%;
-    aspect-ratio: 8 / 3;
-    background: #081E36;
-    border-radius: 28px;
-    margin-top: 6%;
-    z-index: 2;
+.titlesunscribe{
+    display: flex;
+    flex-direction: column;
+    width: 50%;
 }
 
-
-.describe_block h2 {
-    position: absolute;
-    font-size: 3.2vw;
-    margin-top: 4%;
-    margin-left: 52%;
-    font-family: 'Oswald', sans-serif;
+h2 {
+    font-size: 70px;
+    font-family: "Bebas Neue", serif;
+    max-width: 600px;
+    
 }
 
 .red {
-    color: #D51117; /* Красный цвет для первого слова */
+    color: #FD554B; /* Красный цвет для первого слова */
 }
 
 .white {
@@ -49,33 +55,17 @@
 
 
 .coshial {
-    /*position: absolute;*/
     font-family: 'Inter', sans-serif;
     color: white;
-    font-size: 2vw;
-    margin-top: 16%;
-    margin-left: 52%;
-}
-
-.photo {
-    position: absolute;
-    margin-top: -10.4%;
+    margin-top: 5%;
     margin-left: 2%;
 }
 
-.describe_block .logo_image {
-    width: 50px;
+.photo {
+    width: 30%;
     height: auto;
-    margin-right: 5%;
+    min-width: 600px;
+    max-width: 900px;
+    margin: -210px 10px -110px -40px;
 }
 
-.describe_block .arrow_image{
-    width: 19px;
-    height: auto;
-    margin-left: 3px;
-}
-.coshial>div{
-    display: flex;
-    align-items: center;
-    margin-bottom: 4%;
-}

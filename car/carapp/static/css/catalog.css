@@ -3,6 +3,11 @@
     display: flex;
     gap: 15px;
 }
+#sorting_block > form{
+    width: fit-content;
+    background: none;
+    padding: 15px;
+}
 
 .sorting {
     padding: 16px;

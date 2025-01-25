@@ -184,7 +184,33 @@ p, h2, h3{margin: 0px;}
 .link_btn{
     height: 50px;
 }
-
+.orange_btn{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 12px 24px;
+    gap: 12px;
+    min-width: min-content;
+    max-width: 300px;
+    height: 50px;
+    background: #D51117;
+    border-radius: 60px;
+    border: none;
+    box-shadow: none;
+    box-sizing: border-box;
+}
+.orange_btn>p{
+    font-family: Inter;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 19.6px;
+    text-align: center;
+    text-underline-position: from-font;
+    text-decoration-skip-ink: none;
+    color: #fff;
+    /* margin: 0px 10px 0px 10px; */
+}
 
 /*Header settings*/
 #main_container {
@@ -266,7 +292,7 @@ p, h2, h3{margin: 0px;}
 
 #breadcrump{
     padding: 0px 0px 0px 50px;
-    margin-bottom: 50px;
+    /*margin-bottom: 50px;*/
     font-family: Inter;
     font-size: 14px;
     color: #FFFFFF80;
@@ -284,3 +310,22 @@ p, h2, h3{margin: 0px;}
     flex-wrap: nowrap;
 }
 
+.modal::backdrop {
+    backdrop-filter: blur(10px);  /* Добавление эффекта размытия */
+    background: rgba(255, 255, 255, 0.5);
+    background: #011224CC;
+}
+.modal_top {
+    display: flex;
+    justify-content: flex-end;
+}
+.close_btn{
+    background: none;
+    border: none;
+}
+.modal_content {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    gap: 20px;
+}
