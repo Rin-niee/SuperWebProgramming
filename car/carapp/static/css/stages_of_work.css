@@ -89,3 +89,10 @@
     -webkit-transform: rotate(-2deg);
     transform: rotate(-4deg);
 }*/
+
+.main {
+    display: flex; 
+    flex-direction: column; 
+    gap: 50px;
+    padding: 0px 40px;
+}

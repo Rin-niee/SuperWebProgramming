@@ -39,6 +39,6 @@
 #commission > div.button_set > .gradient_btn {
     margin-top: 24px;
 }
-.button_set{
+#commission .button_set{
 	flex-direction: column;
 }
