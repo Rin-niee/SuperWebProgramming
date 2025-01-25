@@ -14,7 +14,7 @@ body > div.popular_auto > div.\.title{
     /* min-width: 260px; */
     width: 100vw;
     position: absolute;
-    padding-left: 630px;
+    padding-left: 650px;
     padding-right: 90px;
     z-index: 2;
     margin: 0;
@@ -109,10 +109,3 @@ body > div.popular_auto > div.\.title > p{
 .circle_bar{}
 .lil_circle {}
 .act_lil_circle{}
-
-.imagepic{
-    max-width: 286px;
-    min-width: 100px;
-    height: auto;
-    width: 100%;
-}
