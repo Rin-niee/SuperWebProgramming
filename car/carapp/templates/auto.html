@@ -23,7 +23,7 @@
 	<div id="auto_card">
 		{%for car in car%}
 		<div id="auto_card_left">
-			<p class="huge_text decorated_text">{{car.brand_country.brand}} {{car.model}}, 2021 г.</p>
+			<p class="huge_text decorated_text">{{car.brand_country.brand}} {{car.model}}, {{car.year}} г.</p>
 			<div id="auto_item_price">
 				<p class="large_text decorated_text">{{car.price}} ₽</p>
 				<div class="switch_container">
@@ -95,15 +95,16 @@
 	<!-- <button class="gradient_btn" type="button" onclick="window.photo_viewer_window.showModal()"><p>Смотреть пример</p></button> -->
 	<dialog id="photo_viewer_window" class="modal">
 		<div class="modal_content">
+			{% for car in car %}
 			<div class="modal_top"><button type="button" onclick="window.photo_viewer_window.close()" class="close_btn large_text">x</button></div>
 			<img src="{% static 'img/car1.jpg' %}">
 			<div class="info_container">
 				<div class="info_container_left">
-					<p class="big_text decorated_text">Subaru LEVORG VN5</p>
-					<p class="tiny_text grey_text">2021 • Бензин • 42 000 км</p>
+					<p class="big_text decorated_text">{{car.brand_country.brand}} {{car.model}}</p>
+					<p class="tiny_text grey_text">{{car.year}} • {{car.transmission}} • {{car.mileage}} км</p>
 				</div>
 				<div class="info_container_right">
-					<p class="big_text decorated_text">1 315 000 ₽</p>
+					<p class="big_text decorated_text">{{car.price}} ₽</p>
 					<a href="#contact-section"><div class="orange_btn"><p>Оставить заявку</p></div></a>
 					<a href=""><img src="{% static 'img/whatsapp_logo.svg' %}"></a>
 				</div>
@@ -120,6 +121,7 @@
 				<img class="mini_foto" src="{% static 'img/auto2.png' %}">
 				<img class="mini_foto" src="{% static 'img/auto2.png' %}">
 			</div>
+			{% endfor %}
 		</div>
 	</dialog>
 	{% include "popular_auto.html"%}
