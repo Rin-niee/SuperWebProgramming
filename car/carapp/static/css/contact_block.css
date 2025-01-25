@@ -43,6 +43,7 @@
 }
 
 .simple_form input[type="text"],  .simple_form textarea, .simple_form select{
+    resize: none; 
     padding: 16px;
     width: 100%;
     /*height: 70%;*/

@@ -1,7 +1,7 @@
 {% load static %}
 <!DOCTYPE html>
 <html>
-<head>
+<head> 
 	<meta charset="utf-8">
 	<title>Главная</title>
 	<link rel="stylesheet" type="text/css" href="{% static 'css/for_all.css' %}">
@@ -21,7 +21,7 @@
 		<div id="banner_center" style=" background: url(); background-size: contain;">
 			<h1 class="giant_text decorated_text">АВТОМОБИЛЬ ВАШЕЙ МЕЧТЫ ЗДЕСЬ</h1>
 			<p class="big_text">Прозрачное ценообразование с подробным разъяснением затрат на каждом этапе</p><br>
-			<a href=""><div class="gradient_btn"><p>Рассчитать стоимость</p></div></a>
+			<a href="#contact-section"><div class="gradient_btn"><p>Рассчитать стоимость</p></div></a>
 		</div>
 		<div id="banner_down">
 			<div id="banner_down_left">
@@ -33,8 +33,7 @@
 					<p class="huge_text decorated_text">4000+</p>
 					<p class="tiny_text grey_text">довольных клиентов</p>
 				</div>
-				<div class="banner_item" style="
-				">
+				<div class="banner_item">
 					<img src="{% static 'img/star.png' %}" alt="star">
 					<p class="huge_text decorated_text">4.9</p>
 				</div>
@@ -48,9 +47,9 @@
 		</div>
 	</div>
 	{% include "economia.html" %}
-	{% include "popular_auto.html" %}
-	{% include "popular_auto.html" %}
-	{% include "popular_auto.html" %}
+	{% include "popular_auto.html" with country_forms="Японии" carsmini=cars_japan %}
+    {% include "popular_auto.html" with country_forms="Кореи" carsmini=cars_korea %}
+    {% include "popular_auto.html" with country_forms="Китая" carsmini=cars_china %}
 	
 	<div id="brend_bar">
 		<div class="div2">
@@ -185,7 +184,9 @@
 		</div>
 	</div>
 	{% include "subscribe_block.html" %}
-	{% include "contact_block.html" %}
+	<div id="contact-section">
+		{% include "contact_block.html" %}
+	</div>
 	{% include "footer.html" %}
 </body>
 </html>

@@ -1,29 +1,13 @@
-"""
-URL configuration for car project.
-
-The `urlpatterns` list routes URLs to views. For more information please see:
-    https://docs.djangoproject.com/en/5.1/topics/http/urls/
-Examples:
-Function views
-    1. Add an import:  from my_app import views
-    2. Add a URL to urlpatterns:  path('', views.home, name='home')
-Class-based views
-    1. Add an import:  from other_app.views import Home
-    2. Add a URL to urlpatterns:  path('', Home.as_view(), name='home')
-Including another URLconf
-    1. Import the include() function: from django.urls import include, path
-    2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
-"""
 from django.contrib import admin
 from django.urls import path
 from . import views
 
 urlpatterns = [
     path('', views.index, name = "index"), #главная
-    path('auto/', views.auto, name = "auto"), #страница авто
-    path('catalog/', views.catalog, name = "catalog"), #каталог
+    path('auto/<int:car_id>/', views.auto, name = "auto"), #страница авто
+    path('catalog/<str:country>/', views.catalog, name = "catalog"), #каталог
     path('promotion/', views.promotion, name = "promotion"), #акции
     path('contacts/', views.contacts, name = "contacts"), #контакты
     path('workconditions/', views.workconditions, name = "workconditions"), #условия работы
-
+    path('ajax/load-models/', views.load_models, name='load_models'),  # новый путь для AJAX-запроса
 ]
