@@ -80,7 +80,7 @@ body > div.popular_auto > div.\.title > p{
 
 .popular_auto_item{
     height: 19%;
-    width: 23%;
+    width: 20%;
     /* top: 0; */
     /* left: 0; */
     background-color: #081e36;
@@ -93,6 +93,7 @@ body > div.popular_auto > div.\.title > p{
     align-content: center;
     position: relative;
     margin-bottom: 7px;
+    min-width: 250px;
 }
 .popular_auto_item .red_flag {
     background: url(../img/red_flag.png) no-repeat center center;
@@ -108,4 +109,12 @@ body > div.popular_auto > div.\.title > p{
 }
 .circle_bar{}
 .lil_circle {}
-.act_lil_circle{}
+
+.imagepic{
+    /* max-width: 286px; */
+    min-width: 100px;
+    height: auto;
+    width: 100%;
+    margin-top: 20px;
+    border-radius: 15px;
+}

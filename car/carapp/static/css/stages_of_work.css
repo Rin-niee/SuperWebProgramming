@@ -71,7 +71,7 @@
     box-sizing: border-box;
     background-repeat: no-repeat;
     background-size: 100% 100%;
-    z-index: -1;
+    /* z-index: -1; */
 }
 .save_discount > a > div {
     width: 20px;
