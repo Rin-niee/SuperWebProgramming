@@ -3,6 +3,7 @@ from django.shortcuts import render
 from django.http import JsonResponse
 from .models import *
 from .forms import *
+from .poshlina import main
 
 
 
@@ -39,12 +40,32 @@ def contact(request):
 
 def index(request):
     forms = contact(request)
-    carsmini = Cars.objects.all()
+    carsmini = Cars.objects.select_related('brand_country').all()
+  
 
     # Отфильтруйте автомобили по странам
     cars_japan = carsmini.filter(brand_country__country='Япония')[:5]
     cars_korea = carsmini.filter(brand_country__country='Корея')[:5]
     cars_china = carsmini.filter(brand_country__country='Китай')[:5]
+    
+    #расчет пошлины
+    def add_duties(cars):
+        for car in cars:
+            price = car.price
+            engine_volume = car.engine_volume
+            year_mach = car.year
+            country = car.brand_country.country
+
+            # Рассчитываем пошлину
+            total_duty = main(price, engine_volume, year_mach, country)  # Предполагаем, что main возвращает сумму пошлины
+            
+            # Добавляем рассчитанную пошлину к объекту автомобиля
+            car.total = total_duty
+
+    # Рассчитываем пошлину для каждой группы автомобилей
+    add_duties(cars_japan)
+    add_duties(cars_korea)
+    add_duties(cars_china)
     # Передайте отфильтрованные данные в шаблон
     context = {
         'forms': forms,
