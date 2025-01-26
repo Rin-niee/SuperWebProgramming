@@ -8,7 +8,6 @@ from .forms import *
 
 # Create your views here.
 def get_country_name_in_case(country, case='nominative'):
-    # Словарь с названиями стран и их формами в разных падежах
     country_forms = {
         'Корея': {
             'nominative': 'Корея',
@@ -31,7 +30,7 @@ def contact(request):
     if request.method == 'POST':
         form = Connection(request.POST)
         if form.is_valid():
-            form.save()  # Сохраняем данные в базе данных
+            form.save()
             return JsonResponse({'success': True, 'message': 'Форма успешно отправлена!'})
         else:
             return JsonResponse({'success': False, 'errors': form.errors})
@@ -41,11 +40,9 @@ def index(request):
     forms = contact(request)
     carsmini = Cars.objects.all()
 
-    # Отфильтруйте автомобили по странам
     cars_japan = carsmini.filter(brand_country__country='Япония')[:5]
     cars_korea = carsmini.filter(brand_country__country='Корея')[:5]
     cars_china = carsmini.filter(brand_country__country='Китай')[:5]
-    # Передайте отфильтрованные данные в шаблон
     context = {
         'forms': forms,
         'cars_japan': cars_japan,
@@ -69,7 +66,6 @@ SORT_CHOICES = {
 def catalog(request, country):
     cars = Cars.objects.filter(brand_country__country=country)
     sort_option = request.GET.get('sort')
-    # Применяем сортировку, если параметр сортировки передан
     if sort_option in SORT_CHOICES:
         cars = cars.order_by(SORT_CHOICES[sort_option][0])  # Сортировка по полю из SORT_CHOICES
     if request.method == 'GET':
@@ -120,14 +116,14 @@ def catalog(request, country):
             if color:
                 cars = cars.filter(color=color)
 
-    paginator = Paginator(cars, 12)  # Показывать по 12 машин на странице
-    page_number = request.GET.get('page')  # Получаем номер страницы из GET-запроса
+    paginator = Paginator(cars, 12)
+    page_number = request.GET.get('page')
     try:
-        cars_page = paginator.page(page_number)  # Получаем нужную страницу
+        cars_page = paginator.page(page_number)
     except PageNotAnInteger:
-        cars_page = paginator.page(1)  # Если номер страницы не является целым числом, показываем первую
+        cars_page = paginator.page(1)
     except EmptyPage:
-        cars_page = paginator.page(paginator.num_pages)  # Если номер страницы больше, чем количество страниц, показываем последнюю
+        cars_page = paginator.page(paginator.num_pages)
     forms = contact(request)
     carsmini= Cars.objects.filter(brand_country__country=country)[:5]
     context = {
@@ -138,8 +134,8 @@ def catalog(request, country):
         'cars_page': cars_page,
         'carsmini': carsmini,
         'forms': forms,
-        'sort_choices': SORT_CHOICES,  # Передаем варианты сортировки в шаблон
-        'current_sort': sort_option,  # Текущая выбранная сортировка
+        'sort_choices': SORT_CHOICES,
+        'current_sort': sort_option,
     }
     return render(request, 'catalog.html', context)
 
