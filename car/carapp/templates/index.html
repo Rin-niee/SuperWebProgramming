@@ -173,14 +173,11 @@
 			<a href=""><div class="transperent_btn"><img src="{% static 'img/vk_logo3.png' %}"><p>Подписаться</p></div></a>
 		</div>
 		<div class="swipper">
-			<img src="{% static 'img/preview.jpg' %}">
-			<img src="{% static 'img/preview.jpg' %}">
-			<img src="{% static 'img/preview.jpg' %}">
-			<img src="{% static 'img/preview.jpg' %}">
-			<img src="{% static 'img/preview.jpg' %}">
-			<img src="{% static 'img/preview.jpg' %}">
-			<img src="{% static 'img/preview.jpg' %}">
-			<img src="{% static 'img/preview.jpg' %}">
+			{% for clip in clips %}
+            <a href="{{ clip.url }}">
+                <img src="{{ clip.preview_image }}" alt="Preview">
+            </a>
+        {% endfor %}
 		</div>
 	</div>
 	{% include "subscribe_block.html" %}

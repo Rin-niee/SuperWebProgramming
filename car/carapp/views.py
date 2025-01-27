@@ -1,12 +1,62 @@
+from selenium import webdriver
+from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.common.by import  By
+from selenium.webdriver.chrome.service import Service
+from webdriver_manager.chrome import ChromeDriverManager
+import time
+from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.common.exceptions import TimeoutException
+
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.shortcuts import render
+from yandex_reviews_parser.utils import YandexParser
+# import json
 from django.http import JsonResponse
 from .models import *
 from .forms import *
 
+def VK_clips():
+    # Настройка Selenium
+    options = webdriver.ChromeOptions()
+    options.add_argument('--headless')  # Запуск в фоновом режиме (без GUI)
+    driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
+
+    # Загружаем страницу с клипами
+    driver.get('https://vk.com/clips/tomiko_trade')
+
+    # Поиск всех элементов с клипами
+    clips = driver.find_elements(By.CSS_SELECTOR, 'a[data-testid="clip-preview"]')
+
+    clips_data = []  # Список для хранения данных клипов
+
+    # Функция поиска ссылок
+    for clip in clips:
+        url = clip.get_attribute('href')
+        preview_image = clip.find_element(By.CSS_SELECTOR, 'img').get_attribute('src')
+        views = clip.find_element(By.CSS_SELECTOR, 'h4[data-testid="clipcontainer-views"]').text
+
+        # Создание словаря для каждого клипа
+        clip_info = {
+            'url': url,
+            'preview_image': preview_image,
+            'views': views
+        }
+        
+        # Добавление словаря в список
+        clips_data.append(clip_info)
+
+    # Закрываем драйвер
+    driver.quit()
+    
+    return clips_data
+
 
 
 # Create your views here.
+
+#это чтобы получить разные конечности
 def get_country_name_in_case(country, case='nominative'):
     country_forms = {
         'Корея': {
@@ -25,6 +75,7 @@ def get_country_name_in_case(country, case='nominative'):
     
     return country_forms.get(country, {}).get(case, country)
 
+#это функция для принятия контакта(она есть везде)
 
 def contact(request):
     if request.method == 'POST':
@@ -36,6 +87,17 @@ def contact(request):
             return JsonResponse({'success': False, 'errors': form.errors})
     return forms
 
+# #это для яндекса
+# def OTZIVI():
+#     id_ya = 126455019912  # ID Компании Yandex
+#     parser = YandexParser(id_ya)
+
+#     all_data = parser.parse()  # Получаем все данные
+
+#     # Выводим только company_reviews
+#     company_reviews = all_data.get("company_reviews", [])
+#     return all_data.get("company_reviews", [])
+
 def index(request):
     forms = contact(request)
     carsmini = Cars.objects.all()
@@ -43,11 +105,16 @@ def index(request):
     cars_japan = carsmini.filter(brand_country__country='Япония')[:5]
     cars_korea = carsmini.filter(brand_country__country='Корея')[:5]
     cars_china = carsmini.filter(brand_country__country='Китай')[:5]
+    # company_reviews = OTZIVI()
+    clips = VK_clips()
+    clips = clips[:8]
     context = {
+        'clips': clips,
         'forms': forms,
         'cars_japan': cars_japan,
         'cars_korea': cars_korea,
         'cars_china': cars_china,
+        # 'company_reviews': company_reviews,
     }
     return render(request, 'index.html', context)
 
