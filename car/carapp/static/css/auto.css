@@ -228,16 +228,6 @@ align-content: space-around;
     justify-content: flex-end;
     width: 100%;
 }
-/*#photo_viewer_window > div > div.modal_top > button {
-    width: 40px;
-    height: 40px;
-    top: 50px;
-    left: 1490px;
-    padding: 10px; 
-    border-radius: 50px;
-    background: #FFFFFF33;
-    border: none;
-}*/
 
 #photo_viewer_window > div > img {
     width: 100%;

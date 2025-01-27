@@ -1,3 +1,4 @@
+{% load static %}
 <div class="popular_auto">
 		<div class=".title">
 			<p class="huge_text decorated_text grey_text">ПОПУЛЯРНЫЕ АВТО </p> <br>
@@ -8,52 +9,41 @@
 			{% for car in carsmini %}
 			<a href = "{% url 'auto' car.id %}">
 				{% if forloop.first %}  <!-- Отображаем только первый элемент как большой -->
-					<div class="popular_auto_item_big">
-						<div class="auto_item_img">
-							<img src="/static/img/car1.jpg">
-							<div class="auto_item">
-								<div class="auto_item_title">
-									<p class="big_text decorated_text">{{ car.brand_country.brand }} {{ car.model }}</p>
-									<p class="tiny_text grey_text">{{ car.year }} • {{ car.transmission }} • {{ car.mileage }} км</p>
-								</div>
-								<div class="auto_item_price">
-									<p class="large_text decorated_text">{{ car.price }} ₽</p>
-									<a href="#contact-section"><div class="transperent_btn"><p>Оставить заявку</p></div></a>
-								</div>
-							</div>
-						</div>
-						<div class="circle_bar">
-							<div class="lil_circle act_lil_circle"></div>
-							<div class="lil_circle"></div>
-							<div class="lil_circle"></div>
-							<div class="lil_circle"></div>
-							<div class="lil_circle"></div>
-							<div class="lil_circle"></div>
-							<div class="lil_circle"></div>
-							<div class="lil_circle"></div>
-							<div class="lil_circle"></div>
-							<div class="lil_circle"></div>
-							<div class="lil_circle"></div>
-							<div class="lil_circle"></div>
-						</div>
-						<div class="red_flag"></div>
+				<div class="popular_auto_item item_big">
+					<div class="auto_item_title">
+						<p class="big_text decorated_text">{{ car.brand_country.brand }} {{ car.model }}</p>
+						<p class="tiny_text grey_text">{{ car.year }} • {{ car.transmission }} • {{ car.mileage }} км</p>
 					</div>
-				{% else %}  <!-- Остальные элементы отображаем как маленькие -->
-					<div class="popular_auto_item">
-						<div class="auto_item_title">
-							<p class="big_text decorated_text">{{ car.brand_country.brand }} {{ car.model }}</p>
-							<p class="tiny_text grey_text">{{ car.year }} • {{ car.transmission }} • {{ car.mileage }} км</p>
-						</div>
-						<img class = 'imagepic' src="/static/img/auto2.png">
-						
-						<div class="auto_item_price">
-							<p class="big_text decorated_text">{{ car.price }} ₽</p>
-							<a href="#contact-section"><div class="transperent_btn"><p>Оставить заявку</p></div></a>
-						</div>
-						<div class="red_flag"></div>
+					<div class="pictire_place" style=" background-image: url({% static 'img/car1.jpg' %}); ">
+						<!-- place for picture -->
 					</div>
-				{% endif %}
+					<div class="auto_item_price">
+						<p class="decorated_text">{{ car.price }} ₽</p>
+						<a href="#contact-section">
+							<div class="transperent_btn"><p>Оставить заявку</p></div>
+						</a>
+					</div>
+					<div class="red_flag"></div>
+				</div>
 			</a>
+			{% else %}  <!-- Остальные элементы отображаем как маленькие -->
+			<a href = "{% url 'auto' car.id %}">
+				<div class="popular_auto_item">
+					<div class="auto_item_title">
+						<p class="big_text decorated_text">{{ car.brand_country.brand }} {{ car.model }}</p>
+						<p class="tiny_text grey_text">{{ car.year }} • {{ car.transmission }} • {{ car.mileage }} км</p>
+					</div>
+					<div class="pictire_place" style=" background-image: url({% static 'img/auto2.png' %}); ">
+						<!-- place for picture -->
+					</div>
+					<div class="auto_item_price">
+						<p class="decorated_text">{{ car.price }} ₽</p>
+						<a href="#contact-section"><div class="transperent_btn"><p>Оставить заявку</p></div></a>
+					</div>
+					<div class="red_flag"></div>
+				</div>
+			</a>
+			{% endif %}
 			{% endfor %}
 		</div>
 		
