@@ -94,9 +94,14 @@
 	</div>
 	<!-- <button class="gradient_btn" type="button" onclick="window.photo_viewer_window.showModal()"><p>Смотреть пример</p></button> -->
 	<dialog id="photo_viewer_window" class="modal">
+			<button type="button" onclick="window.photo_viewer_window.close()" class="circle_nav_button large_text">x</button>
+		</div>
+		<div class="nav_btn_container">
+			<button type="button" class="circle_nav_button large_text"><</button>
+		</div>
+
 		<div class="modal_content">
 			{% for car in car %}
-			<div class="modal_top"><button type="button" onclick="window.photo_viewer_window.close()" class="close_btn large_text">x</button></div>
 			<img src="{% static 'img/car1.jpg' %}">
 			<div class="info_container">
 				<div class="info_container_left">
@@ -123,6 +128,12 @@
 			</div>
 			{% endfor %}
 		</div>
+
+		<div class="nav_btn_container">
+			<button type="button" class="circle_nav_button large_text">></button>
+		</div>
+	</div>
+		
 	</dialog>
 	{% include "popular_auto.html"%}
 	<div id="contact-section">

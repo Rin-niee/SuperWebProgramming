@@ -213,6 +213,12 @@ p, h2, h3{margin: 0px;}
 }
 
 /*Header settings*/
+#header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: #011224;
+}
 #main_container {
     padding: 0px 40px 0px 40px;
     display: flex;
@@ -318,6 +324,7 @@ p, h2, h3{margin: 0px;}
 .modal_top {
     display: flex;
     justify-content: flex-end;
+    width: 100%;
 }
 .close_btn{
     background: none;
@@ -326,6 +333,18 @@ p, h2, h3{margin: 0px;}
 .modal_content {
     display: flex;
     justify-content: space-around;
-    align-items: center;
+    align-items: stretch;
     gap: 20px;
+    flex-direction: column;
+    width: 50%;
+    min-width: 300px;
+}
+.circle_nav_button {
+    width: 60px;
+    height: 60px;
+    padding: 10px;
+    border-radius: 50px;
+    background: #FFFFFF33;
+    border: none;
+    text-align: center;
 }

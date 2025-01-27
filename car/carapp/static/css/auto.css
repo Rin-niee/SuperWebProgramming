@@ -101,11 +101,12 @@ td.tiny_text.grey_text {
     flex-direction: column;
     gap: 12px;
     width: 60%;
+    align-content: center;
 }
 #foto_row{
     display: flex;
-    gap: 2px;
-    justify-content: flex-start;
+    /* gap: 2px; */
+    /* justify-content: center; */
 }
 #big_foto{
     position: relative;
@@ -161,7 +162,7 @@ td.tiny_text.grey_text {
     width: 16.5%;
     height: auto;
     border-radius: 9px;
-    margin: 0% 0% 0% -16.8%;
+    margin: 0% 0% 0% -16.7%;
     z-index: 1;
     align-content: center;
     text-align: center;
@@ -181,8 +182,19 @@ td.tiny_text.grey_text {
     background: none;
     border: none;
 }
-#photo_viewer_window>div{
-    width: min-content;
+#photo_viewer_window>div {
+    
+display: flex;
+    
+flex-wrap: wrap;
+    
+justify-content: space-evenly;
+    
+align-items: center;
+    
+/* padding: 60px; */
+    
+align-content: space-around;
 }
 .info_container{
     display: flex;
@@ -214,6 +226,7 @@ td.tiny_text.grey_text {
 .modal_top {
     display: flex;
     justify-content: flex-end;
+    width: 100%;
 }
 /*#photo_viewer_window > div > div.modal_top > button {
     width: 40px;
@@ -227,5 +240,10 @@ td.tiny_text.grey_text {
 }*/
 
 #photo_viewer_window > div > img {
-    width: 1100px;
+    width: 100%;
+}
+.nav_btn_container {
+    /* width: 20%; */
+    min-width: 65px;
+    vertical-align: center;
 }
