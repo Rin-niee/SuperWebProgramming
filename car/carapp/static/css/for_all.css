@@ -330,15 +330,6 @@ p, h2, h3{margin: 0px;}
     background: none;
     border: none;
 }
-.modal_content {
-    display: flex;
-    justify-content: space-around;
-    align-items: stretch;
-    gap: 20px;
-    flex-direction: column;
-    width: 50%;
-    min-width: 300px;
-}
 .circle_nav_button {
     width: 60px;
     height: 60px;
