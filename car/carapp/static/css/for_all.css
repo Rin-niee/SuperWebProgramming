@@ -213,6 +213,12 @@ p, h2, h3{margin: 0px;}
 }
 
 /*Header settings*/
+#header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: #011224;
+}
 #main_container {
     padding: 0px 40px 0px 40px;
     display: flex;
