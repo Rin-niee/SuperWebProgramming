@@ -1,14 +1,3 @@
-from selenium import webdriver
-from selenium.webdriver.common.keys import Keys
-from selenium.webdriver.common.by import  By
-from selenium.webdriver.chrome.service import Service
-from webdriver_manager.chrome import ChromeDriverManager
-import time
-from selenium.webdriver.chrome.options import Options
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
-from selenium.common.exceptions import TimeoutException
-
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.shortcuts import render
 from yandex_reviews_parser.utils import YandexParser
@@ -16,12 +5,43 @@ from yandex_reviews_parser.utils import YandexParser
 from django.http import JsonResponse
 from .models import *
 from .forms import *
+from selenium import webdriver
+from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.common.by import By
+from selenium.webdriver.chrome.service import Service
+from selenium.webdriver.firefox.service import Service as FirefoxService
+from selenium.webdriver.edge.service import Service as EdgeService
+from webdriver_manager.chrome import ChromeDriverManager
+from webdriver_manager.firefox import GeckoDriverManager
+from webdriver_manager.microsoft import EdgeDriverManager
+import time
+from selenium.webdriver.chrome.options import Options as ChromeOptions
+from selenium.webdriver.firefox.options import Options as FirefoxOptions
+from selenium.webdriver.edge.options import Options as EdgeOptions
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.common.exceptions import TimeoutException
 
-def VK_clips():
+
+def VK_clips(browser="chrome"):
     # Настройка Selenium
-    options = webdriver.ChromeOptions()
-    options.add_argument('--headless')  # Запуск в фоновом режиме (без GUI)
-    driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
+    if browser == "chrome":
+        options = ChromeOptions()
+        options.add_argument('--headless')  # Запуск в фоновом режиме (без GUI)
+        driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
+
+    elif browser == "firefox":
+        options = FirefoxOptions()
+        options.headless = True  # Запуск в фоновом режиме
+        driver = webdriver.Firefox(service=FirefoxService(GeckoDriverManager().install()), options=options)
+
+    elif browser == "edge":
+        options = EdgeOptions()
+        options.add_argument('--headless')  # Запуск в фоновом режиме (без GUI)
+        driver = webdriver.Edge(service=EdgeService(EdgeDriverManager().install()), options=options)
+
+    else:
+        raise ValueError("Неподдерживаемый браузер")
 
     # Загружаем страницу с клипами
     driver.get('https://vk.com/clips/tomiko_trade')
