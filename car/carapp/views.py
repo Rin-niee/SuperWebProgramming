@@ -4,6 +4,8 @@ from django.http import JsonResponse
 from .models import *
 from .forms import *
 
+from carapp.tasks import *
+from django.core.cache import cache
 
 
 # Create your views here.
@@ -38,16 +40,36 @@ def contact(request):
 
 def index(request):
     forms = contact(request)
-    carsmini = Cars.objects.all()
 
+    carsmini = Cars.objects.all()
     cars_japan = carsmini.filter(brand_country__country='Япония')[:5]
     cars_korea = carsmini.filter(brand_country__country='Корея')[:5]
     cars_china = carsmini.filter(brand_country__country='Китай')[:5]
+
+
+    clips_data = cache.get('clips_data')
+    if not clips_data:
+        task_result = VK_clips.apply_async()
+        clips_data = task_result.get(timeout = 300)
+    clips = clips_data[:8]
+
+    reviews = cache.get('company_reviews')
+    if not reviews:
+        reviews_result = Yandex.apply_async()
+        reviews = reviews_result.get(timeout = 300)
+    reviews = reviews[:6]
+    star_range = range(5)
+
+
+
     context = {
+        'reviews': reviews,
+        'star_range': star_range,
         'forms': forms,
         'cars_japan': cars_japan,
         'cars_korea': cars_korea,
         'cars_china': cars_china,
+        'clips': clips,
     }
     return render(request, 'index.html', context)
 
