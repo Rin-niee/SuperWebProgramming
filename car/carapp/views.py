@@ -3,11 +3,72 @@ from django.shortcuts import render
 from django.http import JsonResponse
 from .models import *
 from .forms import *
+from yandex_reviews_parser.utils import YandexParser
+from datetime import datetime
+import json
+import locale
+from selenium import webdriver
+from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.common.by import  By
+from selenium.webdriver.chrome.service import Service
+from webdriver_manager.chrome import ChromeDriverManager
+import time
+from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.common.exceptions import TimeoutException
 
+def VK_clips():
+    # Настройка Selenium
+    options = webdriver.ChromeOptions()
+    options.add_argument('--headless')  # Запуск в фоновом режиме (без GUI)
+    driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
+
+    # Загружаем страницу с клипами
+    driver.get('https://vk.com/clips/tomiko_trade')
+
+    # Поиск всех элементов с клипами
+    clips = driver.find_elements(By.CSS_SELECTOR, 'a[data-testid="clip-preview"]')
+
+    clips_data = []  # Список для хранения данных клипов
+
+    # Функция поиска ссылок
+    for clip in clips:
+        url = clip.get_attribute('href')
+        preview_image = clip.find_element(By.CSS_SELECTOR, 'img').get_attribute('src')
+        views = clip.find_element(By.CSS_SELECTOR, 'h4[data-testid="clipcontainer-views"]').text
+
+        # Создание словаря для каждого клипа
+        clip_info = {
+            'url': url,
+            'preview_image': preview_image,
+            'views': views
+        }
+        
+        # Добавление словаря в список
+        clips_data.append(clip_info)
+
+    # Закрываем драйвер
+    driver.quit()
+    
+    return clips_data
+
+
+def Yandex():
+    
+    id_ya = 46877748407 #ID Компании Yandex
+    parser = YandexParser(id_ya)
+
+    all_data = parser.parse() #Получаем все данные
+
+    # Выводим только company_reviews
+    company_reviews = all_data.get("company_reviews", [])
+    return company_reviews
 
 
 # Create your views here.
 def get_country_name_in_case(country, case='nominative'):
+    # Словарь с названиями стран и их формами в разных падежах
     country_forms = {
         'Корея': {
             'nominative': 'Корея',
@@ -30,7 +91,7 @@ def contact(request):
     if request.method == 'POST':
         form = Connection(request.POST)
         if form.is_valid():
-            form.save()
+            form.save()  # Сохраняем данные в базе данных
             return JsonResponse({'success': True, 'message': 'Форма успешно отправлена!'})
         else:
             return JsonResponse({'success': False, 'errors': form.errors})
@@ -39,15 +100,36 @@ def contact(request):
 def index(request):
     forms = contact(request)
     carsmini = Cars.objects.all()
+    reviews = Yandex()[:6]
+    for review in reviews:
+        review['stars'] = int(review.get('stars', 0)) if str(review.get('stars', 0)).isdigit() else 0
+    
+    locale.setlocale(locale.LC_TIME, 'Russian_Russia.1251')  # Для Windows
 
+    for review in reviews:
+        # Преобразование временной метки
+        timestamp = review.get('date', 0)  # Предполагается, что 'date' — это временная метка
+        dt_object = datetime.fromtimestamp(timestamp)
+        review['formatted_date'] = dt_object.strftime('%d %B %Y г.')
+    star_range = range(5)
+        
+
+    # Отфильтруйте автомобили по странам
     cars_japan = carsmini.filter(brand_country__country='Япония')[:5]
     cars_korea = carsmini.filter(brand_country__country='Корея')[:5]
     cars_china = carsmini.filter(brand_country__country='Китай')[:5]
+
+    clips = VK_clips()
+    clips = clips[:8]
+    # Передайте отфильтрованные данные в шаблон
     context = {
+        'clips': clips,
         'forms': forms,
         'cars_japan': cars_japan,
         'cars_korea': cars_korea,
         'cars_china': cars_china,
+        'reviews': reviews,
+        'star_range': star_range,
     }
     return render(request, 'index.html', context)
 
@@ -66,6 +148,7 @@ SORT_CHOICES = {
 def catalog(request, country):
     cars = Cars.objects.filter(brand_country__country=country)
     sort_option = request.GET.get('sort')
+    # Применяем сортировку, если параметр сортировки передан
     if sort_option in SORT_CHOICES:
         cars = cars.order_by(SORT_CHOICES[sort_option][0])  # Сортировка по полю из SORT_CHOICES
     if request.method == 'GET':
@@ -116,14 +199,14 @@ def catalog(request, country):
             if color:
                 cars = cars.filter(color=color)
 
-    paginator = Paginator(cars, 12)
-    page_number = request.GET.get('page')
+    paginator = Paginator(cars, 12)  # Показывать по 12 машин на странице
+    page_number = request.GET.get('page')  # Получаем номер страницы из GET-запроса
     try:
-        cars_page = paginator.page(page_number)
+        cars_page = paginator.page(page_number)  # Получаем нужную страницу
     except PageNotAnInteger:
-        cars_page = paginator.page(1)
+        cars_page = paginator.page(1)  # Если номер страницы не является целым числом, показываем первую
     except EmptyPage:
-        cars_page = paginator.page(paginator.num_pages)
+        cars_page = paginator.page(paginator.num_pages)  # Если номер страницы больше, чем количество страниц, показываем последнюю
     forms = contact(request)
     carsmini= Cars.objects.filter(brand_country__country=country)[:5]
     context = {
@@ -134,8 +217,8 @@ def catalog(request, country):
         'cars_page': cars_page,
         'carsmini': carsmini,
         'forms': forms,
-        'sort_choices': SORT_CHOICES,
-        'current_sort': sort_option,
+        'sort_choices': SORT_CHOICES,  # Передаем варианты сортировки в шаблон
+        'current_sort': sort_option,  # Текущая выбранная сортировка
     }
     return render(request, 'catalog.html', context)
 
