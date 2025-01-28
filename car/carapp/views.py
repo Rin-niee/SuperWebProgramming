@@ -1,3 +1,12 @@
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.shortcuts import render
+from django.http import JsonResponse
+from .models import *
+from .forms import *
+from yandex_reviews_parser.utils import YandexParser
+from datetime import datetime
+import json
+import locale
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import  By
@@ -8,14 +17,6 @@ from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import TimeoutException
-
-from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-from django.shortcuts import render
-from yandex_reviews_parser.utils import YandexParser
-# import json
-from django.http import JsonResponse
-from .models import *
-from .forms import *
 
 def VK_clips():
     # Настройка Selenium
@@ -53,11 +54,21 @@ def VK_clips():
     return clips_data
 
 
+def Yandex():
+    
+    id_ya = 46877748407 #ID Компании Yandex
+    parser = YandexParser(id_ya)
+
+    all_data = parser.parse() #Получаем все данные
+
+    # Выводим только company_reviews
+    company_reviews = all_data.get("company_reviews", [])
+    return company_reviews
+
 
 # Create your views here.
-
-#это чтобы получить разные конечности
 def get_country_name_in_case(country, case='nominative'):
+    # Словарь с названиями стран и их формами в разных падежах
     country_forms = {
         'Корея': {
             'nominative': 'Корея',
@@ -75,46 +86,50 @@ def get_country_name_in_case(country, case='nominative'):
     
     return country_forms.get(country, {}).get(case, country)
 
-#это функция для принятия контакта(она есть везде)
 
 def contact(request):
     if request.method == 'POST':
         form = Connection(request.POST)
         if form.is_valid():
-            form.save()
+            form.save()  # Сохраняем данные в базе данных
             return JsonResponse({'success': True, 'message': 'Форма успешно отправлена!'})
         else:
             return JsonResponse({'success': False, 'errors': form.errors})
     return forms
 
-# #это для яндекса
-# def OTZIVI():
-#     id_ya = 126455019912  # ID Компании Yandex
-#     parser = YandexParser(id_ya)
-
-#     all_data = parser.parse()  # Получаем все данные
-
-#     # Выводим только company_reviews
-#     company_reviews = all_data.get("company_reviews", [])
-#     return all_data.get("company_reviews", [])
-
 def index(request):
     forms = contact(request)
     carsmini = Cars.objects.all()
+    reviews = Yandex()[:6]
+    for review in reviews:
+        review['stars'] = int(review.get('stars', 0)) if str(review.get('stars', 0)).isdigit() else 0
+    
+    locale.setlocale(locale.LC_TIME, 'Russian_Russia.1251')  # Для Windows
 
+    for review in reviews:
+        # Преобразование временной метки
+        timestamp = review.get('date', 0)  # Предполагается, что 'date' — это временная метка
+        dt_object = datetime.fromtimestamp(timestamp)
+        review['formatted_date'] = dt_object.strftime('%d %B %Y г.')
+    star_range = range(5)
+        
+
+    # Отфильтруйте автомобили по странам
     cars_japan = carsmini.filter(brand_country__country='Япония')[:5]
     cars_korea = carsmini.filter(brand_country__country='Корея')[:5]
     cars_china = carsmini.filter(brand_country__country='Китай')[:5]
-    # company_reviews = OTZIVI()
+
     clips = VK_clips()
     clips = clips[:8]
+    # Передайте отфильтрованные данные в шаблон
     context = {
         'clips': clips,
         'forms': forms,
         'cars_japan': cars_japan,
         'cars_korea': cars_korea,
         'cars_china': cars_china,
-        # 'company_reviews': company_reviews,
+        'reviews': reviews,
+        'star_range': star_range,
     }
     return render(request, 'index.html', context)
 
@@ -133,6 +148,7 @@ SORT_CHOICES = {
 def catalog(request, country):
     cars = Cars.objects.filter(brand_country__country=country)
     sort_option = request.GET.get('sort')
+    # Применяем сортировку, если параметр сортировки передан
     if sort_option in SORT_CHOICES:
         cars = cars.order_by(SORT_CHOICES[sort_option][0])  # Сортировка по полю из SORT_CHOICES
     if request.method == 'GET':
@@ -183,14 +199,14 @@ def catalog(request, country):
             if color:
                 cars = cars.filter(color=color)
 
-    paginator = Paginator(cars, 12)
-    page_number = request.GET.get('page')
+    paginator = Paginator(cars, 12)  # Показывать по 12 машин на странице
+    page_number = request.GET.get('page')  # Получаем номер страницы из GET-запроса
     try:
-        cars_page = paginator.page(page_number)
+        cars_page = paginator.page(page_number)  # Получаем нужную страницу
     except PageNotAnInteger:
-        cars_page = paginator.page(1)
+        cars_page = paginator.page(1)  # Если номер страницы не является целым числом, показываем первую
     except EmptyPage:
-        cars_page = paginator.page(paginator.num_pages)
+        cars_page = paginator.page(paginator.num_pages)  # Если номер страницы больше, чем количество страниц, показываем последнюю
     forms = contact(request)
     carsmini= Cars.objects.filter(brand_country__country=country)[:5]
     context = {
@@ -201,8 +217,8 @@ def catalog(request, country):
         'cars_page': cars_page,
         'carsmini': carsmini,
         'forms': forms,
-        'sort_choices': SORT_CHOICES,
-        'current_sort': sort_option,
+        'sort_choices': SORT_CHOICES,  # Передаем варианты сортировки в шаблон
+        'current_sort': sort_option,  # Текущая выбранная сортировка
     }
     return render(request, 'catalog.html', context)
 
