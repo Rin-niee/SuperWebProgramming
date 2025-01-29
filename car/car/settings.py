@@ -24,9 +24,11 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-^vet%9@mf^_f0-vq^v!l!w!f57$=oy=z$4i9@%8*4!a0*(y9u%'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
+
+handler404 = 'carapp.views.page404'
 
 
 # Application definition
@@ -39,7 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'carapp',
-    'django_celery_beat',
+    # 'django_celery_beat',
 ]
 
 
