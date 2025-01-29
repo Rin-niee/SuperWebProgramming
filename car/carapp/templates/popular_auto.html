@@ -2,7 +2,7 @@
 		<div class=".title">
 			<p class="huge_text decorated_text grey_text">ПОПУЛЯРНЫЕ АВТО </p> <br>
 			<span class="huge_text decorated_text red_text">ИЗ {{country_forms}}</span>
-			<img src="/static/img/flag_korea.png" alt="KoreaFlag">
+			<img src="/static/img/flag_{{country_forms}}.png" alt="Flag">
 		</div>
 		<div class="swipper">
 			{% for car in carsmini %}
@@ -17,7 +17,7 @@
 									<p class="tiny_text grey_text">{{ car.year }} • {{ car.transmission }} • {{ car.mileage }} км</p>
 								</div>
 								<div class="auto_item_price">
-									<p class="large_text decorated_text">{{ car.price }} ₽</p>
+									<p class="large_text decorated_text">{{ car.total }} ₽</p>
 									<a href="#contact-section"><div class="transperent_btn"><p>Оставить заявку</p></div></a>
 								</div>
 							</div>
@@ -47,7 +47,7 @@
 						<img class = 'imagepic' src="/static/img/auto2.png">
 						
 						<div class="auto_item_price">
-							<p class="big_text decorated_text">{{ car.price }} ₽</p>
+							<p class="big_text decorated_text">{{car.total}} ₽</p>
 							<a href="#contact-section"><div class="transperent_btn"><p>Оставить заявку</p></div></a>
 						</div>
 						<div class="red_flag"></div>
