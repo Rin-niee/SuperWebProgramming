@@ -17,8 +17,59 @@ from yandex_reviews_parser.utils import YandexParser
 from datetime import datetime
 import json
 import locale
+import re
 
 logger = logging.getLogger(__name__)
+
+
+@shared_task
+def fetch_currency_data():
+    currency_data = cache.get('currency_data')
+    if currency_data:
+        return currency_data
+        
+    # Настройка Selenium
+    options = webdriver.ChromeOptions()
+    options.add_argument('--headless')  # Запуск в фоновом режиме (без GUI)
+    driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
+
+    try:
+        driver.get("https://bbr.ru/")  
+
+        accept_cookies_button = WebDriverWait(driver, 10).until(
+            EC.element_to_be_clickable((By.XPATH, "//button[text()='Принять']"))
+        )
+        accept_cookies_button.click()
+
+        eur_sell_price = WebDriverWait(driver, 10).until(
+            EC.visibility_of_element_located((By.XPATH, "//span[text()='продажа']/following-sibling::div/span"))
+        ).text
+        eur_sell_price = eur_sell_price.replace(',', '.')
+
+        expand_table_button = WebDriverWait(driver, 10).until(
+            EC.element_to_be_clickable((By.XPATH, "//button[contains(@class, 'css-15bdcy0') and contains(., 'Все валюты')]"))
+        )
+        expand_table_button.click()
+
+        time.sleep(2)  
+
+        currency_data = {"EUR": eur_sell_price}
+
+        rows = WebDriverWait(driver, 10).until(
+            EC.presence_of_all_elements_located((By.XPATH, "//table[@class='css-1uixtsi e23c5745']//tbody/tr"))
+        )
+        for row in rows:
+            cells = row.find_elements(By.TAG_NAME, "td")
+            if len(cells) >= 3:
+                currency_code = cells[1].text
+                sell_price = cells[4].text
+                cleaned_price = sell_price.replace(',', '.')
+                currency_data[currency_code] = cleaned_price
+            
+    finally:
+        driver.quit()
+    cache.set('currency_data', currency_data, timeout= 60*60*24)
+    return currency_data
 
 @shared_task
 def VK_clips():
@@ -62,26 +113,47 @@ def VK_clips():
 
 @shared_task
 def Yandex():
-    company_reviews = cache.get('company_reviews')
-    if company_reviews:
-        return company_reviews
-    id_ya = 46877748407 #ID Компании Yandex
-    parser = YandexParser(id_ya)
-
-    all_data = parser.parse() #Получаем все данные
-
-    # Выводим только company_reviews
-    company_reviews = all_data.get("company_reviews", [])
-    for review in company_reviews:
-        review['stars'] = int(review.get('stars', 0)) if str(review.get('stars', 0)).isdigit() else 0
-    
-    # locale.setlocale(locale.LC_TIME, 'Russian_Russia.1251')  # Для Windows
-
-    for review in company_reviews:
-        # Преобразование временной метки
-        timestamp = review.get('date', 0)  # Предполагается, что 'date' — это временная метка
-        dt_object = datetime.fromtimestamp(timestamp)
-        review['formatted_date'] = dt_object.strftime('%d %B %Y г.')
-    cache.set('company_reviews', company_reviews, timeout= 60*60*24)
-    return company_reviews
+    reviews = cache.get('reviews')
+    if reviews:
+        return reviews
+    else:
+        options = webdriver.ChromeOptions()
+        options.add_argument('--headless')  # Запуск в фоновом режиме (без GUI)
+        driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
+        # Открываем страницу с отзывами
+        url = "https://yandex.ru/maps/org/tomiko_trade/126455019912/reviews/?ll=131.922567%2C43.127157&z=16"
+        driver.get(url)
+        # Даем время на загрузку страницы
+        time.sleep(1)  # Увеличьте время, если страница загружается медленно
+        # Список для хранения отзывов
+        reviews = []
+        # Поиск всех элементов с отзывами
+        review_elements = driver.find_elements(By.CSS_SELECTOR, ".business-reviews-card-view__review")
+        for review in review_elements:
+            # Извлечение имени пользователя
+            author_name = review.find_element(By.CSS_SELECTOR, ".business-review-view__author-name span").text
+            # Извлечение иконки пользователя
+            avatar_element = review.find_element(By.CSS_SELECTOR,'.business-review-view__author-image .user-icon-view__icon')  # Извлечение URL из стиля
+            style = avatar_element.get_attribute('style')
+            match = re.search(r'url\("?(.*?)"?\)', style)
+            if match:
+                avatar_url = match.group(1)
+            else:
+                avatar_url = None  # Если URL не найден
+            # Извлечение количества звезд
+            stars = review.find_elements(By.CSS_SELECTOR, ".business-rating-badge-view__star._full")
+            star_count = len(stars)
+            # Извлечение даты отзыва
+            review_date = review.find_element(By.CSS_SELECTOR, ".business-review-view__date span").text
+            # Добавление отзыва в список
+            reviews.append({
+                "name": author_name,
+                "icon_href": avatar_url,
+                "stars": star_count,
+                "date": review_date
+            })
+        # Закрытие драйвера
+        driver.quit()
+        cache.set('reviews', reviews, timeout= 60*60*24)
+    return reviews
 
