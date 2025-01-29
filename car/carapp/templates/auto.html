@@ -25,7 +25,7 @@
 		<div id="auto_card_left">
 			<p class="huge_text decorated_text">{{car.brand_country.brand}} {{car.model}}, {{car.year}} г.</p>
 			<div id="auto_item_price">
-				<p class="large_text decorated_text">{{car.price}} ₽</p>
+				<p class="large_text decorated_text">{{car.total}} ₽</p>
 				<div class="switch_container">
 					<label class="toggle-switch">
 					    <input type="checkbox" />
@@ -104,7 +104,7 @@
 					<p class="tiny_text grey_text">{{car.year}} • {{car.transmission}} • {{car.mileage}} км</p>
 				</div>
 				<div class="info_container_right">
-					<p class="big_text decorated_text">{{car.price}} ₽</p>
+					<p class="big_text decorated_text">{{car.total}} ₽</p>
 					<a href="#contact-section"><div class="orange_btn"><p>Оставить заявку</p></div></a>
 					<a href=""><img src="{% static 'img/whatsapp_logo.svg' %}"></a>
 				</div>
