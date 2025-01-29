@@ -6,7 +6,7 @@
 #sorting_block > form{
     width: fit-content;
     background: none;
-    margin-left: -10px;
+    margin-left: 10px
 }
 
 .sorting {
