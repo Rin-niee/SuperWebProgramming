@@ -1,66 +1,30 @@
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-from django.shortcuts import render
-from django.http import JsonResponse
-from .models import *
-from .forms import *
-
-from carapp.tasks import *
 from django.core.cache import cache
-
-
-# Create your views here.
-def get_country_name_in_case(country, case='nominative'):
-    country_forms = {
-        'Корея': {
-            'nominative': 'Корея',
-            'genitive': 'Кореи',
-        },
-        'Япония': {
-            'nominative': 'США',
-            'genitive': 'Японии',
-        },
-        'Китай': {
-            'nominative': 'Китай',
-            'genitive': 'Китая',
-        },
-    }
-    
-    return country_forms.get(country, {}).get(case, country)
-
-
-def contact(request):
-    if request.method == 'POST':
-        form = Connection(request.POST)
-        if form.is_valid():
-            form.save()
-            return JsonResponse({'success': True, 'message': 'Форма успешно отправлена!'})
-        else:
-            return JsonResponse({'success': False, 'errors': form.errors})
-    return forms
+from django.shortcuts import render
+from django.http import JsonResponse, HttpResponseNotFound
+from .services import *
+from carapp.tasks import *
 
 def index(request):
     forms = contact(request)
-
     carsmini = Cars.objects.all()
     cars_japan = carsmini.filter(brand_country__country='Япония')[:5]
     cars_korea = carsmini.filter(brand_country__country='Корея')[:5]
     cars_china = carsmini.filter(brand_country__country='Китай')[:5]
-
+    cars_japan, cars_korea, cars_china = map (add_duties, [cars_japan, cars_korea, cars_china])
 
     clips_data = cache.get('clips_data')
     if not clips_data:
-        task_result = VK_clips.apply_async()
-        clips_data = task_result.get(timeout = 300)
+        clips = VK_clips.delay()
+        clips = []
     clips = clips_data[:8]
 
-    reviews = cache.get('company_reviews')
+    reviews = cache.get('reviews')
     if not reviews:
-        reviews_result = Yandex.apply_async()
-        reviews = reviews_result.get(timeout = 300)
+        reviews = Yandex.delay()
+        reviews = []
     reviews = reviews[:6]
     star_range = range(5)
-
-
 
     context = {
         'reviews': reviews,
@@ -137,7 +101,7 @@ def catalog(request, country):
                 cars = cars.filter(drive=drive)
             if color:
                 cars = cars.filter(color=color)
-
+    cars = add_duties(cars)
     paginator = Paginator(cars, 12)
     page_number = request.GET.get('page')
     try:
@@ -146,8 +110,11 @@ def catalog(request, country):
         cars_page = paginator.page(1)
     except EmptyPage:
         cars_page = paginator.page(paginator.num_pages)
+        
     forms = contact(request)
+
     carsmini= Cars.objects.filter(brand_country__country=country)[:5]
+    carsmini = add_duties(carsmini)
     context = {
         'country_forms': get_country_name_in_case(country = country, case = 'genitive'),
         'country': country,
@@ -168,10 +135,13 @@ def load_models(request):
     
 def auto(request, car_id):
     car = Cars.objects.filter(id=car_id)
+    car = add_duties(car)
     country = Cars.objects.select_related('brand_country').get(id=car_id)
     countryid = country.brand_country.country
     forms = contact(request)
+
     carsmini= Cars.objects.filter(brand_country__country=countryid)[:5]
+    carsmini = add_duties(carsmini)
     context = {
         'country_forms': get_country_name_in_case(country = countryid, case = 'genitive'),  
         'carsmini': carsmini,
@@ -203,9 +173,5 @@ def workconditions(request):
     }
     return render(request, 'workconditions.html', context)
 
-# def get_models(request):
-#     brand_id = request.GET.get('brands_id')
-#     if brand_id:
-#         models = Cars.objects.filter(brand_id=brand_id).values('model').distinct()
-#         model_choices = [(model['model'], model['model']) for model in models]
-#     return JsonResponse({'models': []})
+def page404(request, exception):
+    return render(request, '404.html', status=404)
