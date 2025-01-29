@@ -1,145 +1,45 @@
 {% load static %}
 <div id="comments">
-		<div class="comments_top inline">
-			<div class="comments_title inline">
-				<h2 class="giant_text decorated_text">Отзывы</h2>
-				<img src="{% static 'img/star.png' %}">
-				<p class="giant_text decorated_text">4.9</p>
-			</div>
-			<div class="comments_links">
-				<a class="tiny_text grey_text" href="https://2gis.ru/vladivostok/firm/70000001067259118/tab/reviews" target="_blank">2ГИС<img loading="lazy" src="{% static 'img/arr_link.svg' %}" alt="Стрелка"></a>
-				<a class="tiny_text grey_text"  href="https://www.vl.ru/pravyj-rul-avto-iz-yaponii" target="_blank">VL справочник<img loading="lazy" src="{% static 'img/arr_link.svg' %}" alt="Стрелка"></a>
-				<a class="tiny_text grey_text"  href="https://yandex.ru/maps/org/pravy_rul/114125692870/reviews/?ll=131.886877%2C43.098752&amp;tab=reviews&amp;z=15" target="_blank">Яндекс карты<img loading="lazy" src="{% static 'img/arr_link.svg' %}" alt="Стрелка"></a>
-			</div>
-		</div>
-		<div class="comments_down">
-			<div class="comment_item">
-                <div class="comment_item_left">
-                    <div class="logo-avtar-default tiny_text" style="background-color: #A84CA8">ТП</div>
-                    <p class="user_name tiny_text">Татьяна Птицына</p>
+    <div class="comments_top inline">
+        <div class="comments_title inline">
+            <h2 class="giant_text decorated_text">Отзывы</h2>
+            <img src="{% static 'img/star.png' %}">
+            <p class="giant_text decorated_text">4.9</p>
+        </div>
+        <div class="comments_links">
+            <a class="tiny_text grey_text" href="https://2gis.ru/vladivostok/firm/70000001067259118/tab/reviews" target="_blank">2ГИС<img loading="lazy" src="{% static 'img/arr_link.svg' %}" alt="Стрелка"></a>
+            <a class="tiny_text grey_text"  href="https://www.vl.ru/pravyj-rul-avto-iz-yaponii" target="_blank">VL справочник<img loading="lazy" src="{% static 'img/arr_link.svg' %}" alt="Стрелка"></a>
+            <a class="tiny_text grey_text"  href="https://yandex.ru/maps/org/pravy_rul/114125692870/reviews/?ll=131.886877%2C43.098752&amp;tab=reviews&amp;z=15" target="_blank">Яндекс карты<img loading="lazy" src="{% static 'img/arr_link.svg' %}" alt="Стрелка"></a>
+        </div>
+    </div>
+
+    <div class="comments_down">
+        {% for review in reviews %}
+        <div class="comment_item">
+            
+            <div class="comment_item_left">
+                <div class="logo-avtar-default tiny_text" style="background-color: #A84CA8">
+                    {% if review.icon_href %}
+                        <img src="{{ review.icon_href }}" alt="Avatar" style='border-radius: 90px;'>
+                    {% else %}
+                        <p>N</p>
+                    {% endif %}
                 </div>
-                <div class="comment_item_right">
-                    <div class="rating_stars" data-stars="5">
-                        <img src="{% static 'img/star_fill.svg' %}">
-                        <img src="{% static 'img/star_fill.svg' %}">
-                        <img src="{% static 'img/star_fill.svg' %}">
-                        <img src="{% static 'img/star_fill.svg' %}">
-                        <img src="{% static 'img/star_fill.svg' %}">
-                    </div>
-                    <p class="comment_date tiny_text">15 октября 2024 г.</p>
-                </div>
+                <p class="user_name tiny_text">{{review.name}}</p>
             </div>
-            <div class="comment_item">
-                <div class="comment_item_left">
-                    <div class="logo-avtar-default tiny_text" style="background-color: #A84CA8">ТП</div>
-                    <p class="user_name tiny_text">Татьяна Птицына</p>
+            <div class="comment_item_right">
+                <div class="rating_stars" data-stars="{{ review.stars }}">
+                    {% for i in star_range%}
+                        {% if i < review.stars %}
+                            <img src="{% static 'img/star_fill.svg' %}" alt="Заполненная звезда">
+                        {% else %}
+                            <img src="{% static 'img/star_empty.svg' %}" alt="Пустая звезда">
+                        {% endif %}
+                    {% endfor %}
                 </div>
-                <div class="comment_item_right">
-                    <div class="rating_stars" data-stars="5">
-                        <img src="{% static 'img/star_fill.svg' %}">
-                        <img src="{% static 'img/star_fill.svg' %}">
-                        <img src="{% static 'img/star_fill.svg' %}">
-                        <img src="{% static 'img/star_fill.svg' %}">
-                        <img src="{% static 'img/star_fill.svg' %}">
-                    </div>
-                    <p class="comment_date tiny_text">15 октября 2024 г.</p>
-                </div>
+                <p class="comment_date tiny_text">{{review.date}}</p>
             </div>
-            <div class="comment_item">
-                <div class="comment_item_left">
-                    <div class="logo-avtar-default tiny_text" style="background-color: #A84CA8">ТП</div>
-                    <p class="user_name tiny_text">Татьяна Птицына</p>
-                </div>
-                <div class="comment_item_right">
-                    <div class="rating_stars" data-stars="5">
-                        <img src="{% static 'img/star_fill.svg' %}">
-                        <img src="{% static 'img/star_fill.svg' %}">
-                        <img src="{% static 'img/star_fill.svg' %}">
-                        <img src="{% static 'img/star_fill.svg' %}">
-                        <img src="{% static 'img/star_fill.svg' %}">
-                    </div>
-                    <p class="comment_date tiny_text">15 октября 2024 г.</p>
-                </div>
-            </div>
-            <div class="comment_item">
-                <div class="comment_item_left">
-                    <div class="logo-avtar-default tiny_text" style="background-color: #A84CA8">ТП</div>
-                    <p class="user_name tiny_text">Татьяна Птицына</p>
-                </div>
-                <div class="comment_item_right">
-                    <div class="rating_stars" data-stars="5">
-                        <img src="{% static 'img/star_fill.svg' %}">
-                        <img src="{% static 'img/star_fill.svg' %}">
-                        <img src="{% static 'img/star_fill.svg' %}">
-                        <img src="{% static 'img/star_fill.svg' %}">
-                        <img src="{% static 'img/star_fill.svg' %}">
-                    </div>
-                    <p class="comment_date tiny_text">15 октября 2024 г.</p>
-                </div>
-            </div>
-            <div class="comment_item">
-                <div class="comment_item_left">
-                    <div class="logo-avtar-default tiny_text" style="background-color: #A84CA8">ТП</div>
-                    <p class="user_name tiny_text">Татьяна Птицына</p>
-                </div>
-                <div class="comment_item_right">
-                    <div class="rating_stars" data-stars="5">
-                        <img src="{% static 'img/star_fill.svg' %}">
-                        <img src="{% static 'img/star_fill.svg' %}">
-                        <img src="{% static 'img/star_fill.svg' %}">
-                        <img src="{% static 'img/star_fill.svg' %}">
-                        <img src="{% static 'img/star_fill.svg' %}">
-                    </div>
-                    <p class="comment_date tiny_text">15 октября 2024 г.</p>
-                </div>
-            </div>
-            <div class="comment_item">
-                <div class="comment_item_left">
-                    <div class="logo-avtar-default tiny_text" style="background-color: #A84CA8">ТП</div>
-                    <p class="user_name tiny_text">Татьяна Птицына</p>
-                </div>
-                <div class="comment_item_right">
-                    <div class="rating_stars" data-stars="5">
-                        <img src="{% static 'img/star_fill.svg' %}">
-                        <img src="{% static 'img/star_fill.svg' %}">
-                        <img src="{% static 'img/star_fill.svg' %}">
-                        <img src="{% static 'img/star_fill.svg' %}">
-                        <img src="{% static 'img/star_fill.svg' %}">
-                    </div>
-                    <p class="comment_date tiny_text">15 октября 2024 г.</p>
-                </div>
-            </div>
-            <div class="comment_item">
-                <div class="comment_item_left">
-                    <div class="logo-avtar-default tiny_text" style="background-color: #A84CA8">ТП</div>
-                    <p class="user_name tiny_text">Татьяна Птицына</p>
-                </div>
-                <div class="comment_item_right">
-                    <div class="rating_stars" data-stars="5">
-                        <img src="{% static 'img/star_fill.svg' %}">
-                        <img src="{% static 'img/star_fill.svg' %}">
-                        <img src="{% static 'img/star_fill.svg' %}">
-                        <img src="{% static 'img/star_fill.svg' %}">
-                        <img src="{% static 'img/star_fill.svg' %}">
-                    </div>
-                    <p class="comment_date tiny_text">15 октября 2024 г.</p>
-                </div>
-            </div>
-            <div class="comment_item">
-                <div class="comment_item_left">
-                    <div class="logo-avtar-default tiny_text" style="background-color: #A84CA8">ТП</div>
-                    <p class="user_name tiny_text">Татьяна Птицына</p>
-                </div>
-                <div class="comment_item_right">
-                    <div class="rating_stars" data-stars="5">
-                        <img src="{% static 'img/star_fill.svg' %}">
-                        <img src="{% static 'img/star_fill.svg' %}">
-                        <img src="{% static 'img/star_fill.svg' %}">
-                        <img src="{% static 'img/star_fill.svg' %}">
-                        <img src="{% static 'img/star_fill.svg' %}">
-                    </div>
-                    <p class="comment_date tiny_text">15 октября 2024 г.</p>
-                </div>
-            </div>
-		</div>
-	</div>
+        </div>
+        {% endfor %}
+    </div>   
+</div>
