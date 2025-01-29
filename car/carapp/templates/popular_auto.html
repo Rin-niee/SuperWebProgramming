@@ -1,8 +1,8 @@
-<div class="popular_auto" id = "popular_auto_{{ country_forms }}">
+<div class="popular_auto">
 		<div class=".title">
-			<p class="large_text decorated_text grey_text">ПОПУЛЯРНЫЕ АВТО </p> <br>
-			<span class="large_text decorated_text red_text">ИЗ {{country_forms}}</span>
-			<img src="/static/img/flag_korea.png" alt="KoreaFlag">
+			<p class="huge_text decorated_text grey_text">ПОПУЛЯРНЫЕ АВТО </p> <br>
+			<span class="huge_text decorated_text red_text">ИЗ {{country_forms}}</span>
+			<img src="/static/img/flag_{{country_forms}}.png" alt="Flag">
 		</div>
 		<div class="swipper">
 			{% for car in carsmini %}
