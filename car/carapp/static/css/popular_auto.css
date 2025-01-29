@@ -1,22 +1,29 @@
 .popular_auto{
     margin: 50px 0px 0px 20px;
+    overflow: hidden;
 }
 
 body > div.popular_auto > div.\.title{
     display: flex;
     flex-wrap: wrap;
-    width: 100vw;
+    width: 55%;
     position: absolute;
     padding-left: 650px;
     padding-right: 90px;
     z-index: 2;
     margin: 0;
+    justify-content: flex-start;
+    gap: 50%;
+    align-items: center;
 }
 .popular_auto .swipper{
     display: flex;
+    /*height: 417px;*/
     align-items: flex-end;
     gap: 12px;
-    overflow: hidden;
+    /*overflow: hidden;*/
+    transition: 1s;
+    justify-content: flex-start;
 }
 body > div.popular_auto > div.\.title > p{
     width: 100%;
@@ -28,10 +35,18 @@ body > div.popular_auto > div.\.title > p{
     gap: 14px;
 }
 
+img.nav_vector:hover {
+    opacity: 1;
+}
+img.nav_vector {
+    opacity: 0.5;
+}
+
 /*LITTLE ITEM SETTINGS*/
 
-.popular_auto_item{
+.popular_auto_item {
     width: 20%;
+    height: 10%;
     background-color: #081e36;
     border-radius: 24px;
     padding: 8px 16px 8px 16px;
@@ -41,6 +56,7 @@ body > div.popular_auto > div.\.title > p{
     position: relative;
     margin-bottom: 7px;
     min-width: 250px;
+    transition: width  1s ease, height 1s ease, background-color 1s ease, padding 1s ease; /* Плавный переход */
 }
 .popular_auto_item .red_flag {
     background: url(../img/red_flag.png) no-repeat center center;
@@ -73,12 +89,16 @@ body > div.popular_auto > div.\.title > p{
 /*BIG ITEM SETTINGS*/
 
 .popular_auto_item.item_big {
-    flex: 0 0 40%;
+    /*flex: 0 0 40%;*/
+    display: flex;
+    width: 40%;
+    height: 30%;
     min-width: 600px;
     position: relative;
     padding-bottom: 5px;
     background: none;
     padding: 0px;
+    transition:  width 1s ease, height 1s ease, background-color 1s ease, padding 1s ease; /* Плавный переход */
 }
 
 .popular_auto_item.item_big .red_flag {

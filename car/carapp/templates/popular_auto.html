@@ -1,9 +1,16 @@
 {% load static %}
-<div class="popular_auto">
+<div class="popular_auto" id="popular_auto_korea">
 		<div class=".title">
-			<p class="huge_text decorated_text grey_text">ПОПУЛЯРНЫЕ АВТО </p> <br>
-			<span class="huge_text decorated_text red_text">ИЗ {{country_forms}}</span>
-			<img src="/static/img/flag_korea.png" alt="KoreaFlag">
+			<div>
+				<p class="huge_text decorated_text grey_text">ПОПУЛЯРНЫЕ АВТО </p> <br>
+				<span class="huge_text decorated_text red_text">ИЗ {{country_forms}}</span>
+				<img src="/static/img/flag_korea.png" alt="KoreaFlag">
+			</div>
+			
+			<div>
+				<img class="nav_vector nav_left" src="{% static 'img/vector_left.png' %}">
+				<img class="nav_vector nav_right" src="{% static 'img/vector_right.png' %}">
+			</div>
 		</div>
 		<div class="swipper">
 			{% for car in carsmini %}
@@ -45,6 +52,5 @@
 			</a>
 			{% endif %}
 			{% endfor %}
-		</div>
-		
+		</div>		
 </div>
