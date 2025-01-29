@@ -9,13 +9,13 @@ app = Celery('car')
 app.config_from_object('django.conf:settings', namespace = 'CELERY')
 app.autodiscover_tasks()
 
-app.conf.beat_schedule={
-    'fetch-vk-clips-every-24-hours':{
-        'task': 'carapp.tasks.VK_clips',
-        'schedule': crontab(minute =  0, hour = 0),
-    },
-    'fetch-yandex-every-24-hours':{
-        'task': 'carapp.tasks.Yandex',
-        'schedule': crontab(minute =  0, hour = 0),
-    },
-}
+# app.conf.beat_schedule={
+#     'fetch-vk-clips-every-24-hours':{
+#         'task': 'carapp.tasks.VK_clips',
+#         'schedule': crontab(minute =  0, hour = 0),
+#     },
+#     'fetch-yandex-every-24-hours':{
+#         'task': 'carapp.tasks.Yandex',
+#         'schedule': crontab(minute =  0, hour = 0),
+#     },
+# }
