@@ -74,13 +74,21 @@
 				</tr>
 			</table>
 		</div>
-		<div id="auto_card_right">
+		<div id="auto_card_right" class="auto_slider">
 			<div id="big_foto">
-				<img src="{% static 'img/car1.jpg' %}">
+				<div class="swipper_container">
+				<div class="swipper">
+					<div class="big_image" style="background-image: url({% static 'img/car1.jpg' %})"></div>
+					<div class="big_image" style="background-image: url({% static 'img/auto2.png' %})"></div>
+					<div class="big_image" style="background-image: url({% static 'img/auto2.png' %})"></div>
+					<div class="big_image" style="background-image: url({% static 'img/auto2.png' %})"></div>
+					<div class="big_image" style="background-image: url({% static 'img/auto2.png' %})"></div>
+				</div>
+				</div>
 				<div class="nav">
-					<button class="nav_button"><img src="{% static 'img/navigation_left.png' %}"></button>
+					<button class="nav_button nav_left"><img class="nav_left" src="{% static 'img/navigation_left.png' %}"></button>
 					<button type="button" onclick="window.photo_viewer_window.showModal()"></button>
-					<button class="nav_button"><img src="{% static 'img/navigation_right.png' %}"></button></div>
+					<button class="nav_button nav_right"><img class="nav_right" src="{% static 'img/navigation_right.png' %}"></button></div>
 			</div>
 			<div id="foto_row">
 				<img class="mini_foto active_img" src="{% static 'img/car1.jpg' %}">
@@ -141,6 +149,6 @@
 		{% include "contact_block.html" %}
 	</div>
 	{% include "footer.html" %}
-	<script type="text/javascript" src="{% static 'js/popular_auto_slider2.js'%}"></script>
+	<script type="text/javascript" src="{% static 'js/auto_slider.js'%}"></script>
 </body>
 </html>
