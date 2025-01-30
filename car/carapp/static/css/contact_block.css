@@ -59,6 +59,9 @@
     border: none;
     margin-top: 10px;
 }
+.simple_form textarea{
+    height: 100px;
+}
 
  .simple_form select{ 
     background-position-x: 90%;
