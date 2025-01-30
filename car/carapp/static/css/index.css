@@ -232,9 +232,9 @@ span.blue-line, span.red-line {
     padding: 16px 24px;
     border-radius: 16px;
     background: #081e36;
-    max-width: 323px;
+    max-width: 325px;
     flex-shrink: 0;
-    width: 100%;
+    width: fit-content;
     height: 100%;
     position: relative;
     transition-property: transform;
