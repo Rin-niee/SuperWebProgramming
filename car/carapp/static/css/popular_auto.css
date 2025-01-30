@@ -1,6 +1,7 @@
 .popular_auto{
     margin: 50px 0px 0px 20px;
     overflow: hidden;
+    position: relative;
 }
 
 body > div.popular_auto > div.\.title{
@@ -12,9 +13,9 @@ body > div.popular_auto > div.\.title{
     padding-right: 90px;
     z-index: 2;
     margin: 0;
-    justify-content: flex-start;
     gap: 40%;
     align-items: center;
+    justify-content: space-between;
 }
 .popular_auto .swipper{
     display: flex;
