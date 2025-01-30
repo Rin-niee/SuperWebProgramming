@@ -312,7 +312,7 @@ span.blue-line, span.red-line {
     border-radius: 16px;
     margin: 8px;
 }
-.swipper{
+#clips.swipper{
     margin-left: auto;
     margin-right: auto;
     position: relative;

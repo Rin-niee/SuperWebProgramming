@@ -79,22 +79,16 @@
 
 document.addEventListener("DOMContentLoaded", () => {
     // Функция для движения слайдов
-    function move(panel, direction) {
+    function move(panel, element, direction) {
         let offset = panel.offset; // Начальный сдвиг для этой панели
-        let translateWidth = panel.querySelector('.popular_auto_item').offsetWidth + 16;
-        let maxOffset = panel.swipper.scrollWidth - panel.swipper.offsetWidth; // Максимальный сдвиг (последний элемент)
-
+        let translateWidth = element.offsetWidth + 14;
+        // let maxOffset = panel.swipper.scrollWidth - panel.swipper.offsetWidth; // Максимальный сдвиг (последний элемент)
+        console.log(translateWidth);
+        console.log(panel.querySelector('.popular_auto_item'));
         // Ограничиваем движение слайдов
-        offset += direction * (translateWidth + 30);
-        if (offset > 0) {
-            offset = 0; // Ограничение для движения влево
-        }
-        if (offset < -maxOffset) {
-            offset = -maxOffset; // Ограничение для движения вправо
-        }
-
-        panel.offset = offset; // Обновляем сдвиг
-        panel.swipper.style.transform = `translateX(${offset}px)`; // Применяем трансформацию
+        panel.offset += direction * (translateWidth + 30);
+        // panel.offset = offset; // Обновляем сдвиг
+        panel.swipper.style.transform = `translateX(${panel.offset}px)`; // Применяем трансформацию
     }
 
     // Обработчик событий для всех панелей
@@ -120,7 +114,7 @@ document.addEventListener("DOMContentLoaded", () => {
                         index_g = i + 1;
                         if (index_g < objects.length) { // Проверка на наличие следующего элемента
                             element_next = objects[index_g];
-                            move(panel, -1);
+                            move(panel, element_next, -1);
                             element.classList.remove('item_big');
                         }
                     }
@@ -138,7 +132,7 @@ document.addEventListener("DOMContentLoaded", () => {
                         index_g = i - 1;
                         if (index_g >= 0) { 
                             element_next = objects[index_g];
-                            move(panel, 1);
+                            move(panel, element_next, 1);
                             element.classList.remove('item_big');
                         }
                     }
