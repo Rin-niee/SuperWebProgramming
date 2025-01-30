@@ -4,7 +4,7 @@ console.log(panel);
 let offset = 20; // Начальный сдвиг элементов
 
 function move(item, pos){
-	let translateWidth = item.offsetWidth+16;
+	let translateWidth = item.offsetWidth+14;
 	console.log(translateWidth);
 	offset += pos*(translateWidth+30);
 	console.log(offset);
