@@ -13,7 +13,7 @@ body > div.popular_auto > div.\.title{
     z-index: 2;
     margin: 0;
     justify-content: flex-start;
-    gap: 50%;
+    gap: 40%;
     align-items: center;
 }
 .popular_auto .swipper{
@@ -22,7 +22,7 @@ body > div.popular_auto > div.\.title{
     align-items: flex-end;
     gap: 12px;
     /*overflow: hidden;*/
-    transition: 1s;
+    transition: 0.7s;
     justify-content: flex-start;
 }
 body > div.popular_auto > div.\.title > p{
@@ -56,7 +56,7 @@ img.nav_vector {
     position: relative;
     margin-bottom: 7px;
     min-width: 250px;
-    transition: width  1s ease, height 1s ease, background-color 1s ease, padding 1s ease; /* Плавный переход */
+    /*transition: width  1s ease, height 1s ease, background-color 1s ease, padding 1s ease; /* Плавный переход */*/
 }
 .popular_auto_item .red_flag {
     background: url(../img/red_flag.png) no-repeat center center;
@@ -98,7 +98,7 @@ img.nav_vector {
     padding-bottom: 5px;
     background: none;
     padding: 0px;
-    transition:  width 1s ease, height 1s ease, background-color 1s ease, padding 1s ease; /* Плавный переход */
+    /*transition:  width 1s ease, height 1s ease, background-color 1s ease, padding 1s ease; /* Плавный переход */*/
 }
 
 .popular_auto_item.item_big .red_flag {
