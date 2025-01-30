@@ -5,6 +5,7 @@ body{
     display: flex;
     flex-direction: column;
     gap: 50px;
+    margin: 0px 20px;
 }
 a{
     text-decoration: none;
@@ -220,7 +221,7 @@ p, h2, h3{margin: 0px;}
     background: #011224;
 }
 #main_container {
-    padding: 0px 40px 0px 40px;
+    /* padding: 0px 40px 0px 40px; */
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -337,5 +338,4 @@ p, h2, h3{margin: 0px;}
     border-radius: 50px;
     background: #FFFFFF33;
     border: none;
-    text-align: center;
-}
+ 

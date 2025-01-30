@@ -8,7 +8,7 @@
 .contact_block_left {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: flex-start;
     max-width: 370px;
 }
 #contact_block .small_text.grey_text {
